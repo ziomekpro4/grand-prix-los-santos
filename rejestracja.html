@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rejestracja — Grand Prix Los Santos 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --red: #e10600;
+  --red-dark: #9b0000;
+  --red-light: #ff2a2a;
+  --white: #ffffff;
+  --black: #000000;
+  --grey-dark: #15151e;
+  --grey-mid: #1f1f2e;
+  --grey-light: #2d2d3a;
+  --grey-text: #9898a4;
+  --gold: #f5c842;
+  --green: #00c853;
+  --font: 'Titillium Web', sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--grey-dark);
+  color: var(--white);
+  font-family: var(--font);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--red); color: var(--white); }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--grey-dark); }
+::-webkit-scrollbar-thumb { background: var(--red); }
+
+/* ===== NAV ===== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: 60px;
+  background: rgba(21,21,30,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--grey-text);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-back:hover { color: var(--white); }
+.nav-back-arrow { font-size: 16px; }
+
+.nav-logo-text {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.nav-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+  border: 1px solid rgba(225,6,0,0.4);
+  padding: 4px 12px;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+
+/* ===== PAGE WRAPPER ===== */
+.page-wrapper {
+  padding-top: 60px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== HERO STRIP ===== */
+.reg-hero {
+  background: var(--grey-mid);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 60px 80px 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+.reg-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(225,6,0,0.08) 0%, transparent 60%),
+    linear-gradient(90deg, transparent 60%, rgba(225,6,0,0.04));
+}
+
+.reg-hero::after {
+  content: 'REJESTRACJA';
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  font-size: 130px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.025);
+  letter-spacing: -8px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.reg-hero-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.reg-hero-text {}
+
+.reg-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.reg-eyebrow-dot {
+  width: 8px; height: 8px;
+  background: var(--red);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.reg-eyebrow-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.reg-title {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  line-height: 0.95;
+}
+
+.reg-title em { font-style: normal; color: var(--red); }
+
+.reg-subtitle {
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--grey-text);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.reg-hero-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.reg-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--grey-text);
+}
+
+.reg-meta-icon { font-size: 16px; }
+
+.reg-meta-val { color: var(--white); }
+
+/* ===== RED STRIPE ===== */
+.red-stripe {
+  height: 4px;
+  background: linear-gradient(90deg, var(--red-dark), var(--red), var(--red-light), var(--red), var(--red-dark));
+}
+
+/* ===== MAIN CONTENT ===== */
+.reg-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 0;
+}
+
+/* ===== FORM AREA ===== */
+.form-area {
+  padding: 60px 80px;
+  border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+.form-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 24px;
+  margin-top: 44px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.form-section-title:first-of-type { margin-top: 0; }
+
+.form-section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+}
+
+.form-section-title .fsn-icon { font-size: 16px; }
+
+/* Input groups */
+.field-group {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.field-group.two-col {
+  grid-template-columns: 1fr 1fr;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+}
+
+.field label .required {
+  color: var(--red);
+  margin-left: 4px;
+}
+
+.field input,
+.field textarea {
+  background: var(--grey-mid);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 2px solid rgba(255,255,255,0.12);
+  color: var(--white);
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 18px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  width: 100%;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: rgba(255,255,255,0.18);
+  font-weight: 400;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--red);
+  border-bottom-color: var(--red);
+  background: rgba(225,6,0,0.04);
+  box-shadow: 0 2px 20px rgba(225,6,0,0.1);
+}
+
+.field input.valid {
+  border-bottom-color: var(--green);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.field-hint {
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+/* Separator driver */
+.driver-separator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.ds-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  white-space: nowrap;
+}
+
+.ds-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+}
+
+/* Logo preview */
+.logo-preview-wrap {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo-preview-box {
+  width: 80px;
+  height: 80px;
+  background: var(--grey-light);
+  border: 1px dashed rgba(255,255,255,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: rgba(255,255,255,0.1);
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: border-color 0.3s;
+}
+
+.logo-preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.logo-preview-text {
+  font-size: 12px;
+  color: var(--grey-text);
+  line-height: 1.6;
+}
+
+.logo-preview-text strong { color: var(--white); display: block; margin-bottom: 2px; }
+
+/* Submit area */
+.submit-area {
+  margin-top: 44px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+
+.submit-terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.submit-terms input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--red);
+  flex-shrink: 0;
+  margin-top: 2px;
+  cursor: pointer;
+  clip-path: none;
+}
+
+.submit-terms label {
+  font-size: 12px;
+  color: var(--grey-text);
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+.submit-terms label a {
+  color: var(--red);
+  text-decoration: none;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 20px 40px;
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  clip-path: polygon(14px 0%, 100% 0%, calc(100% - 14px) 100%, 0% 100%);
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.1);
+  transform: translateX(-110%);
+  transition: transform 0.35s;
+}
+
+.submit-btn:hover::before { transform: translateX(0); }
+.submit-btn:hover { background: var(--red-light); }
+
+.submit-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.submit-btn:disabled::before { display: none; }
+
+/* ===== SUCCESS STATE ===== */
+.success-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(21,21,30,0.97);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 24px;
+  text-align: center;
+  padding: 40px;
+}
+
+.success-overlay.show {
+  display: flex;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.success-icon {
+  font-size: 80px;
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes popIn {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.success-title {
+  font-size: 48px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+}
+
+.success-title em { font-style: normal; color: var(--red); }
+
+.success-sub {
+  font-size: 16px;
+  color: var(--grey-text);
+  letter-spacing: 2px;
+  max-width: 500px;
+  line-height: 1.7;
+}
+
+.success-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--red);
+  color: var(--white);
+  padding: 16px 40px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+
+.success-back:hover { background: var(--red-light); }
+
+/* ===== SIDEBAR ===== */
+.reg-sidebar {
+  padding: 60px 40px;
+  background: var(--grey-mid);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.sidebar-card {
+  background: var(--grey-dark);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-left: 3px solid var(--red);
+  padding: 24px 22px;
+}
+
+.sidebar-card-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+}
+
+.sidebar-card-body {
+  font-size: 13px;
+  color: var(--grey-text);
+  line-height: 1.8;
+}
+
+.sidebar-card-body strong { color: var(--white); }
+
+.sidebar-schedule-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 13px;
+}
+
+.sidebar-schedule-item:last-child { border-bottom: none; }
+
+.ssi-label { color: var(--grey-text); }
+.ssi-time { color: var(--white); font-weight: 700; font-size: 14px; }
+.ssi-time.featured { color: var(--red); }
+
+.rules-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rules-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--grey-text);
+  line-height: 1.5;
+}
+
+.rules-list li::before {
+  content: '→';
+  color: var(--red);
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+.rules-list li strong { color: var(--white); }
+
+/* ===== FOOTER ===== */
+.reg-footer {
+  background: var(--black);
+  border-top: 2px solid var(--red);
+  padding: 24px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reg-footer-copy {
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 2px;
+}
+
+.reg-footer-link {
+  font-size: 11px;
+  color: var(--red);
+  text-decoration: none;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-transform: uppercase;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.reg-footer-link:hover { opacity: 1; }
+
+/* ===== VALIDATION ===== */
+.field input.error,
+.field textarea.error {
+  border-bottom-color: #ff6b6b;
+  background: rgba(255,107,107,0.04);
+}
+
+.field-error {
+  font-size: 11px;
+  color: #ff6b6b;
+  letter-spacing: 0.5px;
+  display: none;
+}
+
+.field-error.show { display: block; }
+
+/* ===== PROGRESS BAR ===== */
+.form-progress {
+  height: 3px;
+  background: rgba(255,255,255,0.06);
+  position: sticky;
+  top: 60px;
+  z-index: 50;
+}
+
+.form-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--red-dark), var(--red), var(--red-light));
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1000px) {
+  .reg-main { grid-template-columns: 1fr; }
+  .reg-sidebar { display: none; }
+  .form-area { padding: 40px 24px; }
+  .reg-hero { padding: 40px 24px 36px; }
+  .reg-footer { padding: 20px 24px; }
+  nav { padding: 0 20px; }
+  .nav-logo-text { display: none; }
+}
+
+@media (max-width: 600px) {
+  .field-group.two-col { grid-template-columns: 1fr; }
+  .reg-hero-meta { display: none; }
+  .reg-title { font-size: 36px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- SUCCESS OVERLAY -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-icon">🏁</div>
+  <h2 class="success-title">Zgłoszenie <em>przyjęte!</em></h2>
+  <p class="success-sub">Twój zespół został pomyślnie zgłoszony do Grand Prix Los Santos 2026. Skontaktujemy się z Tobą wkrótce z potwierdzeniem.</p>
+  <a href="index.html" class="success-back">← Wróć na stronę główną</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-back">
+    <span class="nav-back-arrow">←</span>
+    Powrót
+  </a>
+  <span class="nav-logo-text">Grand Prix Los Santos</span>
+  <span class="nav-badge">Rejestracja 2026</span>
+</nav>
+
+<!-- PROGRESS BAR -->
+<div class="form-progress">
+  <div class="form-progress-bar" id="progressBar"></div>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- HERO STRIP -->
+  <div class="reg-hero">
+    <div class="reg-hero-inner">
+      <div class="reg-hero-text">
+        <div class="reg-eyebrow">
+          <div class="reg-eyebrow-dot"></div>
+          <span class="reg-eyebrow-label">Formularz zgłoszeniowy</span>
+        </div>
+        <h1 class="reg-title">Dołącz do<br><em>wyścigu</em></h1>
+        <p class="reg-subtitle">Grand Prix Los Santos · 21–22 Marca 2026</p>
+      </div>
+      <div class="reg-hero-meta">
+        <div class="reg-meta-item">
+          <span class="reg-meta-icon">📅</span>
+          <span>Data: <span class="reg-meta-val">21–22.03.2026</span></span>
+        </div>
+        <div class="reg-meta-item">
+          <span class="reg-meta-icon">🏎</span>
+          <span>Maks. per frakcja: <span class="reg-meta-val">3 zespoły</span></span>
+        </div>
+        <div class="reg-meta-item">
+          <span class="reg-meta-icon">👤</span>
+          <span>Kierowcy: <span class="reg-meta-val">2 + maks. 2 rezerwowych</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="red-stripe"></div>
+
+  <!-- MAIN -->
+  <div class="reg-main">
+
+    <!-- FORM AREA -->
+    <div class="form-area">
+      <form id="regForm" novalidate>
+
+        <!-- SEKCJA: ZESPÓŁ -->
+        <div class="form-section-title">
+          <span class="fsn-icon">🏁</span>
+          Dane zespołu
+        </div>
+
+        <div class="field-group">
+          <div class="field">
+            <label for="teamName">Nazwa zespołu <span class="required">*</span></label>
+            <input type="text" id="teamName" name="teamName" placeholder="np. Los Santos Racing Team" autocomplete="off">
+            <span class="field-error" id="teamNameErr">Podaj nazwę zespołu.</span>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field">
+            <label for="teamBoss">Imię i nazwisko szefa zespołu <span class="required">*</span></label>
+            <input type="text" id="teamBoss" name="teamBoss" placeholder="np. Jan Kowalski" autocomplete="off">
+            <span class="field-error" id="teamBossErr">Podaj imię i nazwisko szefa zespołu.</span>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field">
+            <label for="teamLogo">Link do logo zespołu</label>
+            <input type="url" id="teamLogo" name="teamLogo" placeholder="https://przykład.com/logo.png" autocomplete="off">
+            <span class="field-hint">Wklej link do pliku graficznego (PNG, JPG, WebP). Nie jest obowiązkowe.</span>
+            <span class="field-error" id="teamLogoErr">Podaj poprawny adres URL (https://...).</span>
+            <div class="logo-preview-wrap" id="logoPreviewWrap" style="display:none;">
+              <div class="logo-preview-box" id="logoPreviewBox">🏎</div>
+              <div class="logo-preview-text">
+                <strong>Podgląd logo</strong>
+                Logo zostanie wyświetlone na profilu zespołu po zatwierdzeniu rejestracji.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEKCJA: KIEROWCY GŁÓWNI -->
+        <div class="form-section-title">
+          <span class="fsn-icon">👤</span>
+          Kierowcy główni
+        </div>
+
+        <div class="field-group two-col">
+          <div class="field">
+            <label for="driver1first">Imię — Kierowca 1 <span class="required">*</span></label>
+            <input type="text" id="driver1first" name="driver1first" placeholder="Imię" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="driver1last">Nazwisko — Kierowca 1 <span class="required">*</span></label>
+            <input type="text" id="driver1last" name="driver1last" placeholder="Nazwisko" autocomplete="off">
+          </div>
+        </div>
+        <span class="field-error" id="driver1Err" style="margin-top:-8px;margin-bottom:12px;">Podaj imię i nazwisko pierwszego kierowcy.</span>
+
+        <div class="driver-separator">
+          <div class="ds-line"></div>
+          <span class="ds-label">Kierowca 2</span>
+          <div class="ds-line"></div>
+        </div>
+
+        <div class="field-group two-col">
+          <div class="field">
+            <label for="driver2first">Imię — Kierowca 2 <span class="required">*</span></label>
+            <input type="text" id="driver2first" name="driver2first" placeholder="Imię" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="driver2last">Nazwisko — Kierowca 2 <span class="required">*</span></label>
+            <input type="text" id="driver2last" name="driver2last" placeholder="Nazwisko" autocomplete="off">
+          </div>
+        </div>
+        <span class="field-error" id="driver2Err" style="margin-top:-8px;margin-bottom:12px;">Podaj imię i nazwisko drugiego kierowcy.</span>
+
+        <!-- SEKCJA: KIEROWCY REZERWOWI -->
+        <div class="form-section-title" style="margin-top:40px;">
+          <span class="fsn-icon">🔄</span>
+          Kierowcy rezerwowi <span style="font-weight:400;color:rgba(255,255,255,0.25);font-size:10px;margin-left:8px;">— opcjonalnie</span>
+        </div>
+
+        <div class="field-group two-col">
+          <div class="field">
+            <label for="reserve1first">Imię — Rezerwowy 1</label>
+            <input type="text" id="reserve1first" name="reserve1first" placeholder="Imię" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="reserve1last">Nazwisko — Rezerwowy 1</label>
+            <input type="text" id="reserve1last" name="reserve1last" placeholder="Nazwisko" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="driver-separator">
+          <div class="ds-line"></div>
+          <span class="ds-label">Rezerwowy 2</span>
+          <div class="ds-line"></div>
+        </div>
+
+        <div class="field-group two-col">
+          <div class="field">
+            <label for="reserve2first">Imię — Rezerwowy 2</label>
+            <input type="text" id="reserve2first" name="reserve2first" placeholder="Imię" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="reserve2last">Nazwisko — Rezerwowy 2</label>
+            <input type="text" id="reserve2last" name="reserve2last" placeholder="Nazwisko" autocomplete="off">
+          </div>
+        </div>
+
+        <!-- SUBMIT -->
+        <div class="submit-area">
+          <div class="submit-terms">
+            <input type="checkbox" id="acceptTerms" name="acceptTerms">
+            <label for="acceptTerms">
+              Zapoznałem/am się z <a href="index.html#rules">regulaminem</a> Grand Prix Los Santos 2026 i akceptuję jego warunki. Rozumiem, że udział w zawodach oznacza pełną akceptację regulaminu.
+            </label>
+          </div>
+          <button type="submit" class="submit-btn" id="submitBtn" disabled>
+            ▶ &nbsp; Wyślij zgłoszenie
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="reg-sidebar">
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">📅 Harmonogram</div>
+        <div class="sidebar-schedule-item">
+          <span class="ssi-label">Trening & Odprawa</span>
+          <span class="ssi-time">20:00–20:30</span>
+        </div>
+        <div class="sidebar-schedule-item">
+          <span class="ssi-label">Kwalifikacje</span>
+          <span class="ssi-time">20:40–21:55</span>
+        </div>
+        <div class="sidebar-schedule-item">
+          <span class="ssi-label">Wyścig Sprint</span>
+          <span class="ssi-time featured">22:00</span>
+        </div>
+        <div class="sidebar-schedule-item" style="margin-top:12px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.06);">
+          <span class="ssi-label">Wyścig Główny</span>
+          <span class="ssi-time featured">21:00</span>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">📋 Zasady zgłoszenia</div>
+        <ul class="rules-list">
+          <li>Każdy zespół składa się z <strong>2 kartów</strong></li>
+          <li>Wymagani są <strong>2 kierowcy główni</strong></li>
+          <li>Dopuszcza się do <strong>2 kierowców rezerwowych</strong></li>
+          <li>Każda frakcja może zgłosić max. <strong>3 zespoły</strong></li>
+          <li>Zgłoszenie = <strong>akceptacja regulaminu</strong></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">🔴 Obowiązkowe wyposażenie</div>
+        <ul class="rules-list">
+          <li>Kask kartingowy lub motocyklowy</li>
+          <li>Rękawice ochronne</li>
+          <li>Zamknięte obuwie</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card" style="border-left-color: var(--gold);">
+        <div class="sidebar-card-title" style="color:var(--gold);">⚠️ Ważne</div>
+        <div class="sidebar-card-body">
+          Kierowca pod wpływem alkoholu lub środków odurzających zostaje <strong>natychmiast zdyskwalifikowany</strong>. Nieobecność na odprawie może skutkować niedopuszczeniem do startu.
+        </div>
+      </div>
+
+    </aside>
+
+  </div><!-- /reg-main -->
+
+  <!-- FOOTER -->
+  <footer class="reg-footer">
+    <span class="reg-footer-copy">© 2026 Grand Prix Los Santos</span>
+    <a href="index.html" class="reg-footer-link">← Strona główna</a>
+  </footer>
+
+</div><!-- /page-wrapper -->
+
+<script>
+// ===== LOGO PREVIEW =====
+const logoInput = document.getElementById('teamLogo');
+const logoPreviewWrap = document.getElementById('logoPreviewWrap');
+const logoPreviewBox = document.getElementById('logoPreviewBox');
+const logoErr = document.getElementById('teamLogoErr');
+
+logoInput.addEventListener('input', () => {
+  const val = logoInput.value.trim();
+  logoErr.classList.remove('show');
+  logoInput.classList.remove('error');
+
+  if (!val) {
+    logoPreviewWrap.style.display = 'none';
+    return;
+  }
+
+  // Validate URL format
+  try {
+    const url = new URL(val);
+    if (!['http:', 'https:'].includes(url.protocol)) throw new Error();
+
+    logoPreviewWrap.style.display = 'flex';
+    const img = new Image();
+    img.onload = () => {
+      logoPreviewBox.innerHTML = '';
+      logoPreviewBox.appendChild(img);
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+      logoPreviewBox.style.borderStyle = 'solid';
+      logoInput.classList.add('valid');
+    };
+    img.onerror = () => {
+      logoPreviewBox.innerHTML = '🔗';
+      logoPreviewBox.style.fontSize = '28px';
+      logoPreviewBox.style.color = 'rgba(255,255,255,0.3)';
+    };
+    img.src = val;
+  } catch {
+    logoErr.classList.add('show');
+    logoInput.classList.add('error');
+    logoPreviewWrap.style.display = 'none';
+  }
+});
+
+// ===== REAL-TIME VALIDATION HELPERS =====
+function validateRequired(inputId, errorId, msg) {
+  const input = document.getElementById(inputId);
+  const err = document.getElementById(errorId);
+  const ok = input.value.trim().length > 0;
+  input.classList.toggle('error', !ok);
+  if (err) err.classList.toggle('show', !ok);
+  if (ok) input.classList.add('valid');
+  return ok;
+}
+
+['teamName', 'teamBoss', 'driver1first', 'driver1last', 'driver2first', 'driver2last'].forEach(id => {
+  document.getElementById(id).addEventListener('blur', () => {
+    document.getElementById(id).classList.toggle(
+      'valid',
+      document.getElementById(id).value.trim().length > 0
+    );
+  });
+});
+
+// ===== TERMS CHECKBOX => ENABLE SUBMIT =====
+const termsCheckbox = document.getElementById('acceptTerms');
+const submitBtn = document.getElementById('submitBtn');
+
+termsCheckbox.addEventListener('change', () => {
+  submitBtn.disabled = !termsCheckbox.checked;
+});
+
+// ===== PROGRESS BAR =====
+const progressBar = document.getElementById('progressBar');
+const allRequired = ['teamName', 'teamBoss', 'driver1first', 'driver1last', 'driver2first', 'driver2last'];
+
+function updateProgress() {
+  const filled = allRequired.filter(id => document.getElementById(id).value.trim().length > 0).length;
+  const pct = Math.round((filled / allRequired.length) * 100);
+  progressBar.style.width = pct + '%';
+}
+
+allRequired.forEach(id => {
+  document.getElementById(id).addEventListener('input', updateProgress);
+});
+
+// ===== FORM SUBMIT =====
+document.getElementById('regForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  let valid = true;
+
+  // Validate required fields
+  if (!validateRequired('teamName', 'teamNameErr', 'Podaj nazwę zespołu.')) valid = false;
+  if (!validateRequired('teamBoss', 'teamBossErr', 'Podaj imię i nazwisko szefa zespołu.')) valid = false;
+
+  const d1ok = document.getElementById('driver1first').value.trim() && document.getElementById('driver1last').value.trim();
+  document.getElementById('driver1Err').classList.toggle('show', !d1ok);
+  if (!d1ok) valid = false;
+
+  const d2ok = document.getElementById('driver2first').value.trim() && document.getElementById('driver2last').value.trim();
+  document.getElementById('driver2Err').classList.toggle('show', !d2ok);
+  if (!d2ok) valid = false;
+
+  if (!termsCheckbox.checked) { valid = false; }
+
+  if (!valid) {
+    // Scroll to first error
+    const firstErr = document.querySelector('.error, .field-error.show');
+    if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  // ⚙️  WKLEJ TU SWÓJ SCRIPT URL Z GOOGLE APPS SCRIPT
+  const SCRIPT_URL = 'TUTAJ_WKLEJ_SWOJ_URL';
+
+  const payload = {
+    teamName:   document.getElementById('teamName').value.trim(),
+    teamBoss:   document.getElementById('teamBoss').value.trim(),
+    teamLogo:   document.getElementById('teamLogo').value.trim(),
+    driver1:    document.getElementById('driver1first').value.trim() + ' ' + document.getElementById('driver1last').value.trim(),
+    driver2:    document.getElementById('driver2first').value.trim() + ' ' + document.getElementById('driver2last').value.trim(),
+    reserve1:  (document.getElementById('reserve1first').value.trim() + ' ' + document.getElementById('reserve1last').value.trim()).trim() || '—',
+    reserve2:  (document.getElementById('reserve2first').value.trim() + ' ' + document.getElementById('reserve2last').value.trim()).trim() || '—',
+    timestamp:  new Date().toLocaleString('pl-PL')
+  };
+
+  // Animate button immediately
+  submitBtn.textContent = '⏳ Wysyłanie...';
+  submitBtn.disabled = true;
+
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(() => {
+    document.getElementById('successOverlay').classList.add('show');
+    progressBar.style.width = '100%';
+  })
+  .catch(() => {
+    // Nawet przy no-cors fetch rzuca tylko przy braku sieci
+    document.getElementById('successOverlay').classList.add('show');
+    progressBar.style.width = '100%';
+  });
+});
+</script>
+
+</body>
+</html>

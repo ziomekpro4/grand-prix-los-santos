@@ -1,0 +1,2130 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grand Prix Los Santos 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Formula1+Display:wght@Bold&family=Titillium+Web:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+/* ========== CSS VARIABLES ========== */
+:root {
+  --red: #e10600;
+  --red-dark: #9b0000;
+  --red-light: #ff2a2a;
+  --white: #ffffff;
+  --black: #000000;
+  --grey-dark: #15151e;
+  --grey-mid: #1f1f2e;
+  --grey-light: #2d2d3a;
+  --grey-text: #9898a4;
+  --gold: #f5c842;
+  --font-display: 'Titillium Web', sans-serif;
+}
+
+/* ========== RESET & BASE ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--grey-dark);
+  color: var(--white);
+  font-family: var(--font-display);
+  overflow-x: hidden;
+  cursor: default;
+}
+
+::selection { background: var(--red); color: var(--white); }
+
+/* ========== TYPOGRAPHY ========== */
+.f1-title {
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--grey-dark); }
+::-webkit-scrollbar-thumb { background: var(--red); }
+
+/* ========== NAV ========== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(21, 21, 30, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--red);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.nav-logo-flag {
+  width: 36px;
+  height: 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1px;
+  transform: skewX(-8deg);
+}
+
+.nav-logo-flag div {
+  background: var(--white);
+}
+.nav-logo-flag div:nth-child(odd) {
+  background: var(--black);
+}
+
+.nav-logo-text {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 32px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--grey-text);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--red);
+  transition: width 0.25s;
+}
+
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  background: var(--red);
+  color: var(--white);
+  padding: 8px 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  transition: background 0.2s;
+}
+
+.nav-cta:hover { background: var(--red-light); }
+
+/* ========== HERO ========== */
+#hero {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--grey-dark);
+}
+
+.hero-track-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(225,6,0,0.08) 0%, transparent 50%),
+    linear-gradient(225deg, rgba(225,6,0,0.05) 0%, transparent 60%);
+  overflow: hidden;
+}
+
+/* Animated speed lines */
+.speed-lines {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.speed-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(225,6,0,0.4), transparent);
+  animation: speedLine 3s linear infinite;
+  opacity: 0;
+}
+
+@keyframes speedLine {
+  0% { transform: translateX(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(200%); opacity: 0; }
+}
+
+/* Circuit SVG decoration */
+.circuit-decoration {
+  position: absolute;
+  right: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 600px;
+  height: 600px;
+  opacity: 0.06;
+}
+
+/* Hero grid texture */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 80px;
+  max-width: 900px;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero-eyebrow-line {
+  width: 40px;
+  height: 2px;
+  background: var(--red);
+}
+
+.hero-eyebrow-text {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.hero-title {
+  font-size: clamp(56px, 8vw, 110px);
+  font-weight: 900;
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: -3px;
+  animation: fadeUp 0.8s 0.1s ease both;
+}
+
+.hero-title span {
+  display: block;
+  color: var(--red);
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--grey-text);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin-top: 20px;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.hero-date-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-left: 3px solid var(--red);
+  padding: 16px 28px;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.hero-date-badge .date-day {
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--white);
+}
+
+.hero-date-badge .date-info {
+  border-left: 1px solid rgba(255,255,255,0.15);
+  padding-left: 16px;
+}
+
+.hero-date-badge .date-month {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--red);
+  text-transform: uppercase;
+}
+
+.hero-date-badge .date-year {
+  font-size: 12px;
+  color: var(--grey-text);
+  letter-spacing: 2px;
+}
+
+.hero-cta-group {
+  display: flex;
+  gap: 16px;
+  margin-top: 40px;
+  animation: fadeUp 0.8s 0.4s ease both;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--red);
+  color: var(--white);
+  padding: 16px 36px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s;
+}
+
+.btn-primary:hover::before { transform: translateX(0); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--white);
+  padding: 16px 36px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  transition: all 0.25s;
+}
+
+.btn-secondary:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+/* Animated number display */
+.hero-number {
+  position: absolute;
+  right: 80px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 320px;
+  font-weight: 900;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+  letter-spacing: -20px;
+  user-select: none;
+  animation: fadeIn 1.5s 0.5s ease both;
+  pointer-events: none;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: fadeIn 1s 1s ease both;
+}
+
+.hero-scroll span {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--grey-text);
+  text-transform: uppercase;
+}
+
+.scroll-indicator {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(180deg, var(--red) 0%, transparent 100%);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(0.8); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ========== SECTION COMMON ========== */
+section {
+  padding: 100px 80px;
+}
+
+.section-header {
+  margin-bottom: 60px;
+}
+
+.section-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.section-eyebrow-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--red);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.section-eyebrow-text {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.section-title {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.section-title em {
+  font-style: normal;
+  color: var(--red);
+}
+
+/* ========== SCHEDULE SECTION ========== */
+#schedule {
+  background: var(--grey-mid);
+  position: relative;
+  overflow: hidden;
+}
+
+#schedule::before {
+  content: 'SCHEDULE';
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  font-size: 160px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.02);
+  letter-spacing: -10px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.schedule-days {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.day-card {
+  background: var(--grey-dark);
+  border: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.day-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--red);
+}
+
+.day-header {
+  padding: 28px 32px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.day-name {
+  font-size: 22px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.day-date {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--red);
+  background: rgba(225,6,0,0.1);
+  padding: 6px 14px;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+
+.schedule-items {
+  padding: 8px 0;
+}
+
+.schedule-item {
+  display: flex;
+  align-items: center;
+  padding: 18px 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  gap: 20px;
+  transition: background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.schedule-item:last-child { border-bottom: none; }
+
+.schedule-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: rgba(225,6,0,0.06);
+  transition: width 0.3s;
+}
+
+.schedule-item:hover::before { width: 100%; }
+
+.schedule-item.featured {
+  background: rgba(225,6,0,0.06);
+}
+
+.schedule-item.featured::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--red);
+}
+
+.item-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.04);
+  font-size: 18px;
+  flex-shrink: 0;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+
+.featured .item-icon {
+  background: rgba(225,6,0,0.2);
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-name {
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.item-desc {
+  font-size: 12px;
+  color: var(--grey-text);
+  margin-top: 2px;
+}
+
+.item-time {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--grey-text);
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.featured .item-time {
+  color: var(--red);
+  font-size: 20px;
+}
+
+/* ========== INFO SECTION ========== */
+#info {
+  background: var(--grey-dark);
+  position: relative;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.info-card {
+  background: var(--grey-mid);
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.info-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  background: linear-gradient(0deg, rgba(225,6,0,0.1), transparent);
+  transition: height 0.4s;
+}
+
+.info-card:hover { transform: translateY(-4px); }
+.info-card:hover::before { height: 100%; }
+
+.info-card-number {
+  font-size: 64px;
+  font-weight: 900;
+  color: rgba(225,6,0,0.2);
+  line-height: 1;
+  letter-spacing: -4px;
+  margin-bottom: 16px;
+}
+
+.info-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.info-card-text {
+  font-size: 14px;
+  color: var(--grey-text);
+  line-height: 1.7;
+}
+
+.info-card-icon {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+/* ========== FLAGS SECTION ========== */
+#flags {
+  background: var(--grey-mid);
+}
+
+.flags-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.flag-card {
+  background: var(--grey-dark);
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.flag-card:hover {
+  border-color: rgba(225,6,0,0.3);
+  transform: translateX(4px);
+}
+
+.flag-emoji {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.flag-info {}
+
+.flag-name {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.flag-desc {
+  font-size: 12px;
+  color: var(--grey-text);
+  line-height: 1.5;
+}
+
+/* ========== RULES SECTION ========== */
+#rules {
+  background: var(--grey-dark);
+}
+
+.rules-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.rules-column {}
+
+.rule-group {
+  margin-bottom: 40px;
+}
+
+.rule-group-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rule-group-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+}
+
+.rule-item {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.rule-number {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--red);
+  background: rgba(225,6,0,0.12);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+  margin-top: 1px;
+}
+
+.rule-text {
+  font-size: 14px;
+  color: var(--grey-text);
+  line-height: 1.7;
+}
+
+.rule-text strong {
+  color: var(--white);
+  font-weight: 600;
+}
+
+/* ========== PENALTIES SECTION ========== */
+.penalties-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 40px;
+}
+
+.penalty-card {
+  background: var(--grey-mid);
+  padding: 20px 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid rgba(255,255,255,0.05);
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+.penalty-icon { font-size: 22px; }
+
+.penalty-name {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ========== ATTRACTIONS SECTION ========== */
+#attractions {
+  background: var(--grey-mid);
+  position: relative;
+  overflow: hidden;
+}
+
+.attractions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 20px;
+}
+
+.attraction-card {
+  background: var(--grey-dark);
+  padding: 50px 36px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.attraction-card:hover { transform: scale(1.02); }
+
+.attraction-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 60%, rgba(225,6,0,0.08));
+}
+
+.attraction-big-icon {
+  font-size: 56px;
+  margin-bottom: 20px;
+  display: block;
+  filter: drop-shadow(0 0 20px rgba(225,6,0,0.3));
+}
+
+.attraction-title {
+  font-size: 18px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.attraction-desc {
+  font-size: 13px;
+  color: var(--grey-text);
+  line-height: 1.7;
+}
+
+/* ========== EQUIPMENT SECTION ========== */
+#equipment {
+  background: var(--grey-dark);
+}
+
+.equipment-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.equipment-block {}
+
+.equipment-block-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.equipment-list {
+  list-style: none;
+}
+
+.equipment-list li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 14px;
+  color: var(--grey-text);
+}
+
+.equipment-list li:last-child { border-bottom: none; }
+
+.equipment-list li::before {
+  content: '→';
+  color: var(--red);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.equipment-required { color: var(--white) !important; }
+
+/* ========== FOOTER ========== */
+footer {
+  background: var(--black);
+  padding: 60px 80px 40px;
+  border-top: 2px solid var(--red);
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 50px;
+}
+
+.footer-brand {}
+
+.footer-brand-name {
+  font-size: 24px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.footer-brand-sub {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--grey-text);
+  text-transform: uppercase;
+}
+
+.footer-meta {
+  font-size: 12px;
+  color: var(--grey-text);
+  text-align: right;
+  line-height: 2;
+  letter-spacing: 1px;
+}
+
+.footer-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  margin-bottom: 30px;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copy {
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 2px;
+}
+
+.footer-disclaimer {
+  font-size: 10px;
+  color: rgba(255,255,255,0.15);
+  letter-spacing: 1px;
+}
+
+/* ========== RED DIVIDER ========== */
+.red-divider {
+  height: 4px;
+  background: linear-gradient(90deg, var(--red-dark), var(--red), var(--red-light), var(--red), var(--red-dark));
+}
+
+/* ========== SECTION COUNTER ========== */
+.section-counter {
+  position: absolute;
+  top: 100px;
+  right: 80px;
+  font-size: 120px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.025);
+  letter-spacing: -8px;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ========== TEAM RULES ========== */
+.team-rules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.team-rule-card {
+  background: var(--grey-mid);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-top: 3px solid var(--red);
+  padding: 36px 28px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.team-rule-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--red);
+}
+
+.team-rule-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.team-rule-number {
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--red);
+  line-height: 1;
+  letter-spacing: -3px;
+  margin-bottom: 8px;
+}
+
+.team-rule-label {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  color: var(--white);
+}
+
+.team-rule-desc {
+  font-size: 13px;
+  color: var(--grey-text);
+  line-height: 1.6;
+}
+
+/* ========== DRIVERS/TEAMS SECTION ========== */
+#drivers {
+  background: var(--grey-dark);
+  position: relative;
+}
+
+.drivers-intro {
+  font-size: 15px;
+  color: var(--grey-text);
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+}
+
+.drivers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.driver-team-card {
+  background: var(--grey-mid);
+  border: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1.1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  transition: border-color 0.3s, transform 0.3s;
+  cursor: default;
+}
+
+.driver-team-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--red-dark), var(--red), var(--red-light));
+}
+
+.driver-team-card:hover {
+  border-color: rgba(225,6,0,0.3);
+  transform: scale(1.02);
+}
+
+.dtc-soon {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.12);
+}
+
+.dtc-icon {
+  font-size: 40px;
+  opacity: 0.15;
+}
+
+.dtc-slot {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(225,6,0,0.4);
+}
+
+/* ========== REGISTRATION SECTION ========== */
+#registration {
+  background: var(--grey-mid);
+  position: relative;
+  overflow: hidden;
+}
+
+#registration::before {
+  content: 'JOIN';
+  position: absolute;
+  bottom: -30px;
+  right: -20px;
+  font-size: 200px;
+  font-weight: 900;
+  color: rgba(225,6,0,0.03);
+  letter-spacing: -15px;
+  pointer-events: none;
+}
+
+.registration-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.registration-text {}
+
+.registration-text p {
+  font-size: 15px;
+  color: var(--grey-text);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.registration-text .reg-highlight {
+  border-left: 3px solid var(--red);
+  padding-left: 16px;
+  font-size: 14px;
+  color: var(--grey-text);
+  line-height: 1.7;
+  margin: 24px 0;
+}
+
+.registration-text .reg-highlight strong {
+  color: var(--white);
+}
+
+.reg-form-panel {
+  background: var(--grey-dark);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-top: 3px solid var(--red);
+  padding: 40px 36px;
+  text-align: center;
+}
+
+.reg-form-title {
+  font-size: 20px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.reg-form-sub {
+  font-size: 12px;
+  color: var(--grey-text);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+
+.reg-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--red);
+  color: var(--white);
+  padding: 18px 44px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  clip-path: polygon(14px 0%, 100% 0%, calc(100% - 14px) 100%, 0% 100%);
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.reg-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s;
+}
+
+.reg-btn:hover::before { transform: translateX(0); }
+.reg-btn:hover { background: var(--red-light); }
+
+.reg-note {
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  margin-top: 16px;
+  letter-spacing: 1px;
+}
+
+/* ========== MOBILE ========== */
+@media (max-width: 900px) {
+  section { padding: 60px 24px; }
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero-content { padding: 0 24px; }
+  .hero-number { display: none; }
+  .schedule-days { grid-template-columns: 1fr; }
+  .info-grid { grid-template-columns: 1fr; }
+  .flags-grid { grid-template-columns: 1fr 1fr; }
+  .rules-container { grid-template-columns: 1fr; }
+  .penalties-grid { grid-template-columns: 1fr 1fr; }
+  .attractions-grid { grid-template-columns: 1fr; }
+  .equipment-split { grid-template-columns: 1fr; }
+  footer { padding: 40px 24px; }
+  .footer-top { flex-direction: column; gap: 24px; }
+  .footer-meta { text-align: left; }
+  .footer-bottom { flex-direction: column; gap: 12px; }
+  .hero-title { font-size: 52px; }
+  .section-counter { display: none; }
+  .team-rules-grid { grid-template-columns: 1fr; }
+  .drivers-grid { grid-template-columns: repeat(2, 1fr); }
+  .registration-inner { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .flags-grid { grid-template-columns: 1fr; }
+  .penalties-grid { grid-template-columns: 1fr; }
+  .drivers-grid { grid-template-columns: 1fr; }
+}
+
+/* ========== INTERSECTION OBSERVER ANIMATIONS ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ========== TEAM RULES ========== */
+.team-rules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.team-rule-card {
+  background: var(--grey-mid);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-top: 3px solid var(--red);
+  padding: 36px 28px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.team-rule-card:hover { transform: translateY(-4px); }
+
+.team-rule-icon { font-size: 32px; margin-bottom: 12px; display: block; }
+
+.team-rule-number {
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--red);
+  line-height: 1;
+  letter-spacing: -3px;
+  margin-bottom: 8px;
+}
+
+.team-rule-label {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  color: var(--white);
+}
+
+.team-rule-desc {
+  font-size: 13px;
+  color: var(--grey-text);
+  line-height: 1.6;
+}
+
+/* ========== DRIVERS/TEAMS SECTION ========== */
+#drivers { background: var(--grey-dark); position: relative; }
+
+.drivers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.driver-team-card {
+  background: var(--grey-mid);
+  border: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1.05;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.driver-team-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--red-dark), var(--red), var(--red-light));
+}
+
+.driver-team-card:hover {
+  border-color: rgba(225,6,0,0.3);
+  transform: scale(1.02);
+}
+
+.dtc-icon { font-size: 36px; opacity: 0.12; }
+
+.dtc-soon {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.1);
+}
+
+.dtc-slot {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(225,6,0,0.35);
+  border: 1px solid rgba(225,6,0,0.2);
+  padding: 4px 12px;
+  clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+}
+
+/* ========== REGISTRATION SECTION ========== */
+#registration {
+  background: var(--grey-mid);
+  position: relative;
+  overflow: hidden;
+}
+
+#registration::before {
+  content: 'JOIN';
+  position: absolute;
+  bottom: -30px;
+  right: -20px;
+  font-size: 200px;
+  font-weight: 900;
+  color: rgba(225,6,0,0.03);
+  letter-spacing: -15px;
+  pointer-events: none;
+}
+
+.registration-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.registration-text p {
+  font-size: 15px;
+  color: var(--grey-text);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.registration-text .reg-highlight {
+  border-left: 3px solid var(--red);
+  padding-left: 16px;
+  font-size: 14px;
+  color: var(--grey-text);
+  line-height: 1.7;
+  margin: 24px 0;
+}
+
+.registration-text .reg-highlight strong { color: var(--white); }
+
+.reg-form-panel {
+  background: var(--grey-dark);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-top: 3px solid var(--red);
+  padding: 40px 36px;
+  text-align: center;
+}
+
+.reg-form-title {
+  font-size: 20px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.reg-form-sub {
+  font-size: 12px;
+  color: var(--grey-text);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+
+.reg-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--red);
+  color: var(--white);
+  padding: 18px 44px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  clip-path: polygon(14px 0%, 100% 0%, calc(100% - 14px) 100%, 0% 100%);
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.reg-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s;
+}
+
+.reg-btn:hover::before { transform: translateX(0); }
+.reg-btn:hover { background: var(--red-light); }
+
+.reg-note {
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  margin-top: 16px;
+  letter-spacing: 1px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ========== NAVIGATION ========== -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-flag">
+      <div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div>
+    </div>
+    <span class="nav-logo-text">Grand Prix Los Santos</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#schedule">Harmonogram</a></li>
+    <li><a href="#rules">Regulamin</a></li>
+    <li><a href="#drivers">Zawodnicy</a></li>
+    <li><a href="#equipment">Wyposażenie</a></li>
+    <li><a href="#attractions">Atrakcje</a></li>
+    <li><a href="#registration">Rejestracja</a></li>
+  </ul>
+  <a href="#registration" class="nav-cta">Zapisz się ▶</a>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section id="hero">
+  <div class="hero-track-bg">
+    <div class="hero-grid"></div>
+    <div class="speed-lines" id="speedLines"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">Edycja 2026 · Los Santos Circuit</span>
+    </div>
+
+    <h1 class="hero-title">
+      Grand Prix
+      <span>Los Santos</span>
+    </h1>
+
+    <p class="hero-subtitle">Karting · Sprint · Grand Prix</p>
+
+    <div class="hero-date-badge">
+      <div class="date-day">21–22</div>
+      <div class="date-info">
+        <div class="date-month">Marca 2026</div>
+        <div class="date-year">Sobota & Niedziela</div>
+      </div>
+    </div>
+
+    <div class="hero-cta-group">
+      <a href="#schedule" class="btn-primary">▶ &nbsp;Sprawdź harmonogram</a>
+      <a href="#rules" class="btn-secondary">Regulamin</a>
+    </div>
+  </div>
+
+  <div class="hero-number">25</div>
+
+  <div class="hero-scroll">
+    <div class="scroll-indicator"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<div class="red-divider"></div>
+
+<!-- ========== SCHEDULE ========== -->
+<section id="schedule">
+  <div class="section-counter">01</div>
+  <div class="section-header reveal">
+    <div class="section-eyebrow">
+      <div class="section-eyebrow-dot"></div>
+      <span class="section-eyebrow-text">Harmonogram zawodów</span>
+    </div>
+    <h2 class="section-title">Race <em>Weekend</em></h2>
+  </div>
+
+  <div class="schedule-days">
+    <!-- SOBOTA -->
+    <div class="day-card reveal reveal-delay-1">
+      <div class="day-header">
+        <div class="day-name">🏁 Sobota</div>
+        <div class="day-date">21.03.2026</div>
+      </div>
+      <div class="schedule-items">
+        <div class="schedule-item">
+          <div class="item-icon">🏎</div>
+          <div class="item-info">
+            <div class="item-name">Trening & Odprawa</div>
+            <div class="item-desc">Zapoznanie z torem i przepisami</div>
+          </div>
+          <div class="item-time">20:00–20:30</div>
+        </div>
+        <div class="schedule-item">
+          <div class="item-icon">⏱</div>
+          <div class="item-info">
+            <div class="item-name">Kwalifikacje</div>
+            <div class="item-desc">Ustalenie siatki startowej</div>
+          </div>
+          <div class="item-time">20:40–21:55</div>
+        </div>
+        <div class="schedule-item featured">
+          <div class="item-icon">🏁</div>
+          <div class="item-info">
+            <div class="item-name">Wyścig Sprint</div>
+            <div class="item-desc">Sobotni wyścig krótki</div>
+          </div>
+          <div class="item-time">22:00</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NIEDZIELA -->
+    <div class="day-card reveal reveal-delay-2">
+      <div class="day-header">
+        <div class="day-name">🏆 Niedziela</div>
+        <div class="day-date">22.03.2026</div>
+      </div>
+      <div class="schedule-items">
+        <div class="schedule-item featured" style="padding: 40px 32px;">
+          <div class="item-icon" style="width:56px;height:56px;font-size:26px;">🏆</div>
+          <div class="item-info">
+            <div class="item-name" style="font-size:18px;">Wyścig Główny</div>
+            <div class="item-desc">Finałowy wyścig Grand Prix Los Santos 2025</div>
+          </div>
+          <div class="item-time" style="font-size:28px;">21:00</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="red-divider"></div>
+
+<!-- ========== INFO CARDS ========== -->
+<section id="info" style="padding-top:80px;padding-bottom:80px;">
+  <div class="info-grid">
+    <div class="info-card reveal">
+      <div class="info-card-icon">🏎️</div>
+      <div class="info-card-number">03</div>
+      <div class="info-card-title">Dni wyścigu</div>
+      <div class="info-card-text">Dwa dni rywalizacji: treningi, kwalifikacje, Sprint i Wyścig Główny. Pełen format Grand Prix.</div>
+    </div>
+    <div class="info-card reveal reveal-delay-1">
+      <div class="info-card-icon">⚑</div>
+      <div class="info-card-number">06</div>
+      <div class="info-card-title">Rodzajów flag</div>
+      <div class="info-card-text">Standardowe sygnały wyścigowe obowiązują na całym torze. Każdy kierowca musi znać ich znaczenie.</div>
+    </div>
+    <div class="info-card reveal reveal-delay-2">
+      <div class="info-card-icon">📋</div>
+      <div class="info-card-number">13</div>
+      <div class="info-card-title">Artykułów regulaminu</div>
+      <div class="info-card-text">Kompletny regulamin zapewniający fair play, bezpieczeństwo i rzetelną rywalizację na torze.</div>
+    </div>
+  </div>
+</section>
+
+<div class="red-divider"></div>
+
+<!-- ========== FLAGS ========== -->
+<section id="flags">
+  <div class="section-counter">02</div>
+  <div class="section-header reveal">
+    <div class="section-eyebrow">
+      <div class="section-eyebrow-dot"></div>
+      <span class="section-eyebrow-text">Sygnalizacja</span>
+    </div>
+    <h2 class="section-title">Flagi <em>wyścigowe</em></h2>
+  </div>
+
+  <div class="flags-grid">
+    <div class="flag-card reveal">
+      <div class="flag-emoji">🟢</div>
+      <div class="flag-info">
+        <div class="flag-name">Zielona flaga</div>
+        <div class="flag-desc">Tor wolny — rozpoczęcie lub wznowienie wyścigu</div>
+      </div>
+    </div>
+    <div class="flag-card reveal reveal-delay-1">
+      <div class="flag-emoji">🟡</div>
+      <div class="flag-info">
+        <div class="flag-name">Żółta flaga</div>
+        <div class="flag-desc">Niebezpieczeństwo na torze — zakaz wyprzedzania</div>
+      </div>
+    </div>
+    <div class="flag-card reveal reveal-delay-2">
+      <div class="flag-emoji">🔵</div>
+      <div class="flag-info">
+        <div class="flag-name">Niebieska flaga</div>
+        <div class="flag-desc">Szybszy zawodnik zbliża się do dublowania</div>
+      </div>
+    </div>
+    <div class="flag-card reveal">
+      <div class="flag-emoji">⚫</div>
+      <div class="flag-info">
+        <div class="flag-name">Czarna flaga</div>
+        <div class="flag-desc">Dyskwalifikacja zawodnika</div>
+      </div>
+    </div>
+    <div class="flag-card reveal reveal-delay-1">
+      <div class="flag-emoji">🏴</div>
+      <div class="flag-info">
+        <div class="flag-name">Czarna z pomarańczowym kołem</div>
+        <div class="flag-desc">Problem techniczny — zjazd do pit lane</div>
+      </div>
+    </div>
+    <div class="flag-card reveal reveal-delay-2">
+      <div class="flag-emoji">🏁</div>
+      <div class="flag-info">
+        <div class="flag-name">Flaga w szachownicę</div>
+        <div class="flag-desc">Zakończenie wyścigu</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="red-divider"></div>
+
+<!-- ========== RULES ========== -->
+<section id="rules">
+  <div class="section-counter">03</div>
+  <div class="section-header reveal">
+    <div class="section-eyebrow">
+      <div class="section-eyebrow-dot"></div>
+      <span class="section-eyebrow-text">Zasady rywalizacji</span>
+    </div>
+    <h2 class="section-title">Regu<em>lamin</em></h2>
+  </div>
+
+  <div class="rules-container">
+    <div class="rules-column">
+
+      <div class="rule-group reveal">
+        <div class="rule-group-title">Zasady jazdy</div>
+        <div class="rule-item">
+          <div class="rule-number">5.1</div>
+          <div class="rule-text"><strong>Fair Play:</strong> Kierowcy muszą prowadzić pojazd bezpiecznie i przewidywalnie. Celowe uderzanie innych zawodników jest zabronione.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-number">5.2</div>
+          <div class="rule-text"><strong>Wyprzedzanie:</strong> Dozwolone jest wszędzie na torze, o ile odbywa się bezpiecznie. Kierowca broniący pozycji musi zostawić miejsce.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-number">5.3</div>
+          <div class="rule-text"><strong>Kontakty:</strong> Niewielkie kontakty mogą się zdarzyć, jednak agresywna jazda i powodowanie kolizji skutkuje karą.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-number">5.4</div>
+          <div class="rule-text"><strong>Blokowanie:</strong> Wielokrotna zmiana toru jazdy w celu blokowania przeciwnika jest zabroniona.</div>
+        </div>
+      </div>
+
+      <div class="rule-group reveal">
+        <div class="rule-group-title">Pit Lane</div>
+        <div class="rule-item">
+          <div class="rule-number">8.1</div>
+          <div class="rule-text">W pit lane obowiązuje <strong>ograniczenie prędkości</strong>. Należy zachować szczególną ostrożność.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-number">8.3</div>
+          <div class="rule-text"><strong>Zakaz wyprzedzania</strong> w pit lane. Wjazd i wyjazd musi odbywać się ostrożnie.</div>
+        </div>
+      </div>
+
+      <div class="rule-group reveal">
+        <div class="rule-group-title">Limity toru</div>
+        <div class="rule-item">
+          <div class="rule-number">9.1</div>
+          <div class="rule-text">Kierowcy muszą utrzymywać kart <strong>w obrębie toru</strong>.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-number">9.2</div>
+          <div class="rule-text"><strong>Skracanie toru</strong> lub uzyskiwanie przewagi przez opuszczanie toru jest zabronione.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="rules-column">
+
+      <div class="rule-group reveal">
+        <div class="rule-group-title">Procedura startu</div>
+        <div class="rule-item">
+          <div class="rule-number">▶</div>
+          <div class="rule-text"><strong>Start lotny:</strong> Kierowcy ustawiają się w dwóch rzędach, tempo dyktuje prowadzący stawki. Po sygnale — start.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-number">▶</div>
+          <div class="rule-text"><strong>Start zatrzymany:</strong> Kierowcy ustawiają się na polach startowych. Start po zgaśnięciu świateł lub sygnale sędziego.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-number">!</div>
+          <div class="rule-text">Falstart może skutkować <strong>karą czasową</strong> lub przejazdem przez pit lane.</div>
+        </div>
+      </div>
+
+      <div class="rule-group reveal">
+        <div class="rule-group-title">Protesty</div>
+        <div class="rule-item">
+          <div class="rule-number">11.1</div>
+          <div class="rule-text">Każdy zawodnik ma prawo zgłosić protest.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-number">11.2</div>
+          <div class="rule-text">Protest musi zostać złożony do <strong>30 minut</strong> po zakończeniu wyścigu.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-number">11.3</div>
+          <div class="rule-text">Decyzja sędziów po analizie protestu jest <strong>ostateczna</strong>.</div>
+        </div>
+      </div>
+
+      <div class="rule-group reveal">
+        <div class="rule-group-title">Informacje ogólne</div>
+        <div class="rule-item">
+          <div class="rule-number">1.3</div>
+          <div class="rule-text">Udział w zawodach oznacza <strong>pełną akceptację regulaminu</strong>.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-number">1.5</div>
+          <div class="rule-text">Decyzje sędziowskie są <strong>ostateczne</strong>.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-number">3.3</div>
+          <div class="rule-text">Kierowca pod wpływem alkoholu lub środków odurzających zostaje <strong>natychmiast zdyskwalifikowany</strong>.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TEAM RULES SUBSECTION -->
+  <div class="section-header reveal" style="margin-top:60px;margin-bottom:32px;">
+    <div class="section-eyebrow">
+      <div class="section-eyebrow-dot"></div>
+      <span class="section-eyebrow-text">Regulamin zespołów</span>
+    </div>
+    <h3 class="section-title" style="font-size:36px;">Zespo<em>ły</em></h3>
+  </div>
+
+  <div class="team-rules-grid">
+    <div class="team-rule-card reveal">
+      <div class="team-rule-icon">🏎🏎</div>
+      <div class="team-rule-number">2</div>
+      <div class="team-rule-label">Karty na zespół</div>
+      <div class="team-rule-desc">Każdy zespół składa się z dokładnie dwóch kartów startujących pod wspólną nazwą.</div>
+    </div>
+    <div class="team-rule-card reveal reveal-delay-1">
+      <div class="team-rule-icon">👤👤</div>
+      <div class="team-rule-number">2+2</div>
+      <div class="team-rule-label">Kierowcy</div>
+      <div class="team-rule-desc">Każdy zespół wystawia 2 kierowców głównych. Dopuszcza się maksymalnie 2 kierowców rezerwowych.</div>
+    </div>
+    <div class="team-rule-card reveal reveal-delay-2">
+      <div class="team-rule-icon">🏁</div>
+      <div class="team-rule-number">3</div>
+      <div class="team-rule-label">Zespoły na frakcję</div>
+      <div class="team-rule-desc">Każda frakcja może zgłosić do wyścigu maksymalnie 3 zespoły.</div>
+    </div>
+  </div>
+    <div class="section-eyebrow">
+      <div class="section-eyebrow-dot"></div>
+      <span class="section-eyebrow-text">System kar</span>
+    </div>
+    <h3 class="section-title" style="font-size:28px;">Kary <em>&amp; sankcje</em></h3>
+  </div>
+
+  <div class="penalties-grid">
+    <div class="penalty-card reveal">
+      <div class="penalty-icon">⚠️</div>
+      <div class="penalty-name">Ostrzeżenie</div>
+    </div>
+    <div class="penalty-card reveal reveal-delay-1">
+      <div class="penalty-icon">⏱</div>
+      <div class="penalty-name">Kara czasowa</div>
+    </div>
+    <div class="penalty-card reveal reveal-delay-2">
+      <div class="penalty-icon">⬇️</div>
+      <div class="penalty-name">Oddanie pozycji</div>
+    </div>
+    <div class="penalty-card reveal">
+      <div class="penalty-icon">🚧</div>
+      <div class="penalty-name">Drive Through</div>
+    </div>
+    <div class="penalty-card reveal reveal-delay-1">
+      <div class="penalty-icon">⛔</div>
+      <div class="penalty-name">Stop &amp; Go</div>
+    </div>
+    <div class="penalty-card reveal reveal-delay-2">
+      <div class="penalty-icon">❌</div>
+      <div class="penalty-name">Dyskwalifikacja</div>
+    </div>
+  </div>
+</section>
+
+<div class="red-divider"></div>
+
+<!-- ========== EQUIPMENT ========== -->
+<section id="equipment">
+  <div class="section-counter">04</div>
+  <div class="section-header reveal">
+    <div class="section-eyebrow">
+      <div class="section-eyebrow-dot"></div>
+      <span class="section-eyebrow-text">Wymogi sprzętowe</span>
+    </div>
+    <h2 class="section-title">Wypo<em>sażenie</em></h2>
+  </div>
+
+  <div class="equipment-split">
+    <div class="equipment-block reveal">
+      <div class="equipment-block-title">🔴 Wymagane — obowiązkowe</div>
+      <ul class="equipment-list">
+        <li class="equipment-required">Kask kartingowy lub motocyklowy</li>
+        <li class="equipment-required">Rękawice ochronne</li>
+        <li class="equipment-required">Zamknięte obuwie</li>
+      </ul>
+    </div>
+    <div class="equipment-block reveal reveal-delay-1">
+      <div class="equipment-block-title">⚪ Zalecane — opcjonalne</div>
+      <ul class="equipment-list">
+        <li>Kombinezon kartingowy</li>
+        <li>Ochraniacz żeber</li>
+        <li>Ochraniacz szyi</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="red-divider"></div>
+
+<!-- ========== ATTRACTIONS ========== -->
+<section id="attractions">
+  <div class="section-counter">05</div>
+  <div class="section-header reveal">
+    <div class="section-eyebrow">
+      <div class="section-eyebrow-dot"></div>
+      <span class="section-eyebrow-text">Poza torem</span>
+    </div>
+    <h2 class="section-title">Atrak<em>cje</em></h2>
+  </div>
+
+  <div class="attractions-grid">
+    <div class="attraction-card reveal">
+      <span class="attraction-big-icon">🔧</span>
+      <div class="attraction-title">Mechanicy</div>
+      <div class="attraction-desc">Na wydarzeniu pojawią się profesjonalni mechanicy, którzy będą współpracować bezpośrednio z zespołami podczas całego weekendu.</div>
+    </div>
+    <div class="attraction-card reveal reveal-delay-1">
+      <span class="attraction-big-icon">🍔</span>
+      <div class="attraction-title">FoodTruck Hookies</div>
+      <div class="attraction-desc">Wyjątkowy food truck z pysznym jedzeniem. Zadbaj o energię przed swoim wyścigiem!</div>
+    </div>
+    <div class="attraction-card reveal reveal-delay-2">
+      <span class="attraction-big-icon">🎧</span>
+      <div class="attraction-title">DJ Stage</div>
+      <div class="attraction-desc">Specjalnie przygotowana scena z profesjonalnym setem DJ. Muzyka na żywo przez cały weekend wyścigowy.</div>
+    </div>
+  </div>
+</section>
+
+<div class="red-divider"></div>
+
+<!-- ========== DRIVERS / TEAMS ========== -->
+<section id="drivers">
+  <div class="section-counter">06</div>
+  <div class="section-header reveal">
+    <div class="section-eyebrow">
+      <div class="section-eyebrow-dot"></div>
+      <span class="section-eyebrow-text">Zgłoszone zespoły i zawodnicy</span>
+    </div>
+    <h2 class="section-title">Zawod<em>nicy</em></h2>
+  </div>
+  <p class="drivers-intro reveal">Poniżej znajdziesz listę zespołów i kierowców zakwalifikowanych do startu. Informacje będą aktualizowane po zakończeniu rejestracji.</p>
+
+  <div class="drivers-grid">
+    <div class="driver-team-card reveal">
+      <div class="dtc-icon">🏎</div>
+      <div class="dtc-soon">SOON</div>
+      <div class="dtc-slot">Slot 1 — Frakcja A</div>
+    </div>
+    <div class="driver-team-card reveal reveal-delay-1">
+      <div class="dtc-icon">🏎</div>
+      <div class="dtc-soon">SOON</div>
+      <div class="dtc-slot">Slot 2 — Frakcja A</div>
+    </div>
+    <div class="driver-team-card reveal reveal-delay-2">
+      <div class="dtc-icon">🏎</div>
+      <div class="dtc-soon">SOON</div>
+      <div class="dtc-slot">Slot 3 — Frakcja A</div>
+    </div>
+    <div class="driver-team-card reveal">
+      <div class="dtc-icon">🏎</div>
+      <div class="dtc-soon">SOON</div>
+      <div class="dtc-slot">Slot 1 — Frakcja B</div>
+    </div>
+    <div class="driver-team-card reveal reveal-delay-1">
+      <div class="dtc-icon">🏎</div>
+      <div class="dtc-soon">SOON</div>
+      <div class="dtc-slot">Slot 2 — Frakcja B</div>
+    </div>
+    <div class="driver-team-card reveal reveal-delay-2">
+      <div class="dtc-icon">🏎</div>
+      <div class="dtc-soon">SOON</div>
+      <div class="dtc-slot">Slot 3 — Frakcja B</div>
+    </div>
+  </div>
+</section>
+
+<div class="red-divider"></div>
+
+<!-- ========== REGISTRATION ========== -->
+<section id="registration">
+  <div class="section-counter">07</div>
+  <div class="registration-inner">
+    <div class="registration-text reveal">
+      <div class="section-eyebrow" style="margin-bottom:16px;">
+        <div class="section-eyebrow-dot"></div>
+        <span class="section-eyebrow-text">Dołącz do wyścigu</span>
+      </div>
+      <h2 class="section-title" style="margin-bottom:24px;">Reje<em>stracja</em></h2>
+      <p>Chcesz wziąć udział w Grand Prix Los Santos 2026? Wypełnij formularz zgłoszeniowy i zapewnij swojemu zespołowi miejsce na starcie.</p>
+      <p>Zgłoszenia są przyjmowane do wyczerpania miejsc. Liczba miejsc dla każdej frakcji jest ograniczona.</p>
+      <div class="reg-highlight">
+        <strong>Pamiętaj:</strong> Każda frakcja może wystawić maksymalnie 3 zespoły.<br>
+        Zespół = 2 karty + 2 kierowców głównych (+ do 2 rezerwowych).<br>
+        <strong>Udział = akceptacja regulaminu.</strong>
+      </div>
+    </div>
+
+    <div class="reg-form-panel reveal reveal-delay-1">
+      <div style="font-size:48px;margin-bottom:16px;">🏁</div>
+      <div class="reg-form-title">Formularz zgłoszeniowy</div>
+      <div class="reg-form-sub">Grand Prix Los Santos 2026</div>
+      <a href="rejestracja.html" target="_blank" rel="noopener" class="reg-btn">
+        ▶ &nbsp; Wypełnij zgłoszenie
+      </a>
+      <div class="reg-note">Zostaniesz przeniesiony do formularza rejestracji</div>
+    </div>
+  </div>
+</section>
+
+<div class="red-divider"></div>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-brand-name">Grand Prix Los Santos</div>
+      <div class="footer-brand-sub">Oficjalna strona zawodów · 2026</div>
+    </div>
+    <div class="footer-meta">
+      <div>📅 21–22 Marca 2026</div>
+      <div>🏁 Los Santos Circuit</div>
+      <div>🎤 Regulamin obowiązuje wszystkich uczestników</div>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Grand Prix Los Santos. Wszelkie prawa zastrzeżone.</div>
+    <div class="footer-disclaimer">Organizator zastrzega sobie prawo do zmian w regulaminie.</div>
+  </div>
+</footer>
+
+<script>
+// ===== SPEED LINES IN HERO =====
+const linesContainer = document.getElementById('speedLines');
+for (let i = 0; i < 18; i++) {
+  const line = document.createElement('div');
+  line.className = 'speed-line';
+  const top = 5 + Math.random() * 90;
+  const width = 80 + Math.random() * 200;
+  const delay = Math.random() * 6;
+  const duration = 2 + Math.random() * 3;
+  const opacity = 0.2 + Math.random() * 0.5;
+  line.style.cssText = `
+    top: ${top}%;
+    width: ${width}px;
+    animation-duration: ${duration}s;
+    animation-delay: ${delay}s;
+    opacity: ${opacity};
+  `;
+  linesContainer.appendChild(line);
+}
+
+// ===== INTERSECTION OBSERVER =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ===== ACTIVE NAV LINKS =====
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 100;
+    if (window.scrollY >= sectionTop) {
+      current = section.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.style.color = '';
+    if (link.getAttribute('href') === '#' + current) {
+      link.style.color = '#fff';
+    }
+  });
+});
+
+// ===== NAV SHADOW ON SCROLL =====
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  if (window.scrollY > 40) {
+    nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.6)';
+  } else {
+    nav.style.boxShadow = '';
+  }
+});
+</script>
+
+</body>
+</html>
