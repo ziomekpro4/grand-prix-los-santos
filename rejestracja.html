@@ -1036,38 +1036,39 @@ document.getElementById('regForm').addEventListener('submit', function(e) {
     return;
   }
 
-  // ⚙️  WKLEJ TU SWÓJ SCRIPT URL Z GOOGLE APPS SCRIPT
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw_G6k2SxaLQIrNOR0E9gQ50Mdgyrpjiac4LE1MRB3fvVVBf7BYpGXM3yxCAz8UHq5M/exec';
+  const FORMSPREE_URL = 'https://formspree.io/f/mjgarpgj';
 
-  const payload = {
-    teamName:   document.getElementById('teamName').value.trim(),
-    teamBoss:   document.getElementById('teamBoss').value.trim(),
-    teamLogo:   document.getElementById('teamLogo').value.trim(),
-    driver1:    document.getElementById('driver1first').value.trim() + ' ' + document.getElementById('driver1last').value.trim(),
-    driver2:    document.getElementById('driver2first').value.trim() + ' ' + document.getElementById('driver2last').value.trim(),
-    reserve1:  (document.getElementById('reserve1first').value.trim() + ' ' + document.getElementById('reserve1last').value.trim()).trim() || '—',
-    reserve2:  (document.getElementById('reserve2first').value.trim() + ' ' + document.getElementById('reserve2last').value.trim()).trim() || '—',
-    timestamp:  new Date().toLocaleString('pl-PL')
-  };
+  const payload = new FormData();
+  payload.append('Nazwa zespołu',     document.getElementById('teamName').value.trim());
+  payload.append('Szef zespołu',      document.getElementById('teamBoss').value.trim());
+  payload.append('Logo URL',          document.getElementById('teamLogo').value.trim() || '—');
+  payload.append('Kierowca 1',        document.getElementById('driver1first').value.trim() + ' ' + document.getElementById('driver1last').value.trim());
+  payload.append('Kierowca 2',        document.getElementById('driver2first').value.trim() + ' ' + document.getElementById('driver2last').value.trim());
+  payload.append('Rezerwowy 1',      (document.getElementById('reserve1first').value.trim() + ' ' + document.getElementById('reserve1last').value.trim()).trim() || '—');
+  payload.append('Rezerwowy 2',      (document.getElementById('reserve2first').value.trim() + ' ' + document.getElementById('reserve2last').value.trim()).trim() || '—');
+  payload.append('_subject',          '🏁 Nowe zgłoszenie: ' + document.getElementById('teamName').value.trim());
+  payload.append('_replyto',          'wojciechowskik28@gmail.com');
 
-  // Animate button immediately
   submitBtn.textContent = '⏳ Wysyłanie...';
   submitBtn.disabled = true;
 
-  fetch(SCRIPT_URL, {
+  fetch(FORMSPREE_URL, {
     method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
+    body: payload,
+    headers: { 'Accept': 'application/json' }
   })
-  .then(() => {
-    document.getElementById('successOverlay').classList.add('show');
-    progressBar.style.width = '100%';
+  .then(res => {
+    if (res.ok) {
+      document.getElementById('successOverlay').classList.add('show');
+      progressBar.style.width = '100%';
+    } else {
+      return res.json().then(data => { throw new Error(data.error || 'Błąd'); });
+    }
   })
-  .catch(() => {
-    // Nawet przy no-cors fetch rzuca tylko przy braku sieci
-    document.getElementById('successOverlay').classList.add('show');
-    progressBar.style.width = '100%';
+  .catch(err => {
+    submitBtn.textContent = '▶ Wyślij zgłoszenie';
+    submitBtn.disabled = false;
+    alert('❌ Błąd wysyłania. Sprawdź połączenie i spróbuj ponownie.\n\n' + err.message);
   });
 });
 </script>
