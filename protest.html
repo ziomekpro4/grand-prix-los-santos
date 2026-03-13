@@ -1056,11 +1056,51 @@ function submitProtest() {
     witnesses:       document.getElementById('witnesses').value.trim(),
   };
 
+  // Zapisz do lokalnej bazy
   saveProtest(entry);
 
-  document.getElementById('protestId').textContent = id;
-  document.getElementById('successOverlay').classList.add('show');
-  window.scrollTo(0, 0);
+  // Wyślij przez Formspree
+  const FORMSPREE_URL = 'https://formspree.io/f/xgonzapk';
+
+  const payload = new FormData();
+  payload.append('_subject',           '⚑ Protest #' + id + ' — ' + entry.reporter_name + ' vs ' + entry.driver_name);
+  payload.append('ID protestu',        id);
+  payload.append('Data zgłoszenia',    date);
+  payload.append('Zgłaszający',        entry.reporter_name);
+  payload.append('Drużyna zgłaszającego', entry.reporter_team);
+  payload.append('Zgłaszany kierowca', entry.driver_name);
+  payload.append('Drużyna kierowcy',   entry.driver_team);
+  payload.append('Numer startowy',     entry.driver_number || '—');
+  payload.append('Sesja',              entry.race_session);
+  payload.append('Okrążenie / czas',   entry.incident_lap || '—');
+  payload.append('Rodzaj naruszenia',  entry.violation_type);
+  payload.append('Powód protestu',     entry.protest_reason);
+  payload.append('Link do dowodu',     entry.evidence_link || '—');
+  payload.append('Świadkowie',         entry.witnesses || '—');
+
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = '⏳ Wysyłanie...';
+  btn.disabled = true;
+
+  fetch(FORMSPREE_URL, {
+    method: 'POST',
+    body: payload,
+    headers: { 'Accept': 'application/json' }
+  })
+  .then(res => {
+    if (res.ok) {
+      document.getElementById('protestId').textContent = id;
+      document.getElementById('successOverlay').classList.add('show');
+      window.scrollTo(0, 0);
+    } else {
+      return res.json().then(data => { throw new Error(data.error || 'Błąd serwera'); });
+    }
+  })
+  .catch(err => {
+    btn.textContent = '⚑ Złóż protest oficjalnie';
+    btn.disabled = false;
+    alert('❌ Błąd wysyłania. Sprawdź połączenie i spróbuj ponownie.\n\n' + err.message);
+  });
 }
 </script>
 
