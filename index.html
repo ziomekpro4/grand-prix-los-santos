@@ -1270,6 +1270,396 @@ footer {
   .drivers-grid { grid-template-columns: 1fr; }
 }
 
+/* ========== CIRCUIT SECTION ========== */
+#circuit {
+  background: var(--black);
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+
+.circuit-hero {
+  position: relative;
+  height: 70vh;
+  min-height: 500px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.circuit-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  filter: brightness(0.7);
+  transition: transform 8s ease;
+}
+
+.circuit-hero:hover .circuit-hero-img { transform: scale(1.04); }
+
+.circuit-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 50%, rgba(225,6,0,0.08) 100%);
+}
+
+.circuit-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 80px 60px;
+  width: 100%;
+}
+
+.circuit-hero-tag {
+  display: inline-flex;
+  background: var(--red);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  margin-bottom: 16px;
+}
+
+.circuit-hero-title {
+  font-size: clamp(40px, 6vw, 80px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  line-height: 0.95;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.8);
+}
+
+.circuit-hero-title em { font-style: normal; color: var(--red); }
+
+.circuit-hero-sub {
+  font-size: 13px;
+  color: var(--grey-text);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-top: 12px;
+}
+
+.circuit-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--grey-mid);
+  border-top: 3px solid var(--red);
+}
+
+.circuit-stat {
+  padding: 28px 32px;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.circuit-stat:last-child { border-right: none; }
+.circuit-stat:hover { background: rgba(225,6,0,0.05); }
+
+.circuit-stat-value {
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--red);
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.circuit-stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+}
+
+.circuit-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 6px;
+  background: var(--black);
+}
+
+.circuit-photo {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.circuit-photo:first-child { grid-column: span 2; aspect-ratio: 21/9; }
+.circuit-photo:not(:first-child) { aspect-ratio: 16/9; }
+
+.circuit-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease, filter 0.3s;
+  filter: brightness(0.9);
+}
+
+.circuit-photo:hover img { transform: scale(1.03); filter: brightness(1.05); }
+
+.circuit-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(225,6,0,0);
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circuit-photo:hover .circuit-photo-overlay { background: rgba(225,6,0,0.08); }
+
+.circuit-photo-overlay span {
+  font-size: 28px;
+  opacity: 0;
+  transform: scale(0.7);
+  transition: all 0.3s;
+}
+
+.circuit-photo:hover .circuit-photo-overlay span { opacity: 1; transform: scale(1); }
+
+.circuit-photo-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(0deg, rgba(0,0,0,0.85), transparent);
+  padding: 30px 20px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  transform: translateY(100%);
+  transition: transform 0.3s;
+}
+
+.circuit-photo:hover .circuit-photo-label { transform: translateY(0); }
+
+@media (max-width: 900px) {
+  .circuit-hero-content { padding: 0 24px 40px; }
+  .circuit-stats { grid-template-columns: repeat(2, 1fr); }
+  .circuit-photos { grid-template-columns: 1fr; }
+  .circuit-photo:first-child { grid-column: span 1; aspect-ratio: 16/9; }
+}
+
+#gallery {
+  background: var(--grey-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+#gallery::before {
+  content: 'FOTO';
+  position: absolute;
+  bottom: -20px;
+  right: -10px;
+  font-size: 180px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.02);
+  letter-spacing: -10px;
+  pointer-events: none;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: 6px;
+}
+
+/* Featured items — bigger */
+.gallery-item:nth-child(1) {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.gallery-item:nth-child(6) {
+  grid-column: span 2;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  background: var(--grey-mid);
+  aspect-ratio: 16/10;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.04);
+  transition: transform 0.3s;
+}
+
+.gallery-item:nth-child(1) { aspect-ratio: auto; }
+
+.gallery-item:hover { transform: scale(1.01); z-index: 2; }
+
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-item:hover .gallery-img { transform: scale(1.05); }
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+/* Placeholder state */
+.gallery-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--grey-mid);
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10px,
+    rgba(255,255,255,0.01) 10px,
+    rgba(255,255,255,0.01) 20px
+  );
+}
+
+.gallery-ph-icon {
+  font-size: 36px;
+  opacity: 0.12;
+}
+
+.gallery-ph-soon {
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.08);
+}
+
+.gallery-ph-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(225,6,0,0.3);
+  border: 1px solid rgba(225,6,0,0.15);
+  padding: 3px 10px;
+  clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+}
+
+/* Red corner accent */
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 20px 20px 0 0;
+  border-color: var(--red) transparent transparent transparent;
+  opacity: 0.5;
+  z-index: 3;
+}
+
+/* Hover overlay */
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(225,6,0,0.08);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-overlay-icon {
+  font-size: 32px;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+  transform: scale(0.8);
+  transition: transform 0.3s;
+}
+
+.gallery-item:hover .gallery-overlay-icon {
+  transform: scale(1);
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0,0,0,0.95);
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.lightbox.open { display: flex; animation: fadeIn 0.2s ease; }
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  box-shadow: 0 0 60px rgba(0,0,0,0.8);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px; right: 28px;
+  font-size: 32px;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  background: none;
+  border: none;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.lightbox-close:hover { color: var(--red); }
+
+.gallery-hint {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.15);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gallery-item:nth-child(1) {
+    grid-column: span 2;
+  }
+  .gallery-item:nth-child(6) {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 500px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-item:nth-child(1),
+  .gallery-item:nth-child(6) { grid-column: span 1; }
+}
+
 /* ========== INTERSECTION OBSERVER ANIMATIONS ========== */
 .reveal {
   opacity: 0;
@@ -1512,10 +1902,10 @@ footer {
   </a>
   <ul class="nav-links">
     <li><a href="#schedule">Harmonogram</a></li>
+    <li><a href="#circuit">Circuit</a></li>
     <li><a href="#rules">Regulamin</a></li>
     <li><a href="#drivers">Zawodnicy</a></li>
-    <li><a href="#equipment">Wyposażenie</a></li>
-    <li><a href="#attractions">Atrakcje</a></li>
+    <li><a href="#gallery">Galeria</a></li>
     <li><a href="#registration">Rejestracja</a></li>
   </ul>
   <a href="#registration" class="nav-cta">Zapisz się ▶</a>
@@ -1655,6 +2045,72 @@ footer {
       <div class="info-card-text">Kompletny regulamin zapewniający fair play, bezpieczeństwo i rzetelną rywalizację na torze.</div>
     </div>
   </div>
+</section>
+
+<div class="red-divider"></div>
+
+<!-- ========== CIRCUIT ========== -->
+<section id="circuit">
+
+  <!-- Hero — zdjęcie Start/Finish -->
+  <div class="circuit-hero">
+    <img class="circuit-hero-img" src="tor2.png" alt="Start/Finish Los Santos Circuit">
+    <div class="circuit-hero-overlay"></div>
+    <div class="circuit-hero-content">
+      <div class="circuit-hero-tag">🏁 Los Santos Circuit</div>
+      <h2 class="circuit-hero-title">The <em>Track</em></h2>
+      <p class="circuit-hero-sub">Grand Prix Los Santos · Edycja 2026</p>
+    </div>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="circuit-stats">
+    <div class="circuit-stat">
+      <div class="circuit-stat-value">2</div>
+      <div class="circuit-stat-label">Sektory toru</div>
+    </div>
+    <div class="circuit-stat">
+      <div class="circuit-stat-value">🏎</div>
+      <div class="circuit-stat-label">Karting</div>
+    </div>
+    <div class="circuit-stat">
+      <div class="circuit-stat-value">GTA</div>
+      <div class="circuit-stat-label">Los Santos</div>
+    </div>
+    <div class="circuit-stat">
+      <div class="circuit-stat-value">21</div>
+      <div class="circuit-stat-label">Marca 2026</div>
+    </div>
+  </div>
+
+  <!-- Photos grid -->
+  <div class="circuit-photos">
+
+    <!-- Duże zdjęcie z lotu ptaka -->
+    <div class="circuit-photo" data-src="tor1.png">
+      <img src="tor1.png" alt="Widok toru z lotu ptaka">
+      <div class="circuit-photo-overlay"><span>🔍</span></div>
+      <div class="circuit-photo-label">Widok z lotu ptaka</div>
+    </div>
+
+    <!-- Zdjęcie Start/Finish -->
+    <div class="circuit-photo" data-src="tor2.png">
+      <img src="tor2.png" alt="Linia Start/Finish">
+      <div class="circuit-photo-overlay"><span>🔍</span></div>
+      <div class="circuit-photo-label">Linia Start / Finish</div>
+    </div>
+
+    <!-- Placeholder 3 -->
+    <div class="circuit-photo" data-src="">
+      <div class="gallery-placeholder" style="min-height:280px;">
+        <div class="gallery-ph-icon">📷</div>
+        <div class="gallery-ph-soon">SOON</div>
+        <div class="gallery-ph-label">Więcej zdjęć po wydarzeniu</div>
+      </div>
+    </div>
+
+  </div>
+
 </section>
 
 <div class="red-divider"></div>
@@ -1962,6 +2418,92 @@ footer {
 
 <div class="red-divider"></div>
 
+<!-- ========== GALLERY ========== -->
+<section id="gallery">
+  <div class="section-counter">06</div>
+  <div class="section-header reveal">
+    <div class="section-eyebrow">
+      <div class="section-eyebrow-dot"></div>
+      <span class="section-eyebrow-text">Zdjęcia z toru</span>
+    </div>
+    <h2 class="section-title">Gale<em>ria</em></h2>
+  </div>
+
+  <div class="gallery-grid">
+
+    <!-- Slot 1 — duży (2x2) -->
+    <div class="gallery-item reveal" data-src="">
+      <div class="gallery-placeholder">
+        <div class="gallery-ph-icon">📷</div>
+        <div class="gallery-ph-soon">SOON</div>
+        <div class="gallery-ph-label">Zdjęcie główne</div>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
+    </div>
+
+    <!-- Slot 2 -->
+    <div class="gallery-item reveal reveal-delay-1" data-src="">
+      <div class="gallery-placeholder">
+        <div class="gallery-ph-icon">🏎</div>
+        <div class="gallery-ph-soon">SOON</div>
+        <div class="gallery-ph-label">Tor</div>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
+    </div>
+
+    <!-- Slot 3 -->
+    <div class="gallery-item reveal reveal-delay-2" data-src="">
+      <div class="gallery-placeholder">
+        <div class="gallery-ph-icon">🏁</div>
+        <div class="gallery-ph-soon">SOON</div>
+        <div class="gallery-ph-label">Start</div>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
+    </div>
+
+    <!-- Slot 4 -->
+    <div class="gallery-item reveal" data-src="">
+      <div class="gallery-placeholder">
+        <div class="gallery-ph-icon">🏆</div>
+        <div class="gallery-ph-soon">SOON</div>
+        <div class="gallery-ph-label">Podium</div>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
+    </div>
+
+    <!-- Slot 5 -->
+    <div class="gallery-item reveal reveal-delay-1" data-src="">
+      <div class="gallery-placeholder">
+        <div class="gallery-ph-icon">👥</div>
+        <div class="gallery-ph-soon">SOON</div>
+        <div class="gallery-ph-label">Zespoły</div>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
+    </div>
+
+    <!-- Slot 6 — szeroki (2x1) -->
+    <div class="gallery-item reveal reveal-delay-2" data-src="">
+      <div class="gallery-placeholder">
+        <div class="gallery-ph-icon">🎧</div>
+        <div class="gallery-ph-soon">SOON</div>
+        <div class="gallery-ph-label">Atrakcje</div>
+      </div>
+      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
+    </div>
+
+  </div>
+
+  <p class="gallery-hint">Zdjęcia zostaną dodane po wydarzeniu · Kliknij zdjęcie aby powiększyć</p>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="Galeria">
+</div>
+
+<div class="red-divider"></div>
+
 <!-- ========== DRIVERS / TEAMS ========== -->
 <section id="drivers">
   <div class="section-counter">06</div>
@@ -2115,7 +2657,37 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// ===== NAV SHADOW ON SCROLL =====
+// ===== GALLERY + CIRCUIT LIGHTBOX =====
+document.querySelectorAll('.gallery-item, .circuit-photo').forEach(item => {
+  item.addEventListener('click', () => {
+    const src = item.getAttribute('data-src');
+    if (!src) return; // placeholder — no lightbox
+    document.getElementById('lightboxImg').src = src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+document.getElementById('lightboxClose').addEventListener('click', () => {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+});
+
+document.getElementById('lightbox').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('lightbox')) {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
+
+
 window.addEventListener('scroll', () => {
   const nav = document.querySelector('nav');
   if (window.scrollY > 40) {
