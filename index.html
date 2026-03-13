@@ -145,405 +145,6 @@ nav {
 
 .nav-cta:hover { background: var(--red-light); }
 
-.nav-protest {
-  color: var(--red) !important;
-  border: 1px solid rgba(225,6,0,0.35);
-  padding: 5px 14px;
-  font-size: 11px !important;
-  letter-spacing: 2px !important;
-  clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
-  transition: background 0.2s, color 0.2s !important;
-}
-.nav-protest:hover {
-  background: rgba(225,6,0,0.1) !important;
-  color: #ff2a1a !important;
-}
-.nav-protest::after { display: none !important; }
-
-/* ===== PROTEST SECTION ===== */
-#protest {
-  background: var(--grey-dark);
-  position: relative;
-  overflow: hidden;
-  border-top: 3px solid var(--red);
-}
-
-#protest::before {
-  content: 'PROTEST';
-  position: absolute;
-  right: -20px;
-  top: -30px;
-  font-family: 'Titillium Web', sans-serif;
-  font-size: 180px;
-  font-weight: 900;
-  letter-spacing: -8px;
-  color: rgba(225,6,0,0.04);
-  pointer-events: none;
-  line-height: 1;
-  user-select: none;
-}
-
-.protest-header {
-  margin-bottom: 48px;
-}
-
-.protest-explainer {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  margin-bottom: 56px;
-}
-
-.protest-step {
-  background: var(--grey-mid);
-  padding: 32px 28px;
-  position: relative;
-  border-bottom: 3px solid transparent;
-  transition: border-color 0.2s, background 0.2s;
-}
-
-.protest-step:hover {
-  border-bottom-color: var(--red);
-  background: rgba(225,6,0,0.04);
-}
-
-.protest-step-num {
-  font-family: 'Titillium Web', sans-serif;
-  font-size: 60px;
-  font-weight: 900;
-  color: rgba(225,6,0,0.1);
-  line-height: 1;
-  letter-spacing: -3px;
-  margin-bottom: 8px;
-}
-
-.protest-step-title {
-  font-family: 'Titillium Web', sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--white);
-  margin-bottom: 10px;
-}
-
-.protest-step-title em {
-  color: var(--red);
-  font-style: normal;
-}
-
-.protest-step-text {
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--grey-text);
-}
-
-/* Warning banner */
-.protest-warning {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  background: rgba(225,6,0,0.07);
-  border: 1px solid rgba(225,6,0,0.2);
-  border-left: 4px solid var(--red);
-  padding: 20px 28px;
-  margin-bottom: 48px;
-}
-
-.protest-warning-icon {
-  font-size: 22px;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.protest-warning-text {
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--grey-text);
-}
-
-.protest-warning-text strong {
-  color: var(--red);
-  display: block;
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 4px;
-}
-
-/* Protest form */
-.protest-form-wrap {
-  background: var(--grey-mid);
-  border-top: 3px solid var(--red);
-  padding: 44px 48px;
-}
-
-.protest-form-title {
-  font-family: 'Titillium Web', sans-serif;
-  font-size: 26px;
-  font-weight: 900;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--white);
-  margin-bottom: 4px;
-}
-
-.protest-form-sub {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--grey-text);
-  margin-bottom: 36px;
-}
-
-.protest-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px 24px;
-}
-
-.protest-grid .pf-full {
-  grid-column: span 2;
-}
-
-.pf {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.pf label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--grey-text);
-}
-
-.pf label .req { color: var(--red); margin-left: 3px; }
-
-.pf input,
-.pf select,
-.pf textarea {
-  background: var(--grey-dark);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-bottom: 2px solid rgba(225,6,0,0.2);
-  color: var(--white);
-  font-family: 'Titillium Web', sans-serif;
-  font-size: 14px;
-  padding: 12px 16px;
-  outline: none;
-  width: 100%;
-  clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
-  transition: border-color 0.2s, background 0.2s;
-  -webkit-appearance: none;
-}
-
-.pf input::placeholder,
-.pf textarea::placeholder { color: rgba(255,255,255,0.15); }
-
-.pf input:focus,
-.pf select:focus,
-.pf textarea:focus {
-  border-bottom-color: var(--red);
-  background: rgba(225,6,0,0.04);
-}
-
-.pf select option { background: #1a1a1a; }
-.pf textarea { resize: vertical; min-height: 110px; }
-
-/* Incident type badges */
-.incident-types {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.incident-type {
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 14px 10px;
-  background: var(--grey-dark);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-bottom: 2px solid transparent;
-  text-align: center;
-  transition: all 0.2s;
-  clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
-}
-
-.incident-type:hover {
-  background: rgba(225,6,0,0.06);
-  border-bottom-color: rgba(225,6,0,0.3);
-}
-
-.incident-type.selected {
-  background: rgba(225,6,0,0.1);
-  border-bottom-color: var(--red);
-  border-color: rgba(225,6,0,0.25);
-}
-
-.incident-type input { display: none; }
-
-.incident-type-icon { font-size: 22px; }
-
-.incident-type-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--grey-text);
-  line-height: 1.3;
-}
-
-.incident-type.selected .incident-type-label { color: var(--red); }
-
-/* Severity */
-.severity-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-}
-
-.severity-btn {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 14px;
-  background: var(--grey-dark);
-  border: 1px solid rgba(255,255,255,0.06);
-  transition: all 0.2s;
-  clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
-}
-
-.severity-btn input { display: none; }
-
-.severity-dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.severity-btn.low .severity-dot  { background: #27ae60; }
-.severity-btn.mid .severity-dot  { background: #e67e22; }
-.severity-btn.high .severity-dot { background: var(--red); }
-
-.severity-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--grey-text);
-}
-
-.severity-btn.selected { border-color: rgba(255,255,255,0.2); }
-.severity-btn.selected .severity-label { color: var(--white); }
-.severity-btn.low.selected  { background: rgba(39,174,96,0.1); border-color: rgba(39,174,96,0.3); }
-.severity-btn.mid.selected  { background: rgba(230,126,34,0.1); border-color: rgba(230,126,34,0.3); }
-.severity-btn.high.selected { background: rgba(225,6,0,0.1); border-color: rgba(225,6,0,0.3); }
-
-/* Submit */
-.protest-terms {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin: 24px 0 20px;
-}
-
-.protest-terms input[type="checkbox"] {
-  width: 16px; height: 16px;
-  accent-color: var(--red);
-  flex-shrink: 0;
-  margin-top: 3px;
-  cursor: pointer;
-}
-
-.protest-terms label {
-  font-size: 12px;
-  color: var(--grey-text);
-  line-height: 1.6;
-  cursor: pointer;
-}
-
-.protest-submit {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--red);
-  color: #fff;
-  border: none;
-  padding: 16px 40px;
-  font-family: 'Titillium Web', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  cursor: pointer;
-  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
-  transition: background 0.2s;
-}
-
-.protest-submit:hover { background: #c0130a; }
-.protest-submit:disabled { opacity: 0.35; cursor: not-allowed; }
-
-/* Success */
-.protest-success {
-  display: none;
-  text-align: center;
-  padding: 60px 20px;
-}
-
-.protest-success.show { display: block; }
-
-.protest-success-icon { font-size: 54px; margin-bottom: 16px; }
-
-.protest-success-title {
-  font-family: 'Titillium Web', sans-serif;
-  font-size: 30px;
-  font-weight: 900;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--white);
-  margin-bottom: 12px;
-}
-
-.protest-success-text {
-  font-size: 14px;
-  line-height: 1.7;
-  color: var(--grey-text);
-  max-width: 420px;
-  margin: 0 auto;
-}
-
-/* Protest ID badge */
-.protest-id-badge {
-  display: inline-block;
-  background: rgba(225,6,0,0.1);
-  border: 1px solid rgba(225,6,0,0.3);
-  color: var(--red);
-  font-family: 'Titillium Web', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  padding: 8px 20px;
-  margin-top: 16px;
-  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
-}
-
-@media (max-width: 900px) {
-  .protest-explainer { grid-template-columns: 1fr; }
-  .protest-grid { grid-template-columns: 1fr; }
-  .protest-grid .pf-full { grid-column: span 1; }
-  .protest-form-wrap { padding: 32px 24px; }
-  .incident-types { grid-template-columns: repeat(2, 1fr); }
-  .severity-row { grid-template-columns: 1fr; }
-}
-
 /* ========== HERO ========== */
 #hero {
   height: 100vh;
@@ -1669,590 +1270,6 @@ footer {
   .drivers-grid { grid-template-columns: 1fr; }
 }
 
-/* ========== CIRCUIT SECTION ========== */
-#circuit {
-  background: var(--black);
-  position: relative;
-  overflow: hidden;
-  padding: 0;
-}
-
-.circuit-hero {
-  position: relative;
-  height: 70vh;
-  min-height: 500px;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-}
-
-.circuit-hero-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 40%;
-  filter: brightness(0.7);
-  transition: transform 8s ease;
-}
-
-.circuit-hero:hover .circuit-hero-img { transform: scale(1.04); }
-
-.circuit-hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 50%, rgba(225,6,0,0.08) 100%);
-}
-
-.circuit-hero-content {
-  position: relative;
-  z-index: 2;
-  padding: 0 80px 60px;
-  width: 100%;
-}
-
-.circuit-hero-tag {
-  display: inline-flex;
-  background: var(--red);
-  color: var(--white);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  padding: 6px 16px;
-  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
-  margin-bottom: 16px;
-}
-
-.circuit-hero-title {
-  font-size: clamp(40px, 6vw, 80px);
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -2px;
-  line-height: 0.95;
-  text-shadow: 0 4px 30px rgba(0,0,0,0.8);
-}
-
-.circuit-hero-title em { font-style: normal; color: var(--red); }
-
-.circuit-hero-sub {
-  font-size: 13px;
-  color: var(--grey-text);
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  margin-top: 12px;
-}
-
-.circuit-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  background: var(--grey-mid);
-  border-top: 3px solid var(--red);
-}
-
-.circuit-stat {
-  padding: 28px 32px;
-  border-right: 1px solid rgba(255,255,255,0.06);
-  text-align: center;
-  transition: background 0.2s;
-}
-
-.circuit-stat:last-child { border-right: none; }
-.circuit-stat:hover { background: rgba(225,6,0,0.05); }
-
-.circuit-stat-value {
-  font-size: 36px;
-  font-weight: 900;
-  color: var(--red);
-  letter-spacing: -2px;
-  line-height: 1;
-  margin-bottom: 6px;
-}
-
-.circuit-stat-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--grey-text);
-}
-
-.circuit-photos {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-  padding: 6px;
-  background: var(--black);
-}
-
-.circuit-photo {
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.circuit-photo:first-child { grid-column: span 2; aspect-ratio: 21/9; }
-.circuit-photo:not(:first-child) { aspect-ratio: 16/9; }
-
-.circuit-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.5s ease, filter 0.3s;
-  filter: brightness(0.9);
-}
-
-.circuit-photo:hover img { transform: scale(1.03); filter: brightness(1.05); }
-
-.circuit-photo-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(225,6,0,0);
-  transition: background 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.circuit-photo:hover .circuit-photo-overlay { background: rgba(225,6,0,0.08); }
-
-.circuit-photo-overlay span {
-  font-size: 28px;
-  opacity: 0;
-  transform: scale(0.7);
-  transition: all 0.3s;
-}
-
-.circuit-photo:hover .circuit-photo-overlay span { opacity: 1; transform: scale(1); }
-
-.circuit-photo-label {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  background: linear-gradient(0deg, rgba(0,0,0,0.85), transparent);
-  padding: 30px 20px 14px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.7);
-  transform: translateY(100%);
-  transition: transform 0.3s;
-}
-
-.circuit-photo:hover .circuit-photo-label { transform: translateY(0); }
-
-/* Track preview */
-.circuit-track-preview {
-  background: var(--black);
-  padding: 0;
-  position: relative;
-}
-
-.circuit-track-label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 18px 80px;
-  background: var(--grey-mid);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--grey-text);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-.circuit-track-label-dot {
-  width: 8px; height: 8px;
-  background: var(--red);
-  border-radius: 50%;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.7); }
-}
-
-.circuit-track-img-wrap {
-  position: relative;
-  overflow: hidden;
-  max-height: 520px;
-}
-
-.circuit-track-img-wrap img {
-  width: 100%;
-  display: block;
-  object-fit: cover;
-  filter: brightness(0.92) saturate(1.1);
-  transition: filter 0.3s;
-}
-
-.circuit-track-img-wrap:hover img { filter: brightness(1) saturate(1.2); }
-
-.circuit-track-zoom {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  background: rgba(0,0,0,0.7);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: var(--white);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 10px 18px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
-  transition: background 0.2s;
-  backdrop-filter: blur(8px);
-}
-
-.circuit-track-zoom:hover { background: rgba(225,6,0,0.6); }
-
-/* Track zoom lightbox */
-.track-lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 3000;
-  background: rgba(0,0,0,0.97);
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.track-lightbox.open { display: flex; animation: fadeIn 0.2s ease; }
-
-.track-lightbox img {
-  max-width: 95vw;
-  max-height: 92vh;
-  object-fit: contain;
-}
-
-.track-lightbox-close {
-  position: absolute;
-  top: 16px; right: 24px;
-  font-size: 30px;
-  color: rgba(255,255,255,0.5);
-  cursor: pointer;
-  background: none;
-  border: none;
-  transition: color 0.2s;
-}
-.track-lightbox-close:hover { color: var(--red); }
-
-/* ========== COUNTDOWN ========== */
-.hero-countdown {
-  margin-top: 40px;
-  animation: fadeUp 0.8s 0.5s ease both;
-}
-
-.countdown-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--grey-text);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.countdown-label::before {
-  content: '';
-  display: inline-block;
-  width: 6px; height: 6px;
-  background: var(--red);
-  border-radius: 50%;
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-.countdown-boxes {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.countdown-box {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-bottom: 2px solid var(--red);
-  min-width: 72px;
-  padding: 14px 10px 10px;
-  text-align: center;
-  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.countdown-box::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0; right: 0;
-  height: 1px;
-  background: rgba(255,255,255,0.04);
-}
-
-.countdown-num {
-  font-size: 34px;
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: -2px;
-  color: var(--white);
-  display: block;
-  font-variant-numeric: tabular-nums;
-}
-
-.countdown-unit {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--grey-text);
-  margin-top: 4px;
-  display: block;
-}
-
-.countdown-sep {
-  font-size: 28px;
-  font-weight: 900;
-  color: var(--red);
-  line-height: 1;
-  padding-bottom: 14px;
-  opacity: 0.6;
-}
-
-.countdown-finished {
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: var(--red);
-  text-transform: uppercase;
-}
-
-@media (max-width: 600px) {
-  .circuit-track-label { padding: 14px 24px; }
-  .countdown-box { min-width: 56px; }
-  .countdown-num { font-size: 26px; }
-}
-
-#gallery {
-  background: var(--grey-dark);
-  position: relative;
-  overflow: hidden;
-}
-
-#gallery::before {
-  content: 'FOTO';
-  position: absolute;
-  bottom: -20px;
-  right: -10px;
-  font-size: 180px;
-  font-weight: 900;
-  color: rgba(255,255,255,0.02);
-  letter-spacing: -10px;
-  pointer-events: none;
-}
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto;
-  gap: 6px;
-}
-
-/* Featured items — bigger */
-.gallery-item:nth-child(1) {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-.gallery-item:nth-child(6) {
-  grid-column: span 2;
-}
-
-.gallery-item {
-  position: relative;
-  overflow: hidden;
-  background: var(--grey-mid);
-  aspect-ratio: 16/10;
-  cursor: pointer;
-  border: 1px solid rgba(255,255,255,0.04);
-  transition: transform 0.3s;
-}
-
-.gallery-item:nth-child(1) { aspect-ratio: auto; }
-
-.gallery-item:hover { transform: scale(1.01); z-index: 2; }
-
-.gallery-item:hover .gallery-overlay { opacity: 1; }
-.gallery-item:hover .gallery-img { transform: scale(1.05); }
-
-.gallery-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.5s ease;
-}
-
-/* Placeholder state */
-.gallery-placeholder {
-  width: 100%;
-  height: 100%;
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  background: var(--grey-mid);
-  position: relative;
-  overflow: hidden;
-}
-
-.gallery-placeholder::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 10px,
-    rgba(255,255,255,0.01) 10px,
-    rgba(255,255,255,0.01) 20px
-  );
-}
-
-.gallery-ph-icon {
-  font-size: 36px;
-  opacity: 0.12;
-}
-
-.gallery-ph-soon {
-  font-size: 13px;
-  font-weight: 900;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.08);
-}
-
-.gallery-ph-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(225,6,0,0.3);
-  border: 1px solid rgba(225,6,0,0.15);
-  padding: 3px 10px;
-  clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
-}
-
-/* Red corner accent */
-.gallery-item::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 0; height: 0;
-  border-style: solid;
-  border-width: 20px 20px 0 0;
-  border-color: var(--red) transparent transparent transparent;
-  opacity: 0.5;
-  z-index: 3;
-}
-
-/* Hover overlay */
-.gallery-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(225,6,0,0.08);
-  opacity: 0;
-  transition: opacity 0.3s;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.gallery-overlay-icon {
-  font-size: 32px;
-  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
-  transform: scale(0.8);
-  transition: transform 0.3s;
-}
-
-.gallery-item:hover .gallery-overlay-icon {
-  transform: scale(1);
-}
-
-/* Lightbox */
-.lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-  background: rgba(0,0,0,0.95);
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-}
-
-.lightbox.open { display: flex; animation: fadeIn 0.2s ease; }
-
-.lightbox-img {
-  max-width: 90vw;
-  max-height: 85vh;
-  object-fit: contain;
-  box-shadow: 0 0 60px rgba(0,0,0,0.8);
-}
-
-.lightbox-close {
-  position: absolute;
-  top: 20px; right: 28px;
-  font-size: 32px;
-  color: rgba(255,255,255,0.5);
-  cursor: pointer;
-  background: none;
-  border: none;
-  line-height: 1;
-  transition: color 0.2s;
-}
-.lightbox-close:hover { color: var(--red); }
-
-.gallery-hint {
-  text-align: center;
-  margin-top: 24px;
-  font-size: 11px;
-  color: rgba(255,255,255,0.15);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-@media (max-width: 900px) {
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .gallery-item:nth-child(1) {
-    grid-column: span 2;
-  }
-  .gallery-item:nth-child(6) {
-    grid-column: span 2;
-  }
-}
-
-@media (max-width: 500px) {
-  .gallery-grid { grid-template-columns: 1fr; }
-  .gallery-item:nth-child(1),
-  .gallery-item:nth-child(6) { grid-column: span 1; }
-}
-
 /* ========== INTERSECTION OBSERVER ANIMATIONS ========== */
 .reveal {
   opacity: 0;
@@ -2479,6 +1496,283 @@ footer {
   letter-spacing: 1px;
 }
 
+/* ========== PROTEST SECTION ========== */
+#protest {
+  padding: 100px 80px;
+  position: relative;
+}
+
+.protest-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 48px;
+}
+
+.protest-info-panel {
+  background: var(--grey-mid);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-left: 4px solid var(--red);
+  padding: 36px;
+}
+
+.protest-info-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.protest-info-body {
+  font-size: 14px;
+  color: var(--grey-text);
+  line-height: 1.8;
+}
+
+.protest-info-body strong { color: var(--white); }
+
+.protest-cta-panel {
+  background: var(--grey-mid);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-top: 3px solid var(--red);
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.protest-cta-icon { font-size: 52px; }
+
+.protest-cta-title {
+  font-size: 22px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.protest-cta-title em { font-style: normal; color: var(--red); }
+
+.protest-cta-sub {
+  font-size: 13px;
+  color: var(--grey-text);
+  letter-spacing: 1px;
+}
+
+.protest-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--red);
+  color: var(--white);
+  padding: 18px 44px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.protest-btn:hover { background: var(--red-light); }
+
+.protest-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.protest-stat {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 20px;
+  text-align: center;
+}
+
+.protest-stat-num {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--red);
+  line-height: 1;
+}
+
+.protest-stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+  margin-top: 6px;
+}
+
+/* ========== DB PANEL ========== */
+#db-panel {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(10,10,15,0.97);
+  backdrop-filter: blur(16px);
+  overflow-y: auto;
+  padding: 30px;
+}
+
+.db-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--red);
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+  position: sticky;
+  top: 0;
+  background: rgba(10,10,15,0.98);
+  z-index: 10;
+  padding-top: 10px;
+}
+
+.db-title {
+  font-size: 22px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.db-title em { color: var(--red); font-style: normal; }
+
+.db-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.db-btn {
+  padding: 10px 24px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  transition: background 0.2s;
+}
+
+.db-btn-close { background: rgba(255,255,255,0.08); color: var(--white); }
+.db-btn-close:hover { background: rgba(255,255,255,0.15); }
+.db-btn-export { background: var(--gold); color: var(--black); }
+.db-btn-export:hover { background: #ffe066; }
+.db-btn-clear { background: var(--red); color: var(--white); }
+.db-btn-clear:hover { background: var(--red-light); }
+
+.db-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+.db-tab {
+  padding: 10px 24px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: transparent;
+  color: var(--grey-text);
+  font-family: var(--font-display);
+  transition: all 0.2s;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+
+.db-tab.active { background: var(--red); color: var(--white); border-color: var(--red); }
+.db-tab:hover:not(.active) { color: var(--white); border-color: rgba(255,255,255,0.2); }
+
+.db-table-wrap {
+  overflow-x: auto;
+}
+
+.db-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.db-table th {
+  background: rgba(225,6,0,0.12);
+  color: var(--red);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 2px solid rgba(225,6,0,0.3);
+  white-space: nowrap;
+}
+
+.db-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: var(--grey-text);
+  vertical-align: top;
+  max-width: 240px;
+  word-break: break-word;
+}
+
+.db-table td strong { color: var(--white); }
+.db-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+.db-empty {
+  text-align: center;
+  padding: 60px;
+  color: rgba(255,255,255,0.15);
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.db-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+}
+
+.db-badge-open { background: rgba(225,6,0,0.2); color: var(--red); }
+.db-badge-done { background: rgba(0,200,83,0.15); color: #00c853; }
+.db-badge-rejected { background: rgba(255,255,255,0.07); color: var(--grey-text); }
+
+.db-counter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--red);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 900;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-left: 6px;
+}
+
 </style>
 </head>
 <body>
@@ -2495,12 +1789,12 @@ footer {
   </a>
   <ul class="nav-links">
     <li><a href="#schedule">Harmonogram</a></li>
-    <li><a href="#circuit">Circuit</a></li>
     <li><a href="#rules">Regulamin</a></li>
     <li><a href="#drivers">Zawodnicy</a></li>
-    <li><a href="#gallery">Galeria</a></li>
-    <li><a href="protest.html" class="nav-protest">⚑ Protest</a></li>
+    <li><a href="#equipment">Wyposażenie</a></li>
+    <li><a href="#attractions">Atrakcje</a></li>
     <li><a href="#registration">Rejestracja</a></li>
+    <li><a href="protest.html" style="color:var(--red);">⚑ Protest</a></li>
   </ul>
   <a href="#registration" class="nav-cta">Zapisz się ▶</a>
 </nav>
@@ -2537,37 +1831,15 @@ footer {
       <a href="#schedule" class="btn-primary">▶ &nbsp;Sprawdź harmonogram</a>
       <a href="#rules" class="btn-secondary">Regulamin</a>
     </div>
+  </div>
 
-    <!-- COUNTDOWN -->
-    <div class="hero-countdown">
-      <div class="countdown-label">Do startu pierwszego treningu</div>
-      <div class="countdown-boxes" id="countdown">
-        <div class="countdown-box"><span class="countdown-num" id="cd-days">00</span><span class="countdown-unit">Dni</span></div>
-        <div class="countdown-sep">:</div>
-        <div class="countdown-box"><span class="countdown-num" id="cd-hours">00</span><span class="countdown-unit">Godziny</span></div>
-        <div class="countdown-sep">:</div>
-        <div class="countdown-box"><span class="countdown-num" id="cd-minutes">00</span><span class="countdown-unit">Minuty</span></div>
-        <div class="countdown-sep">:</div>
-        <div class="countdown-box"><span class="countdown-num" id="cd-seconds">00</span><span class="countdown-unit">Sekundy</span></div>
-      </div>
-    </div>
-
-    </div><!-- /hero-countdown -->
-  </div><!-- /hero-content -->
-
-  <div class="hero-number">26</div>
+  <div class="hero-number">25</div>
 
   <div class="hero-scroll">
     <div class="scroll-indicator"></div>
     <span>Scroll</span>
   </div>
 </section>
-
-<!-- TRACK LIGHTBOX -->
-<div class="track-lightbox" id="trackLightbox">
-  <button class="track-lightbox-close" id="trackLightboxClose">✕</button>
-  <img src="tor1.png" alt="Podgląd toru Los Santos Circuit">
-</div>
 
 <div class="red-divider"></div>
 
@@ -2661,58 +1933,6 @@ footer {
       <div class="info-card-text">Kompletny regulamin zapewniający fair play, bezpieczeństwo i rzetelną rywalizację na torze.</div>
     </div>
   </div>
-</section>
-
-<div class="red-divider"></div>
-
-<!-- ========== CIRCUIT ========== -->
-<section id="circuit">
-
-  <!-- Hero — Start/Finish -->
-  <div class="circuit-hero">
-    <img class="circuit-hero-img" src="tor2.png" alt="Start/Finish Los Santos Circuit">
-    <div class="circuit-hero-overlay"></div>
-    <div class="circuit-hero-content">
-      <div class="circuit-hero-tag">🏁 Los Santos Circuit</div>
-      <h2 class="circuit-hero-title">The <em>Track</em></h2>
-      <p class="circuit-hero-sub">Grand Prix Los Santos · Edycja 2026</p>
-    </div>
-  </div>
-
-  <!-- Stats bar -->
-  <div class="circuit-stats">
-    <div class="circuit-stat">
-      <div class="circuit-stat-value">2</div>
-      <div class="circuit-stat-label">Sektory toru</div>
-    </div>
-    <div class="circuit-stat">
-      <div class="circuit-stat-value">🏎</div>
-      <div class="circuit-stat-label">Karting</div>
-    </div>
-    <div class="circuit-stat">
-      <div class="circuit-stat-value">LS</div>
-      <div class="circuit-stat-label">Los Santos</div>
-    </div>
-    <div class="circuit-stat">
-      <div class="circuit-stat-value">21</div>
-      <div class="circuit-stat-label">Marca 2026</div>
-    </div>
-  </div>
-
-  <!-- Podgląd toru z lotu ptaka — tylko podgląd, nie galeria -->
-  <div class="circuit-track-preview">
-    <div class="circuit-track-label">
-      <span class="circuit-track-label-dot"></span>
-      Podgląd toru
-    </div>
-    <div class="circuit-track-img-wrap">
-      <img src="tor1.png" alt="Podgląd toru Los Santos Circuit">
-      <div class="circuit-track-zoom" id="trackZoomBtn">
-        <span>⛶</span> Powiększ
-      </div>
-    </div>
-  </div>
-
 </section>
 
 <div class="red-divider"></div>
@@ -3020,92 +2240,6 @@ footer {
 
 <div class="red-divider"></div>
 
-<!-- ========== GALLERY ========== -->
-<section id="gallery">
-  <div class="section-counter">06</div>
-  <div class="section-header reveal">
-    <div class="section-eyebrow">
-      <div class="section-eyebrow-dot"></div>
-      <span class="section-eyebrow-text">Zdjęcia z toru</span>
-    </div>
-    <h2 class="section-title">Gale<em>ria</em></h2>
-  </div>
-
-  <div class="gallery-grid">
-
-    <!-- Slot 1 — duży (2x2) -->
-    <div class="gallery-item reveal" data-src="">
-      <div class="gallery-placeholder">
-        <div class="gallery-ph-icon">📷</div>
-        <div class="gallery-ph-soon">SOON</div>
-        <div class="gallery-ph-label">Zdjęcie główne</div>
-      </div>
-      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-    </div>
-
-    <!-- Slot 2 -->
-    <div class="gallery-item reveal reveal-delay-1" data-src="">
-      <div class="gallery-placeholder">
-        <div class="gallery-ph-icon">🏎</div>
-        <div class="gallery-ph-soon">SOON</div>
-        <div class="gallery-ph-label">Tor</div>
-      </div>
-      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-    </div>
-
-    <!-- Slot 3 -->
-    <div class="gallery-item reveal reveal-delay-2" data-src="">
-      <div class="gallery-placeholder">
-        <div class="gallery-ph-icon">🏁</div>
-        <div class="gallery-ph-soon">SOON</div>
-        <div class="gallery-ph-label">Start</div>
-      </div>
-      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-    </div>
-
-    <!-- Slot 4 -->
-    <div class="gallery-item reveal" data-src="">
-      <div class="gallery-placeholder">
-        <div class="gallery-ph-icon">🏆</div>
-        <div class="gallery-ph-soon">SOON</div>
-        <div class="gallery-ph-label">Podium</div>
-      </div>
-      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-    </div>
-
-    <!-- Slot 5 -->
-    <div class="gallery-item reveal reveal-delay-1" data-src="">
-      <div class="gallery-placeholder">
-        <div class="gallery-ph-icon">👥</div>
-        <div class="gallery-ph-soon">SOON</div>
-        <div class="gallery-ph-label">Zespoły</div>
-      </div>
-      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-    </div>
-
-    <!-- Slot 6 — szeroki (2x1) -->
-    <div class="gallery-item reveal reveal-delay-2" data-src="">
-      <div class="gallery-placeholder">
-        <div class="gallery-ph-icon">🎧</div>
-        <div class="gallery-ph-soon">SOON</div>
-        <div class="gallery-ph-label">Atrakcje</div>
-      </div>
-      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-    </div>
-
-  </div>
-
-  <p class="gallery-hint">Zdjęcia zostaną dodane po wydarzeniu · Kliknij zdjęcie aby powiększyć</p>
-</section>
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose">✕</button>
-  <img class="lightbox-img" id="lightboxImg" src="" alt="Galeria">
-</div>
-
-<div class="red-divider"></div>
-
 <!-- ========== DRIVERS / TEAMS ========== -->
 <section id="drivers">
   <div class="section-counter">06</div>
@@ -3187,6 +2321,120 @@ footer {
 
 <div class="red-divider"></div>
 
+<!-- ========== PROTEST ========== -->
+<section id="protest">
+  <div class="section-counter">08</div>
+  <div class="section-header reveal">
+    <div class="section-eyebrow">
+      <div class="section-eyebrow-dot"></div>
+      <span class="section-eyebrow-text">Komisja wyścigowa</span>
+    </div>
+    <h2 class="section-title">Pro<em>test</em></h2>
+  </div>
+
+  <div class="protest-split">
+    <div class="protest-info-panel reveal">
+      <div class="protest-info-title">⚖ Jak złożyć protest?</div>
+      <div class="protest-info-body">
+        <strong>Kto może złożyć protest?</strong><br>
+        Każdy zarejestrowany kierowca lub oficjalny przedstawiciel drużyny biorącej udział w zawodach.<br><br>
+        <strong>Kiedy?</strong><br>
+        W ciągu <strong style="color:var(--red);">30 minut</strong> od zakończenia danej sesji / wyścigu. Po tym czasie zgłoszenia nie będą rozpatrywane.<br><br>
+        <strong>Co jest wymagane?</strong><br>
+        Opis incydentu, dane zgłaszanego kierowcy oraz materiał dowodowy (nagranie, zrzut ekranu).<br><br>
+        <strong>Decyzja komisji</strong><br>
+        Wydawana do 60 minut od przyjęcia zgłoszenia. Decyzja jest ostateczna i nieodwołalna.
+      </div>
+    </div>
+
+    <div class="protest-cta-panel reveal reveal-delay-1">
+      <div class="protest-cta-icon">⚑</div>
+      <div class="protest-cta-title">Złóż <em>Protest</em></div>
+      <div class="protest-cta-sub">Oficjalny formularz komisji wyścigowej</div>
+      <a href="protest.html" target="_blank" rel="noopener" class="protest-btn">
+        ⚑ &nbsp; Wypełnij formularz protestu
+      </a>
+      <div style="font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:1px;">Zostaniesz przeniesiony do formularza</div>
+    </div>
+  </div>
+
+  <div class="protest-stats reveal">
+    <div class="protest-stat">
+      <div class="protest-stat-num" id="stat-protests">0</div>
+      <div class="protest-stat-label">Złożone protesty</div>
+    </div>
+    <div class="protest-stat">
+      <div class="protest-stat-num" id="stat-open">0</div>
+      <div class="protest-stat-label">W rozpatrzeniu</div>
+    </div>
+    <div class="protest-stat">
+      <div class="protest-stat-num" id="stat-closed">0</div>
+      <div class="protest-stat-label">Rozpatrzone</div>
+    </div>
+  </div>
+
+  <!-- DB OPEN BUTTON (tylko dla organizatorów) -->
+  <div style="margin-top:40px;text-align:center;" class="reveal">
+    <button onclick="openDB()" style="
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.1);
+      color:rgba(255,255,255,0.2);
+      font-family:var(--font-display);
+      font-size:10px;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      padding:10px 24px;
+      cursor:pointer;
+      transition:all 0.2s;
+    " onmouseover="this.style.borderColor='rgba(225,6,0,0.4)';this.style.color='var(--red)'"
+       onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='rgba(255,255,255,0.2)'">
+      🔒 Panel organizatora
+    </button>
+  </div>
+</section>
+
+<div class="red-divider"></div>
+
+<!-- ========== DB PANEL ========== -->
+<div id="db-panel">
+  <div class="db-header">
+    <div class="db-title">Baza danych <em>Protestów</em></div>
+    <div class="db-actions">
+      <button class="db-btn db-btn-export" onclick="exportCSV()">⬇ Eksport CSV</button>
+      <button class="db-btn db-btn-clear" onclick="clearDB()">🗑 Wyczyść</button>
+      <button class="db-btn db-btn-close" onclick="closeDB()">✕ Zamknij</button>
+    </div>
+  </div>
+
+  <div class="db-tabs">
+    <button class="db-tab active" onclick="showTab('all', this)">Wszystkie <span class="db-counter" id="cnt-all">0</span></button>
+    <button class="db-tab" onclick="showTab('open', this)">Otwarte <span class="db-counter" id="cnt-open">0</span></button>
+    <button class="db-tab" onclick="showTab('done', this)">Rozpatrzone <span class="db-counter" id="cnt-done">0</span></button>
+  </div>
+
+  <div class="db-table-wrap">
+    <table class="db-table" id="db-table">
+      <thead>
+        <tr>
+          <th>#ID</th>
+          <th>Data</th>
+          <th>Zgłaszający</th>
+          <th>Drużyna</th>
+          <th>Zgłaszany kierowca</th>
+          <th>Drużyna kierowcy</th>
+          <th>Sesja</th>
+          <th>Naruszenie</th>
+          <th>Powód</th>
+          <th>Dowód (link)</th>
+          <th>Status</th>
+          <th>Akcja</th>
+        </tr>
+      </thead>
+      <tbody id="db-body"></tbody>
+    </table>
+  </div>
+</div>
+
 <!-- ========== FOOTER ========== -->
 <footer>
   <div class="footer-top">
@@ -3259,178 +2507,132 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// ===== COUNTDOWN =====
-// Trening: Sobota 21.03.2026 godz. 20:00
-const TARGET = new Date('2026-03-21T20:00:00');
+// ===== PROTEST DATABASE =====
 
-function updateCountdown() {
-  const now = new Date();
-  const diff = TARGET - now;
+const DB_KEY = 'gpls_protests';
 
-  if (diff <= 0) {
-    document.getElementById('countdown').innerHTML =
-      '<span class="countdown-finished">🏁 Trening w toku!</span>';
+function getProtests() {
+  try { return JSON.parse(localStorage.getItem(DB_KEY) || '[]'); } catch { return []; }
+}
+
+function saveProtests(data) {
+  localStorage.setItem(DB_KEY, JSON.stringify(data));
+}
+
+function updateStats() {
+  const protests = getProtests();
+  const open = protests.filter(p => p.status === 'open').length;
+  const closed = protests.filter(p => p.status !== 'open').length;
+  document.getElementById('stat-protests').textContent = protests.length;
+  document.getElementById('stat-open').textContent = open;
+  document.getElementById('stat-closed').textContent = closed;
+  document.getElementById('cnt-all').textContent = protests.length;
+  document.getElementById('cnt-open').textContent = open;
+  document.getElementById('cnt-done').textContent = closed;
+}
+
+function renderTable(filter = 'all') {
+  const protests = getProtests();
+  const filtered = filter === 'all' ? protests
+    : filter === 'open' ? protests.filter(p => p.status === 'open')
+    : protests.filter(p => p.status !== 'open');
+
+  const tbody = document.getElementById('db-body');
+  if (filtered.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="12" class="db-empty">Brak zgłoszeń</td></tr>`;
     return;
   }
 
-  const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours   = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
+  const violationMap = {
+    kontakt: 'Kontakt / zderzenie',
+    blokowanie: 'Niebezp. blokowanie',
+    wyjazd: 'Wyjazd poza tor',
+    start: 'Falstart',
+    regulamin: 'Naruszenie tech.',
+    zachowanie: 'Niebezp. zachowanie',
+    inne: 'Inne'
+  };
 
-  document.getElementById('cd-days').textContent    = String(days).padStart(2, '0');
-  document.getElementById('cd-hours').textContent   = String(hours).padStart(2, '0');
-  document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
-  document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+  tbody.innerHTML = filtered.map((p, i) => {
+    const badgeClass = p.status === 'open' ? 'db-badge-open' : p.status === 'done' ? 'db-badge-done' : 'db-badge-rejected';
+    const badgeLabel = p.status === 'open' ? 'Otwarte' : p.status === 'done' ? 'Rozpatrzone' : 'Odrzucone';
+    const dowod = p.evidence_link ? `<a href="${p.evidence_link}" target="_blank" style="color:var(--red);font-size:11px;">🔗 Link</a>` : '<span style="opacity:.3">—</span>';
+    return `<tr>
+      <td><strong>${p.id}</strong></td>
+      <td style="white-space:nowrap;font-size:11px;">${p.date}</td>
+      <td><strong>${p.reporter_name}</strong></td>
+      <td>${p.reporter_team}</td>
+      <td><strong>${p.driver_name}</strong>${p.driver_number ? ' <span style="color:var(--red);font-size:11px;">' + p.driver_number + '</span>' : ''}</td>
+      <td>${p.driver_team}</td>
+      <td style="font-size:11px;">${p.race_session}</td>
+      <td style="font-size:11px;">${violationMap[p.violation_type] || p.violation_type}</td>
+      <td style="font-size:12px;max-width:200px;">${p.protest_reason}</td>
+      <td>${dowod}</td>
+      <td><span class="db-badge ${badgeClass}">${badgeLabel}</span></td>
+      <td style="white-space:nowrap;">
+        ${p.status === 'open' ? `
+          <button onclick="changeStatus('${p.id}','done')" style="background:rgba(0,200,83,0.15);color:#00c853;border:none;padding:4px 10px;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:var(--font-display);margin-right:4px;">✓ Rozpatrz</button>
+          <button onclick="changeStatus('${p.id}','rejected')" style="background:rgba(255,255,255,0.06);color:var(--grey-text);border:none;padding:4px 10px;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:var(--font-display);">✕ Odrzuć</button>
+        ` : `<span style="font-size:11px;color:rgba(255,255,255,0.2);">—</span>`}
+      </td>
+    </tr>`;
+  }).join('');
 }
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
-// ===== TRACK LIGHTBOX =====
-document.getElementById('trackZoomBtn').addEventListener('click', () => {
-  document.getElementById('trackLightbox').classList.add('open');
-  document.body.style.overflow = 'hidden';
-});
-
-document.getElementById('trackLightboxClose').addEventListener('click', () => {
-  document.getElementById('trackLightbox').classList.remove('open');
-  document.body.style.overflow = '';
-});
-
-document.getElementById('trackLightbox').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('trackLightbox')) {
-    document.getElementById('trackLightbox').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-});
-
-
-document.querySelectorAll('.gallery-item, .circuit-photo').forEach(item => {
-  item.addEventListener('click', () => {
-    const src = item.getAttribute('data-src');
-    if (!src) return; // placeholder — no lightbox
-    document.getElementById('lightboxImg').src = src;
-    document.getElementById('lightbox').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  });
-});
-
-document.getElementById('lightboxClose').addEventListener('click', () => {
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow = '';
-});
-
-document.getElementById('lightbox').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('lightbox')) {
-    document.getElementById('lightbox').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-});
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    document.getElementById('lightbox').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-});
-
-
-window.addEventListener('scroll', () => {
-  const nav = document.querySelector('nav');
-  if (window.scrollY > 40) {
-    nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.6)';
-  } else {
-    nav.style.boxShadow = '';
-  }
-});
-
-// ===== PROTEST — incident type toggle =====
-document.querySelectorAll('.incident-type').forEach(label => {
-  label.addEventListener('click', () => {
-    document.querySelectorAll('.incident-type').forEach(l => l.classList.remove('selected'));
-    label.classList.add('selected');
-  });
-});
-
-// ===== PROTEST — severity toggle =====
-document.querySelectorAll('.severity-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.severity-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-  });
-});
-
-// ===== PROTEST — enable submit when terms checked =====
-const prTerms  = document.getElementById('pr-terms');
-const prSubmit = document.getElementById('protestSubmit');
-if (prTerms && prSubmit) {
-  prTerms.addEventListener('change', () => {
-    prSubmit.disabled = !prTerms.checked;
-  });
+function changeStatus(id, status) {
+  const protests = getProtests();
+  const p = protests.find(x => x.id === id);
+  if (p) { p.status = status; saveProtests(protests); renderTable(window._dbCurrentTab || 'all'); updateStats(); }
 }
 
-// ===== PROTEST — form submit =====
-const protestForm = document.getElementById('protestForm');
-if (protestForm) {
-  protestForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const name    = document.getElementById('pr-name').value.trim();
-    const team    = document.getElementById('pr-team').value.trim();
-    const session = document.getElementById('pr-session').value;
-    const accDrv  = document.getElementById('pr-accused-driver').value.trim();
-    const accTeam = document.getElementById('pr-accused-team').value.trim();
-    const desc    = document.getElementById('pr-desc').value.trim();
-    const incident = document.querySelector('input[name="incident"]:checked');
-    const severity = document.querySelector('input[name="severity"]:checked');
-
-    if (!name || !team || !session || !accDrv || !accTeam || !desc || !incident || !severity) {
-      alert('Wypełnij wszystkie wymagane pola (oznaczone *) oraz wybierz rodzaj incydentu i wagę zdarzenia.');
-      return;
-    }
-
-    prSubmit.textContent = '⏳  Wysyłanie...';
-    prSubmit.disabled = true;
-
-    // Generate protest ID
-    const id = 'PROT-' + String(Math.floor(1000 + Math.random() * 9000));
-
-    // Build form data for Formspree
-    const evidence = document.getElementById('pr-evidence').value.trim();
-    const lap = document.getElementById('pr-lap').value.trim();
-
-    const formData = new FormData();
-    formData.append('_subject', `⚑ Protest ${id}: ${accDrv} (${accTeam}) — ${incident.value}`);
-    formData.append('ID protestu', id);
-    formData.append('Zgłaszający', name);
-    formData.append('Zespół zgłaszający', team);
-    formData.append('Sesja', session);
-    formData.append('Numer okrążenia', lap || 'nie podano');
-    formData.append('Zgłaszany kierowca', accDrv);
-    formData.append('Zgłaszany zespół', accTeam);
-    formData.append('Rodzaj incydentu', incident.value);
-    formData.append('Waga zdarzenia', severity.value);
-    formData.append('Opis zdarzenia', desc);
-    formData.append('Dowód / nagranie', evidence || 'brak');
-
-    fetch('https://formspree.io/f/mjgarpgj', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: formData
-    }).then(res => {
-      document.getElementById('protestFormBody').style.display = 'none';
-      document.getElementById('protestIdBadge').textContent = id;
-      document.getElementById('protestSuccess').classList.add('show');
-    }).catch(() => {
-      // Show success anyway (offline / local file fallback)
-      document.getElementById('protestFormBody').style.display = 'none';
-      document.getElementById('protestIdBadge').textContent = id;
-      document.getElementById('protestSuccess').classList.add('show');
-    });
-  });
+let _dbCurrentTab = 'all';
+function showTab(tab, btn) {
+  _dbCurrentTab = tab;
+  document.querySelectorAll('.db-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderTable(tab);
 }
 
+function openDB() {
+  document.getElementById('db-panel').style.display = 'block';
+  renderTable('all');
+  updateStats();
+}
+
+function closeDB() {
+  document.getElementById('db-panel').style.display = 'none';
+}
+
+function exportCSV() {
+  const protests = getProtests();
+  if (!protests.length) return alert('Brak danych do eksportu.');
+  const headers = ['ID','Data','Zgłaszający','Drużyna zgłasz.','Kierowca','Drużyna kierowcy','Nr startowy','Sesja','Naruszenie','Powód','Link dowód','Świadkowie','Status'];
+  const rows = protests.map(p => [p.id, p.date, p.reporter_name, p.reporter_team, p.driver_name, p.driver_team, p.driver_number, p.race_session, p.violation_type, `"${p.protest_reason?.replace(/"/g,'""')}"`, p.evidence_link, p.witnesses, p.status]);
+  const csv = [headers, ...rows].map(r => r.join(';')).join('\n');
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `protesty_gpls_2026_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+}
+
+function clearDB() {
+  if (confirm('Czy na pewno chcesz usunąć WSZYSTKIE protesty z bazy? Tej operacji nie można cofnąć.')) {
+    saveProtests([]);
+    renderTable();
+    updateStats();
+  }
+}
+
+// odśwież statystyki przy załadowaniu
+updateStats();
+
+// Nasłuchuj zmian ze strony protest.html (cross-tab via storage event)
+window.addEventListener('storage', (e) => {
+  if (e.key === DB_KEY) { updateStats(); if (document.getElementById('db-panel').style.display === 'block') renderTable(_dbCurrentTab || 'all'); }
+});
+
+</script>
 
 </body>
 </html>
