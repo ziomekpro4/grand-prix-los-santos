@@ -1444,11 +1444,205 @@ footer {
 
 .circuit-photo:hover .circuit-photo-label { transform: translateY(0); }
 
-@media (max-width: 900px) {
-  .circuit-hero-content { padding: 0 24px 40px; }
-  .circuit-stats { grid-template-columns: repeat(2, 1fr); }
-  .circuit-photos { grid-template-columns: 1fr; }
-  .circuit-photo:first-child { grid-column: span 1; aspect-ratio: 16/9; }
+/* Track preview */
+.circuit-track-preview {
+  background: var(--black);
+  padding: 0;
+  position: relative;
+}
+
+.circuit-track-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 80px;
+  background: var(--grey-mid);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.circuit-track-label-dot {
+  width: 8px; height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+.circuit-track-img-wrap {
+  position: relative;
+  overflow: hidden;
+  max-height: 520px;
+}
+
+.circuit-track-img-wrap img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  filter: brightness(0.92) saturate(1.1);
+  transition: filter 0.3s;
+}
+
+.circuit-track-img-wrap:hover img { filter: brightness(1) saturate(1.2); }
+
+.circuit-track-zoom {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0,0,0,0.7);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  transition: background 0.2s;
+  backdrop-filter: blur(8px);
+}
+
+.circuit-track-zoom:hover { background: rgba(225,6,0,0.6); }
+
+/* Track zoom lightbox */
+.track-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: rgba(0,0,0,0.97);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.track-lightbox.open { display: flex; animation: fadeIn 0.2s ease; }
+
+.track-lightbox img {
+  max-width: 95vw;
+  max-height: 92vh;
+  object-fit: contain;
+}
+
+.track-lightbox-close {
+  position: absolute;
+  top: 16px; right: 24px;
+  font-size: 30px;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: color 0.2s;
+}
+.track-lightbox-close:hover { color: var(--red); }
+
+/* ========== COUNTDOWN ========== */
+.hero-countdown {
+  margin-top: 40px;
+  animation: fadeUp 0.8s 0.5s ease both;
+}
+
+.countdown-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.countdown-label::before {
+  content: '';
+  display: inline-block;
+  width: 6px; height: 6px;
+  background: var(--red);
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.countdown-boxes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.countdown-box {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 2px solid var(--red);
+  min-width: 72px;
+  padding: 14px 10px 10px;
+  text-align: center;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.countdown-box::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0; right: 0;
+  height: 1px;
+  background: rgba(255,255,255,0.04);
+}
+
+.countdown-num {
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -2px;
+  color: var(--white);
+  display: block;
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown-unit {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+  margin-top: 4px;
+  display: block;
+}
+
+.countdown-sep {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--red);
+  line-height: 1;
+  padding-bottom: 14px;
+  opacity: 0.6;
+}
+
+.countdown-finished {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--red);
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .circuit-track-label { padding: 14px 24px; }
+  .countdown-box { min-width: 56px; }
+  .countdown-num { font-size: 26px; }
 }
 
 #gallery {
@@ -1943,15 +2137,37 @@ footer {
       <a href="#schedule" class="btn-primary">▶ &nbsp;Sprawdź harmonogram</a>
       <a href="#rules" class="btn-secondary">Regulamin</a>
     </div>
-  </div>
 
-  <div class="hero-number">25</div>
+    <!-- COUNTDOWN -->
+    <div class="hero-countdown">
+      <div class="countdown-label">Do startu pierwszego treningu</div>
+      <div class="countdown-boxes" id="countdown">
+        <div class="countdown-box"><span class="countdown-num" id="cd-days">00</span><span class="countdown-unit">Dni</span></div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-box"><span class="countdown-num" id="cd-hours">00</span><span class="countdown-unit">Godziny</span></div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-box"><span class="countdown-num" id="cd-minutes">00</span><span class="countdown-unit">Minuty</span></div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-box"><span class="countdown-num" id="cd-seconds">00</span><span class="countdown-unit">Sekundy</span></div>
+      </div>
+    </div>
+
+    </div><!-- /hero-countdown -->
+  </div><!-- /hero-content -->
+
+  <div class="hero-number">26</div>
 
   <div class="hero-scroll">
     <div class="scroll-indicator"></div>
     <span>Scroll</span>
   </div>
 </section>
+
+<!-- TRACK LIGHTBOX -->
+<div class="track-lightbox" id="trackLightbox">
+  <button class="track-lightbox-close" id="trackLightboxClose">✕</button>
+  <img src="tor1.png" alt="Podgląd toru Los Santos Circuit">
+</div>
 
 <div class="red-divider"></div>
 
@@ -2052,7 +2268,7 @@ footer {
 <!-- ========== CIRCUIT ========== -->
 <section id="circuit">
 
-  <!-- Hero — zdjęcie Start/Finish -->
+  <!-- Hero — Start/Finish -->
   <div class="circuit-hero">
     <img class="circuit-hero-img" src="tor2.png" alt="Start/Finish Los Santos Circuit">
     <div class="circuit-hero-overlay"></div>
@@ -2074,7 +2290,7 @@ footer {
       <div class="circuit-stat-label">Karting</div>
     </div>
     <div class="circuit-stat">
-      <div class="circuit-stat-value">GTA</div>
+      <div class="circuit-stat-value">LS</div>
       <div class="circuit-stat-label">Los Santos</div>
     </div>
     <div class="circuit-stat">
@@ -2083,32 +2299,18 @@ footer {
     </div>
   </div>
 
-  <!-- Photos grid -->
-  <div class="circuit-photos">
-
-    <!-- Duże zdjęcie z lotu ptaka -->
-    <div class="circuit-photo" data-src="tor1.png">
-      <img src="tor1.png" alt="Widok toru z lotu ptaka">
-      <div class="circuit-photo-overlay"><span>🔍</span></div>
-      <div class="circuit-photo-label">Widok z lotu ptaka</div>
+  <!-- Podgląd toru z lotu ptaka — tylko podgląd, nie galeria -->
+  <div class="circuit-track-preview">
+    <div class="circuit-track-label">
+      <span class="circuit-track-label-dot"></span>
+      Podgląd toru
     </div>
-
-    <!-- Zdjęcie Start/Finish -->
-    <div class="circuit-photo" data-src="tor2.png">
-      <img src="tor2.png" alt="Linia Start/Finish">
-      <div class="circuit-photo-overlay"><span>🔍</span></div>
-      <div class="circuit-photo-label">Linia Start / Finish</div>
-    </div>
-
-    <!-- Placeholder 3 -->
-    <div class="circuit-photo" data-src="">
-      <div class="gallery-placeholder" style="min-height:280px;">
-        <div class="gallery-ph-icon">📷</div>
-        <div class="gallery-ph-soon">SOON</div>
-        <div class="gallery-ph-label">Więcej zdjęć po wydarzeniu</div>
+    <div class="circuit-track-img-wrap">
+      <img src="tor1.png" alt="Podgląd toru Los Santos Circuit">
+      <div class="circuit-track-zoom" id="trackZoomBtn">
+        <span>⛶</span> Powiększ
       </div>
     </div>
-
   </div>
 
 </section>
@@ -2657,7 +2859,53 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// ===== GALLERY + CIRCUIT LIGHTBOX =====
+// ===== COUNTDOWN =====
+// Trening: Sobota 21.03.2026 godz. 20:00
+const TARGET = new Date('2026-03-21T20:00:00');
+
+function updateCountdown() {
+  const now = new Date();
+  const diff = TARGET - now;
+
+  if (diff <= 0) {
+    document.getElementById('countdown').innerHTML =
+      '<span class="countdown-finished">🏁 Trening w toku!</span>';
+    return;
+  }
+
+  const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours   = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById('cd-days').textContent    = String(days).padStart(2, '0');
+  document.getElementById('cd-hours').textContent   = String(hours).padStart(2, '0');
+  document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
+  document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ===== TRACK LIGHTBOX =====
+document.getElementById('trackZoomBtn').addEventListener('click', () => {
+  document.getElementById('trackLightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+});
+
+document.getElementById('trackLightboxClose').addEventListener('click', () => {
+  document.getElementById('trackLightbox').classList.remove('open');
+  document.body.style.overflow = '';
+});
+
+document.getElementById('trackLightbox').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('trackLightbox')) {
+    document.getElementById('trackLightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
+
+
 document.querySelectorAll('.gallery-item, .circuit-photo').forEach(item => {
   item.addEventListener('click', () => {
     const src = item.getAttribute('data-src');
