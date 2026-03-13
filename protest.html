@@ -878,7 +878,7 @@ footer {
               Potwierdzam, że powyższe informacje są <strong>zgodne z prawdą</strong>. Rozumiem, że składanie fałszywych protestów może skutkować sankcjami wobec mojej osoby i drużyny. Akceptuję <a href="index.html#rules">regulamin zawodów</a>.
             </span>
           </div>
-          <button class="submit-btn" id="submitBtn" disabled onclick="submitProtest()">
+          <button class="submit-btn" id="submitBtn" onclick="submitProtest()">
             ⚑ &nbsp; Złóż protest oficjalnie
           </button>
         </div>
@@ -993,32 +993,27 @@ uploadArea.addEventListener('drop', e => {
 });
 
 // ===== VALIDATION =====
-const required = ['reporter_name', 'reporter_team', 'driver_name', 'driver_team', 'race_session', 'violation_type', 'protest_reason'];
-const termsCheck = document.getElementById('terms_check');
-const submitBtn = document.getElementById('submitBtn');
+const requiredIds = ["reporter_name", "reporter_team", "driver_name", "driver_team", "race_session", "violation_type", "protest_reason"];
+const termsCheck = document.getElementById("terms_check");
+const submitBtn = document.getElementById("submitBtn");
 
 function validateForm() {
-  const allFilled = required.every(id => {
+  const allFilled = requiredIds.every(id => {
     const el = document.getElementById(id);
     return el && el.value.trim().length > 0;
   });
-  const reasonOk = document.getElementById('protest_reason').value.trim().length >= 30;
-  submitBtn.disabled = !(allFilled && reasonOk && termsCheck.checked);
+  submitBtn.disabled = !(allFilled && termsCheck.checked);
 }
 
-required.forEach(id => {
+requiredIds.forEach(id => {
   const el = document.getElementById(id);
-  if (el) {
-    el.addEventListener('input', () => {
-      if (el.value.trim().length > 0) el.classList.add('valid');
-      else el.classList.remove('valid');
-      validateForm();
-    });
-    el.addEventListener('change', validateForm);
-  }
+  if (!el) return;
+  el.addEventListener("input", validateForm);
+  el.addEventListener("change", validateForm);
 });
 
-termsCheck.addEventListener('change', validateForm);
+termsCheck.addEventListener("change", validateForm);
+validateForm();
 
 // ===== DATABASE =====
 const DB_KEY = 'gpls_protests';
