@@ -2594,6 +2594,8 @@ function showTab(tab, btn) {
 }
 
 function openDB() {
+  const haslo = prompt("🔒 Podaj hasło dostępu:");
+  if (haslo !== "andrzejfiut") { if (haslo !== null) alert("❌ Nieprawidłowe hasło."); return; }
   document.getElementById('db-panel').style.display = 'block';
   renderTable('all');
   updateStats();
