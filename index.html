@@ -145,6 +145,405 @@ nav {
 
 .nav-cta:hover { background: var(--red-light); }
 
+.nav-protest {
+  color: var(--red) !important;
+  border: 1px solid rgba(225,6,0,0.35);
+  padding: 5px 14px;
+  font-size: 11px !important;
+  letter-spacing: 2px !important;
+  clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
+  transition: background 0.2s, color 0.2s !important;
+}
+.nav-protest:hover {
+  background: rgba(225,6,0,0.1) !important;
+  color: #ff2a1a !important;
+}
+.nav-protest::after { display: none !important; }
+
+/* ===== PROTEST SECTION ===== */
+#protest {
+  background: var(--grey-dark);
+  position: relative;
+  overflow: hidden;
+  border-top: 3px solid var(--red);
+}
+
+#protest::before {
+  content: 'PROTEST';
+  position: absolute;
+  right: -20px;
+  top: -30px;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 180px;
+  font-weight: 900;
+  letter-spacing: -8px;
+  color: rgba(225,6,0,0.04);
+  pointer-events: none;
+  line-height: 1;
+  user-select: none;
+}
+
+.protest-header {
+  margin-bottom: 48px;
+}
+
+.protest-explainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-bottom: 56px;
+}
+
+.protest-step {
+  background: var(--grey-mid);
+  padding: 32px 28px;
+  position: relative;
+  border-bottom: 3px solid transparent;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.protest-step:hover {
+  border-bottom-color: var(--red);
+  background: rgba(225,6,0,0.04);
+}
+
+.protest-step-num {
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 60px;
+  font-weight: 900;
+  color: rgba(225,6,0,0.1);
+  line-height: 1;
+  letter-spacing: -3px;
+  margin-bottom: 8px;
+}
+
+.protest-step-title {
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+
+.protest-step-title em {
+  color: var(--red);
+  font-style: normal;
+}
+
+.protest-step-text {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--grey-text);
+}
+
+/* Warning banner */
+.protest-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  background: rgba(225,6,0,0.07);
+  border: 1px solid rgba(225,6,0,0.2);
+  border-left: 4px solid var(--red);
+  padding: 20px 28px;
+  margin-bottom: 48px;
+}
+
+.protest-warning-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.protest-warning-text {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--grey-text);
+}
+
+.protest-warning-text strong {
+  color: var(--red);
+  display: block;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+/* Protest form */
+.protest-form-wrap {
+  background: var(--grey-mid);
+  border-top: 3px solid var(--red);
+  padding: 44px 48px;
+}
+
+.protest-form-title {
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.protest-form-sub {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+  margin-bottom: 36px;
+}
+
+.protest-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
+}
+
+.protest-grid .pf-full {
+  grid-column: span 2;
+}
+
+.pf {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.pf label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+}
+
+.pf label .req { color: var(--red); margin-left: 3px; }
+
+.pf input,
+.pf select,
+.pf textarea {
+  background: var(--grey-dark);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 2px solid rgba(225,6,0,0.2);
+  color: var(--white);
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 14px;
+  padding: 12px 16px;
+  outline: none;
+  width: 100%;
+  clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
+  transition: border-color 0.2s, background 0.2s;
+  -webkit-appearance: none;
+}
+
+.pf input::placeholder,
+.pf textarea::placeholder { color: rgba(255,255,255,0.15); }
+
+.pf input:focus,
+.pf select:focus,
+.pf textarea:focus {
+  border-bottom-color: var(--red);
+  background: rgba(225,6,0,0.04);
+}
+
+.pf select option { background: #1a1a1a; }
+.pf textarea { resize: vertical; min-height: 110px; }
+
+/* Incident type badges */
+.incident-types {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.incident-type {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 10px;
+  background: var(--grey-dark);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 2px solid transparent;
+  text-align: center;
+  transition: all 0.2s;
+  clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
+}
+
+.incident-type:hover {
+  background: rgba(225,6,0,0.06);
+  border-bottom-color: rgba(225,6,0,0.3);
+}
+
+.incident-type.selected {
+  background: rgba(225,6,0,0.1);
+  border-bottom-color: var(--red);
+  border-color: rgba(225,6,0,0.25);
+}
+
+.incident-type input { display: none; }
+
+.incident-type-icon { font-size: 22px; }
+
+.incident-type-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+  line-height: 1.3;
+}
+
+.incident-type.selected .incident-type-label { color: var(--red); }
+
+/* Severity */
+.severity-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.severity-btn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--grey-dark);
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: all 0.2s;
+  clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
+}
+
+.severity-btn input { display: none; }
+
+.severity-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.severity-btn.low .severity-dot  { background: #27ae60; }
+.severity-btn.mid .severity-dot  { background: #e67e22; }
+.severity-btn.high .severity-dot { background: var(--red); }
+
+.severity-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+}
+
+.severity-btn.selected { border-color: rgba(255,255,255,0.2); }
+.severity-btn.selected .severity-label { color: var(--white); }
+.severity-btn.low.selected  { background: rgba(39,174,96,0.1); border-color: rgba(39,174,96,0.3); }
+.severity-btn.mid.selected  { background: rgba(230,126,34,0.1); border-color: rgba(230,126,34,0.3); }
+.severity-btn.high.selected { background: rgba(225,6,0,0.1); border-color: rgba(225,6,0,0.3); }
+
+/* Submit */
+.protest-terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 24px 0 20px;
+}
+
+.protest-terms input[type="checkbox"] {
+  width: 16px; height: 16px;
+  accent-color: var(--red);
+  flex-shrink: 0;
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+.protest-terms label {
+  font-size: 12px;
+  color: var(--grey-text);
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+.protest-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  padding: 16px 40px;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  transition: background 0.2s;
+}
+
+.protest-submit:hover { background: #c0130a; }
+.protest-submit:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* Success */
+.protest-success {
+  display: none;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.protest-success.show { display: block; }
+
+.protest-success-icon { font-size: 54px; margin-bottom: 16px; }
+
+.protest-success-title {
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.protest-success-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--grey-text);
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* Protest ID badge */
+.protest-id-badge {
+  display: inline-block;
+  background: rgba(225,6,0,0.1);
+  border: 1px solid rgba(225,6,0,0.3);
+  color: var(--red);
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  padding: 8px 20px;
+  margin-top: 16px;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+
+@media (max-width: 900px) {
+  .protest-explainer { grid-template-columns: 1fr; }
+  .protest-grid { grid-template-columns: 1fr; }
+  .protest-grid .pf-full { grid-column: span 1; }
+  .protest-form-wrap { padding: 32px 24px; }
+  .incident-types { grid-template-columns: repeat(2, 1fr); }
+  .severity-row { grid-template-columns: 1fr; }
+}
+
 /* ========== HERO ========== */
 #hero {
   height: 100vh;
@@ -2100,6 +2499,7 @@ footer {
     <li><a href="#rules">Regulamin</a></li>
     <li><a href="#drivers">Zawodnicy</a></li>
     <li><a href="#gallery">Galeria</a></li>
+    <li><a href="protest.html" class="nav-protest">⚑ Protest</a></li>
     <li><a href="#registration">Rejestracja</a></li>
   </ul>
   <a href="#registration" class="nav-cta">Zapisz się ▶</a>
@@ -2944,7 +3344,93 @@ window.addEventListener('scroll', () => {
     nav.style.boxShadow = '';
   }
 });
-</script>
+
+// ===== PROTEST — incident type toggle =====
+document.querySelectorAll('.incident-type').forEach(label => {
+  label.addEventListener('click', () => {
+    document.querySelectorAll('.incident-type').forEach(l => l.classList.remove('selected'));
+    label.classList.add('selected');
+  });
+});
+
+// ===== PROTEST — severity toggle =====
+document.querySelectorAll('.severity-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.severity-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  });
+});
+
+// ===== PROTEST — enable submit when terms checked =====
+const prTerms  = document.getElementById('pr-terms');
+const prSubmit = document.getElementById('protestSubmit');
+if (prTerms && prSubmit) {
+  prTerms.addEventListener('change', () => {
+    prSubmit.disabled = !prTerms.checked;
+  });
+}
+
+// ===== PROTEST — form submit =====
+const protestForm = document.getElementById('protestForm');
+if (protestForm) {
+  protestForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name    = document.getElementById('pr-name').value.trim();
+    const team    = document.getElementById('pr-team').value.trim();
+    const session = document.getElementById('pr-session').value;
+    const accDrv  = document.getElementById('pr-accused-driver').value.trim();
+    const accTeam = document.getElementById('pr-accused-team').value.trim();
+    const desc    = document.getElementById('pr-desc').value.trim();
+    const incident = document.querySelector('input[name="incident"]:checked');
+    const severity = document.querySelector('input[name="severity"]:checked');
+
+    if (!name || !team || !session || !accDrv || !accTeam || !desc || !incident || !severity) {
+      alert('Wypełnij wszystkie wymagane pola (oznaczone *) oraz wybierz rodzaj incydentu i wagę zdarzenia.');
+      return;
+    }
+
+    prSubmit.textContent = '⏳  Wysyłanie...';
+    prSubmit.disabled = true;
+
+    // Generate protest ID
+    const id = 'PROT-' + String(Math.floor(1000 + Math.random() * 9000));
+
+    // Build form data for Formspree
+    const evidence = document.getElementById('pr-evidence').value.trim();
+    const lap = document.getElementById('pr-lap').value.trim();
+
+    const formData = new FormData();
+    formData.append('_subject', `⚑ Protest ${id}: ${accDrv} (${accTeam}) — ${incident.value}`);
+    formData.append('ID protestu', id);
+    formData.append('Zgłaszający', name);
+    formData.append('Zespół zgłaszający', team);
+    formData.append('Sesja', session);
+    formData.append('Numer okrążenia', lap || 'nie podano');
+    formData.append('Zgłaszany kierowca', accDrv);
+    formData.append('Zgłaszany zespół', accTeam);
+    formData.append('Rodzaj incydentu', incident.value);
+    formData.append('Waga zdarzenia', severity.value);
+    formData.append('Opis zdarzenia', desc);
+    formData.append('Dowód / nagranie', evidence || 'brak');
+
+    fetch('https://formspree.io/f/mjgarpgj', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: formData
+    }).then(res => {
+      document.getElementById('protestFormBody').style.display = 'none';
+      document.getElementById('protestIdBadge').textContent = id;
+      document.getElementById('protestSuccess').classList.add('show');
+    }).catch(() => {
+      // Show success anyway (offline / local file fallback)
+      document.getElementById('protestFormBody').style.display = 'none';
+      document.getElementById('protestIdBadge').textContent = id;
+      document.getElementById('protestSuccess').classList.add('show');
+    });
+  });
+}
+
 
 </body>
 </html>

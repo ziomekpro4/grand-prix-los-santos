@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protest — Grand Prix Los Santos 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+
+/* ====== VARIABLES ====== */
+:root {
+  --red:        #e10600;
+  --red-dark:   #9b0000;
+  --red-dim:    rgba(225,6,0,0.12);
+  --white:      #ffffff;
+  --black:      #000000;
+  --grey-dark:  #15151e;
+  --grey-mid:   #1f1f2e;
+  --grey-light: #2d2d3a;
+  --grey-card:  #1a1a27;
+  --grey-text:  #9898a4;
+  --font:       'Titillium Web', sans-serif;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--grey-dark);
+  color: var(--white);
+  font-family: var(--font);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+::selection { background: var(--red); color: #fff; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--grey-dark); }
+::-webkit-scrollbar-thumb { background: var(--red); }
+
+/* ====== NAV ====== */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  height: 60px;
+  background: rgba(21,21,30,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(225,6,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+}
+
+.nav-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+  transition: color 0.2s;
+}
+.nav-back:hover { color: var(--white); }
+.nav-back-arrow {
+  font-size: 16px;
+  color: var(--red);
+  transition: transform 0.2s;
+}
+.nav-back:hover .nav-back-arrow { transform: translateX(-3px); }
+
+.nav-brand {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+}
+.nav-brand span { color: var(--red); }
+
+.nav-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--red);
+  border: 1px solid rgba(225,6,0,0.3);
+  padding: 5px 14px;
+  clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
+}
+
+.nav-tag-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  animation: blink 1.6s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%,100% { opacity:1; } 50% { opacity:0.2; }
+}
+
+/* ====== HERO BANNER ====== */
+.protest-hero {
+  background: var(--grey-mid);
+  border-bottom: 3px solid var(--red);
+  padding: 56px 60px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.protest-hero::before {
+  content: 'PROTEST';
+  position: absolute;
+  right: -24px;
+  top: -20px;
+  font-size: 160px;
+  font-weight: 900;
+  letter-spacing: -8px;
+  color: rgba(225,6,0,0.04);
+  pointer-events: none;
+  line-height: 1;
+  user-select: none;
+}
+
+.protest-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: end;
+  position: relative;
+  z-index: 1;
+}
+
+.protest-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.protest-hero-eyebrow-line {
+  width: 28px; height: 2px;
+  background: var(--red);
+}
+
+.protest-hero-eyebrow-text {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.protest-hero-title {
+  font-size: clamp(42px, 7vw, 88px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  line-height: 0.9;
+  color: var(--white);
+}
+
+.protest-hero-title em {
+  font-style: normal;
+  color: var(--red);
+}
+
+.protest-hero-sub {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--grey-text);
+  line-height: 1.7;
+  margin-top: 18px;
+  max-width: 560px;
+}
+
+/* article ref badge */
+.protest-art-ref {
+  background: var(--grey-dark);
+  border: 1px solid rgba(225,6,0,0.2);
+  border-top: 3px solid var(--red);
+  padding: 20px 24px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.protest-art-ref-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+  margin-bottom: 6px;
+}
+
+.protest-art-ref-value {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--red);
+  letter-spacing: 1px;
+}
+
+.protest-art-ref-sub {
+  font-size: 10px;
+  color: var(--grey-text);
+  margin-top: 4px;
+  letter-spacing: 1px;
+}
+
+/* ====== MAIN LAYOUT ====== */
+.protest-main {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 0;
+  min-height: calc(100vh - 200px);
+}
+
+/* ====== SIDEBAR ====== */
+.protest-sidebar {
+  background: var(--grey-mid);
+  border-right: 1px solid rgba(255,255,255,0.05);
+  padding: 40px 32px;
+  position: sticky;
+  top: 60px;
+  height: fit-content;
+}
+
+.sidebar-section {
+  margin-bottom: 36px;
+}
+
+.sidebar-section:last-child { margin-bottom: 0; }
+
+.sidebar-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding-bottom: 10px;
+  margin-bottom: 16px;
+}
+
+/* How it works steps */
+.how-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.how-step {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  position: relative;
+}
+
+.how-step:last-child { border-bottom: none; }
+
+.how-step-num {
+  width: 28px;
+  height: 28px;
+  background: var(--red-dim);
+  border: 1px solid rgba(225,6,0,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--red);
+  flex-shrink: 0;
+}
+
+.how-step-content {}
+
+.how-step-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.how-step-text {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--grey-text);
+  line-height: 1.6;
+}
+
+/* Rules */
+.rule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rule-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--grey-text);
+  line-height: 1.5;
+}
+
+.rule-icon { flex-shrink: 0; font-size: 13px; }
+
+/* Warning box */
+.sidebar-warning {
+  background: rgba(225,6,0,0.06);
+  border: 1px solid rgba(225,6,0,0.2);
+  border-left: 3px solid var(--red);
+  padding: 14px 16px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--grey-text);
+  line-height: 1.6;
+}
+
+.sidebar-warning strong {
+  display: block;
+  color: var(--red);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+/* ====== FORM AREA ====== */
+.protest-form-area {
+  padding: 48px 60px;
+  background: var(--grey-dark);
+}
+
+/* Progress steps */
+.form-progress {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 48px;
+}
+
+.fp-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.fp-step:last-child { flex: 0; }
+
+.fp-dot {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--grey-text);
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+
+.fp-dot.active {
+  border-color: var(--red);
+  background: var(--red-dim);
+  color: var(--red);
+}
+
+.fp-dot.done {
+  border-color: var(--red);
+  background: var(--red);
+  color: #fff;
+}
+
+.fp-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+  transition: color 0.3s;
+}
+
+.fp-step.active .fp-label { color: var(--white); }
+
+.fp-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+  margin: 0 12px;
+  transition: background 0.3s;
+}
+
+.fp-line.done { background: var(--red); }
+
+/* Form panels */
+.form-panel {
+  display: none;
+}
+
+.form-panel.active { display: block; }
+
+.form-panel-title {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.form-panel-sub {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--grey-text);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+/* Field groups */
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.field-row.single { grid-template-columns: 1fr; }
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+}
+
+.field label .req { color: var(--red); margin-left: 2px; }
+
+.field input,
+.field select,
+.field textarea {
+  background: var(--grey-mid);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 2px solid rgba(225,6,0,0.18);
+  color: var(--white);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 400;
+  padding: 13px 16px;
+  outline: none;
+  width: 100%;
+  clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
+  transition: border-color 0.2s, background 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.field input::placeholder,
+.field textarea::placeholder { color: rgba(255,255,255,0.14); font-weight: 300; }
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-bottom-color: var(--red);
+  background: rgba(225,6,0,0.04);
+}
+
+.field select option { background: #1a1a27; }
+.field textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+
+/* ====== INCIDENT TILES ====== */
+.incident-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.incident-tile {
+  cursor: pointer;
+  position: relative;
+}
+
+.incident-tile input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.incident-tile-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 12px;
+  background: var(--grey-mid);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 3px solid transparent;
+  text-align: center;
+  transition: all 0.2s;
+  height: 100%;
+}
+
+.incident-tile:hover .incident-tile-inner {
+  background: rgba(225,6,0,0.05);
+  border-bottom-color: rgba(225,6,0,0.3);
+}
+
+.incident-tile.selected .incident-tile-inner {
+  background: rgba(225,6,0,0.1);
+  border-color: rgba(225,6,0,0.25);
+  border-bottom-color: var(--red);
+}
+
+.incident-tile-icon {
+  font-size: 26px;
+  line-height: 1;
+}
+
+.incident-tile-name {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+  line-height: 1.3;
+}
+
+.incident-tile.selected .incident-tile-name { color: var(--red); }
+
+.incident-tile-desc {
+  font-size: 11px;
+  font-weight: 300;
+  color: rgba(152,152,164,0.7);
+  line-height: 1.4;
+  margin-top: -4px;
+}
+
+/* ====== SEVERITY ====== */
+.severity-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.sev-tile {
+  cursor: pointer;
+  position: relative;
+}
+
+.sev-tile input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sev-tile-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  background: var(--grey-mid);
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: all 0.2s;
+}
+
+.sev-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.sev-tile.low  .sev-dot { background: #27ae60; }
+.sev-tile.mid  .sev-dot { background: #e67e22; }
+.sev-tile.high .sev-dot { background: var(--red); }
+
+.sev-content {}
+
+.sev-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 2px;
+}
+
+.sev-sub {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--grey-text);
+}
+
+.sev-tile.selected.low  .sev-tile-inner { background: rgba(39,174,96,0.08); border-color: rgba(39,174,96,0.3); }
+.sev-tile.selected.mid  .sev-tile-inner { background: rgba(230,126,34,0.08); border-color: rgba(230,126,34,0.3); }
+.sev-tile.selected.high .sev-tile-inner { background: rgba(225,6,0,0.08); border-color: rgba(225,6,0,0.3); }
+
+/* ====== SUMMARY PREVIEW ====== */
+.summary-card {
+  background: var(--grey-mid);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-top: 3px solid var(--red);
+  margin-bottom: 24px;
+}
+
+.summary-header {
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.summary-header-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+}
+
+.summary-header-id {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--red);
+}
+
+.summary-body {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.summary-row {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.summary-row:nth-child(odd) { padding-right: 20px; border-right: 1px solid rgba(255,255,255,0.04); }
+.summary-row:nth-child(even) { padding-left: 20px; }
+.summary-row.full { grid-column: span 2; padding-left: 0; padding-right: 0; border-right: none; }
+.summary-row:last-child { border-bottom: none; }
+
+.summary-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+  margin-bottom: 4px;
+}
+
+.summary-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.5;
+}
+
+.summary-value.red { color: var(--red); }
+
+/* ====== NAV BUTTONS ====== */
+.form-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.btn-prev {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--grey-text);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 13px 28px;
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  transition: all 0.2s;
+}
+
+.btn-prev:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
+
+.btn-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  padding: 13px 36px;
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  transition: background 0.2s;
+}
+
+.btn-next:hover { background: var(--red-dark); }
+.btn-next:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* validation error */
+.field-error {
+  font-size: 11px;
+  color: var(--red);
+  margin-top: -4px;
+  display: none;
+}
+
+.field.has-error input,
+.field.has-error select,
+.field.has-error textarea {
+  border-bottom-color: var(--red) !important;
+  background: rgba(225,6,0,0.04) !important;
+}
+
+.field.has-error .field-error { display: block; }
+
+/* ====== TERMS ====== */
+.terms-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: rgba(225,6,0,0.05);
+  border: 1px solid rgba(225,6,0,0.15);
+  padding: 18px 20px;
+  margin-bottom: 24px;
+}
+
+.terms-box input[type="checkbox"] {
+  width: 18px; height: 18px;
+  accent-color: var(--red);
+  flex-shrink: 0;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.terms-box label {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--grey-text);
+  line-height: 1.7;
+  cursor: pointer;
+}
+
+.terms-box label strong { color: var(--white); font-weight: 700; }
+
+/* ====== SUCCESS ====== */
+.protest-success {
+  display: none;
+  text-align: center;
+  padding: 80px 40px;
+  animation: fadeUp 0.5s ease;
+}
+
+.protest-success.show { display: block; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(16px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+.success-icon { font-size: 64px; margin-bottom: 20px; }
+
+.success-title {
+  font-size: 42px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.success-title em { color: var(--red); font-style: normal; }
+
+.success-text {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--grey-text);
+  line-height: 1.8;
+  max-width: 480px;
+  margin: 0 auto 28px;
+}
+
+.success-id {
+  display: inline-block;
+  background: rgba(225,6,0,0.08);
+  border: 1px solid rgba(225,6,0,0.25);
+  border-top: 3px solid var(--red);
+  padding: 16px 32px;
+  margin-bottom: 32px;
+}
+
+.success-id-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+  margin-bottom: 6px;
+}
+
+.success-id-value {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: var(--red);
+}
+
+.success-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  background: transparent;
+  color: var(--grey-text);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 13px 32px;
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  transition: all 0.2s;
+}
+
+.success-back:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 1000px) {
+  nav { padding: 0 20px; }
+  .protest-hero { padding: 40px 24px 36px; }
+  .protest-hero-inner { grid-template-columns: 1fr; }
+  .protest-art-ref { display: none; }
+  .protest-main { grid-template-columns: 1fr; }
+  .protest-sidebar { position: static; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .protest-form-area { padding: 36px 24px; }
+  .field-row { grid-template-columns: 1fr; }
+  .incident-grid { grid-template-columns: repeat(2, 1fr); }
+  .severity-grid { grid-template-columns: 1fr; }
+  .summary-body { grid-template-columns: 1fr; }
+  .summary-row:nth-child(odd) { padding-right: 0; border-right: none; }
+  .summary-row:nth-child(even) { padding-left: 0; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ====== NAV ====== -->
+<nav>
+  <a href="index.html" class="nav-back">
+    <span class="nav-back-arrow">←</span>
+    Wróć na stronę główną
+  </a>
+  <div class="nav-brand">Grand Prix <span>Los Santos</span> 2026</div>
+  <div class="nav-tag">
+    <span class="nav-tag-dot"></span>
+    Protest
+  </div>
+</nav>
+
+<!-- ====== HERO ====== -->
+<div class="protest-hero">
+  <div class="protest-hero-inner">
+    <div>
+      <div class="protest-hero-eyebrow">
+        <div class="protest-hero-eyebrow-line"></div>
+        <span class="protest-hero-eyebrow-text">Zgłoszenie incydentu na torze</span>
+      </div>
+      <h1 class="protest-hero-title">For<em>mu</em>larz<br>Protestu</h1>
+      <p class="protest-hero-sub">
+        Byłeś uczestnikiem lub świadkiem naruszenia regulaminu? Złóż formalny protest.
+        Każde zgłoszenie trafia bezpośrednio do sędziów wyścigu i jest rozpatrywane
+        zgodnie z <strong style="color:var(--white)">Art. 11 Regulaminu</strong> Grand Prix Los Santos 2026.
+      </p>
+    </div>
+    <div class="protest-art-ref">
+      <div class="protest-art-ref-label">Podstawa prawna</div>
+      <div class="protest-art-ref-value">Art. 11</div>
+      <div class="protest-art-ref-sub">Regulamin · GPLS 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== MAIN ====== -->
+<div class="protest-main">
+
+  <!-- SIDEBAR -->
+  <aside class="protest-sidebar">
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Jak to działa?</div>
+      <div class="how-steps">
+        <div class="how-step">
+          <div class="how-step-num">1</div>
+          <div class="how-step-content">
+            <div class="how-step-title">Kto składa?</div>
+            <div class="how-step-text">Wyłącznie <strong style="color:var(--white)">kierowca lub szef zespołu</strong> biorącego udział w danej sesji.</div>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">2</div>
+          <div class="how-step-content">
+            <div class="how-step-title">Kogo zgłaszasz?</div>
+            <div class="how-step-text">Konkretnego <strong style="color:var(--white)">kierowcę i jego zespół</strong>. Jeden formularz = jeden uczestnik.</div>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">3</div>
+          <div class="how-step-content">
+            <div class="how-step-title">Co opisujesz?</div>
+            <div class="how-step-text">Dokładnie <strong style="color:var(--white)">co, gdzie i kiedy</strong> się wydarzyło. Podaj okrążenie i miejsce na torze.</div>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">4</div>
+          <div class="how-step-content">
+            <div class="how-step-title">Co się dzieje?</div>
+            <div class="how-step-text">Sędziowie analizują protest. Decyzja zapada <strong style="color:var(--white)">w ciągu 30 min</strong> lub przed ceremonią dekoracji.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Zasady składania</div>
+      <div class="rule-list">
+        <div class="rule-item"><span class="rule-icon">⏱️</span>Protest składasz max. <strong style="color:var(--white)">30 minut</strong> po zakończeniu sesji</div>
+        <div class="rule-item"><span class="rule-icon">🎯</span>Jeden formularz — jeden zgłaszany uczestnik</div>
+        <div class="rule-item"><span class="rule-icon">📹</span>Nagranie wideo znacznie przyspiesza decyzję</div>
+        <div class="rule-item"><span class="rule-icon">⚖️</span>Wszystkie protesty są archiwizowane</div>
+        <div class="rule-item"><span class="rule-icon">🚫</span>Możesz zgłosić max. <strong style="color:var(--white)">2 protesty</strong> na sesję</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-warning">
+        <strong>⚠️ Uwaga</strong>
+        Fałszywe lub złośliwe protesty są naruszeniem regulaminu i mogą skutkować ostrzeżeniem lub karą dla <strong style="color:var(--white)">Twojego</strong> zespołu.
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- FORM AREA -->
+  <div class="protest-form-area">
+
+    <!-- Success state -->
+    <div class="protest-success" id="protestSuccess">
+      <div class="success-icon">⚑</div>
+      <div class="success-title">Protest<br><em>Złożony</em></div>
+      <p class="success-text">
+        Twoje zgłoszenie zostało przyjęte i przekazane bezpośrednio do kolegium sędziów Grand Prix Los Santos 2026.
+        Decyzja zostanie ogłoszona zgodnie z Art. 11 Regulaminu.
+      </p>
+      <div class="success-id">
+        <div class="success-id-label">Numer Twojego protestu</div>
+        <div class="success-id-value" id="successIdValue">PROT-0000</div>
+      </div>
+      <br>
+      <a href="index.html" class="success-back">← Wróć na stronę główną</a>
+    </div>
+
+    <!-- Form -->
+    <div id="protestFormWrap">
+
+      <!-- Progress bar -->
+      <div class="form-progress">
+        <div class="fp-step active" id="fp1">
+          <div class="fp-dot active" id="fpd1">1</div>
+          <div class="fp-label">Strony</div>
+        </div>
+        <div class="fp-line" id="fpl1"></div>
+        <div class="fp-step" id="fp2">
+          <div class="fp-dot" id="fpd2">2</div>
+          <div class="fp-label">Incydent</div>
+        </div>
+        <div class="fp-line" id="fpl2"></div>
+        <div class="fp-step" id="fp3">
+          <div class="fp-dot" id="fpd3">3</div>
+          <div class="fp-label">Opis</div>
+        </div>
+        <div class="fp-line" id="fpl3"></div>
+        <div class="fp-step" id="fp4">
+          <div class="fp-dot" id="fpd4">4</div>
+          <div class="fp-label">Podsumowanie</div>
+        </div>
+      </div>
+
+      <!-- PANEL 1 — Strony -->
+      <div class="form-panel active" id="panel1">
+        <div class="form-panel-title">Strony incydentu</div>
+        <div class="form-panel-sub">Podaj dane osoby składającej protest oraz kierowcy, którego zgłaszasz. Jeden formularz dotyczy jednego konkretnego uczestnika.</div>
+
+        <p style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:16px;">— Zgłaszający —</p>
+
+        <div class="field-row">
+          <div class="field" id="f-name-wrap">
+            <label>Twoje imię i nazwisko <span class="req">*</span></label>
+            <input type="text" id="f-name" placeholder="np. Kamil Nowak">
+            <span class="field-error">To pole jest wymagane</span>
+          </div>
+          <div class="field" id="f-team-wrap">
+            <label>Nazwa Twojego zespołu <span class="req">*</span></label>
+            <input type="text" id="f-team" placeholder="np. Team Vortex">
+            <span class="field-error">To pole jest wymagane</span>
+          </div>
+        </div>
+
+        <div class="field-row single" style="margin-bottom:28px;">
+          <div class="field" id="f-role-wrap">
+            <label>Twoja rola w zespole <span class="req">*</span></label>
+            <select id="f-role">
+              <option value="" disabled selected>Wybierz rolę...</option>
+              <option value="kierowca">Kierowca</option>
+              <option value="szef-zespolu">Szef zespołu</option>
+              <option value="przedstawiciel">Wyznaczony przedstawiciel</option>
+            </select>
+            <span class="field-error">Wybierz rolę</span>
+          </div>
+        </div>
+
+        <p style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:16px;">— Zgłaszany uczestnik —</p>
+
+        <div class="field-row">
+          <div class="field" id="f-acc-name-wrap">
+            <label>Imię i nazwisko kierowcy <span class="req">*</span></label>
+            <input type="text" id="f-acc-name" placeholder="np. Adam Kowalski">
+            <span class="field-error">To pole jest wymagane</span>
+          </div>
+          <div class="field" id="f-acc-team-wrap">
+            <label>Nazwa zespołu zgłaszanego <span class="req">*</span></label>
+            <input type="text" id="f-acc-team" placeholder="np. Team Alpha">
+            <span class="field-error">To pole jest wymagane</span>
+          </div>
+        </div>
+
+        <div class="form-nav">
+          <span></span>
+          <button class="btn-next" onclick="goToPanel(2)">Dalej — Incydent →</button>
+        </div>
+      </div>
+
+      <!-- PANEL 2 — Incydent -->
+      <div class="form-panel" id="panel2">
+        <div class="form-panel-title">Szczegóły incydentu</div>
+        <div class="form-panel-sub">Wskaż sesję, podczas której doszło do zdarzenia, oraz wybierz rodzaj naruszenia regulaminu.</div>
+
+        <div class="field-row">
+          <div class="field" id="f-session-wrap">
+            <label>Sesja <span class="req">*</span></label>
+            <select id="f-session">
+              <option value="" disabled selected>Wybierz sesję...</option>
+              <option>Trening — Sobota 21.03 (20:00–20:30)</option>
+              <option>Kwalifikacje — Sobota 21.03 (20:40–21:55)</option>
+              <option>Sprint — Sobota 21.03 (22:00)</option>
+              <option>Wyścig Główny — Niedziela 22.03 (21:00)</option>
+            </select>
+            <span class="field-error">Wybierz sesję</span>
+          </div>
+          <div class="field">
+            <label>Numer okrążenia</label>
+            <input type="text" id="f-lap" placeholder="np. Okrążenie 3 (opcjonalnie)">
+          </div>
+        </div>
+
+        <div class="field" style="margin-bottom:20px;">
+          <label>Rodzaj incydentu <span class="req">*</span></label>
+          <div class="incident-grid" id="incidentGrid">
+
+            <label class="incident-tile" data-val="Kontakt / kolizja">
+              <input type="radio" name="incident_type" value="Kontakt / kolizja">
+              <div class="incident-tile-inner">
+                <div class="incident-tile-icon">💥</div>
+                <div class="incident-tile-name">Kontakt / kolizja</div>
+                <div class="incident-tile-desc">Celowe lub nieumyślne uderzenie w inny kart</div>
+              </div>
+            </label>
+
+            <label class="incident-tile" data-val="Blokowanie toru">
+              <input type="radio" name="incident_type" value="Blokowanie toru">
+              <div class="incident-tile-inner">
+                <div class="incident-tile-icon">🚧</div>
+                <div class="incident-tile-name">Blokowanie toru</div>
+                <div class="incident-tile-desc">Uniemożliwianie wyprzedzania lub utrudnianie przejazdu</div>
+              </div>
+            </label>
+
+            <label class="incident-tile" data-val="Niebezpieczna jazda">
+              <input type="radio" name="incident_type" value="Niebezpieczna jazda">
+              <div class="incident-tile-inner">
+                <div class="incident-tile-icon">⚡</div>
+                <div class="incident-tile-name">Niebezpieczna jazda</div>
+                <div class="incident-tile-desc">Jazda stwarzająca zagrożenie bez kontaktu fizycznego</div>
+              </div>
+            </label>
+
+            <label class="incident-tile" data-val="Fałszywy start">
+              <input type="radio" name="incident_type" value="Fałszywy start">
+              <div class="incident-tile-inner">
+                <div class="incident-tile-icon">🚦</div>
+                <div class="incident-tile-name">Fałszywy start</div>
+                <div class="incident-tile-desc">Ruszenie przed sygnałem startowym</div>
+              </div>
+            </label>
+
+            <label class="incident-tile" data-val="Naruszenie pit lane">
+              <input type="radio" name="incident_type" value="Naruszenie pit lane">
+              <div class="incident-tile-inner">
+                <div class="incident-tile-icon">🔧</div>
+                <div class="incident-tile-name">Naruszenie pit lane</div>
+                <div class="incident-tile-desc">Przekroczenie limitu prędkości lub przepisów pit lane</div>
+              </div>
+            </label>
+
+            <label class="incident-tile" data-val="Inne naruszenie">
+              <input type="radio" name="incident_type" value="Inne naruszenie">
+              <div class="incident-tile-inner">
+                <div class="incident-tile-icon">📋</div>
+                <div class="incident-tile-name">Inne naruszenie</div>
+                <div class="incident-tile-desc">Naruszenie nieujęte w powyższych kategoriach</div>
+              </div>
+            </label>
+
+          </div>
+          <span class="field-error" id="incident-error" style="display:none;">Wybierz rodzaj incydentu</span>
+        </div>
+
+        <div class="field" style="margin-bottom:0;">
+          <label>Waga zdarzenia <span class="req">*</span></label>
+          <div class="severity-grid" id="severityGrid">
+
+            <label class="sev-tile low" data-val="Niegroźny">
+              <input type="radio" name="severity" value="Niegroźny">
+              <div class="sev-tile-inner">
+                <span class="sev-dot"></span>
+                <div class="sev-content">
+                  <div class="sev-title">Niegroźny</div>
+                  <div class="sev-sub">Brak wpływu na wynik / bezpieczeństwo</div>
+                </div>
+              </div>
+            </label>
+
+            <label class="sev-tile mid" data-val="Poważny">
+              <input type="radio" name="severity" value="Poważny">
+              <div class="sev-tile-inner">
+                <span class="sev-dot"></span>
+                <div class="sev-content">
+                  <div class="sev-title">Poważny</div>
+                  <div class="sev-sub">Wpływ na pozycję / wynik w sesji</div>
+                </div>
+              </div>
+            </label>
+
+            <label class="sev-tile high" data-val="Krytyczny">
+              <input type="radio" name="severity" value="Krytyczny">
+              <div class="sev-tile-inner">
+                <span class="sev-dot"></span>
+                <div class="sev-content">
+                  <div class="sev-title">Krytyczny</div>
+                  <div class="sev-sub">Zagrożenie bezpieczeństwa / wycofanie z toru</div>
+                </div>
+              </div>
+            </label>
+
+          </div>
+          <span class="field-error" id="severity-error" style="display:none;">Określ wagę zdarzenia</span>
+        </div>
+
+        <div class="form-nav">
+          <button class="btn-prev" onclick="goToPanel(1)">← Wróć</button>
+          <button class="btn-next" onclick="goToPanel(3)">Dalej — Opis →</button>
+        </div>
+      </div>
+
+      <!-- PANEL 3 — Opis -->
+      <div class="form-panel" id="panel3">
+        <div class="form-panel-title">Opis zdarzenia</div>
+        <div class="form-panel-sub">Opisz dokładnie co się wydarzyło. Im więcej precyzyjnych szczegółów, tym sprawniejsza analiza sędziów. Wskaż miejsce na torze, okoliczności i skutki incydentu.</div>
+
+        <div class="field-row single">
+          <div class="field" id="f-desc-wrap">
+            <label>Szczegółowy opis incydentu <span class="req">*</span></label>
+            <textarea id="f-desc" rows="6" placeholder="Opisz co się wydarzyło — gdzie na torze (zakręt, prosta, pit lane), co konkretnie zrobił zgłaszany kierowca, jak wpłynęło to na Twój przejazd lub bezpieczeństwo. Np.: &quot;Na 3. okrążeniu na wyjściu z zakrętu nr 2 kierowca Zespołu Alpha uderzył moją maszynę od strony lewej, co spowodowało obrót i utratę 4 pozycji.&quot;"></textarea>
+            <span class="field-error">Opis jest wymagany — im więcej szczegółów, tym lepiej</span>
+          </div>
+        </div>
+
+        <div class="field-row single">
+          <div class="field">
+            <label>Link do nagrania / dowodu wideo (opcjonalnie)</label>
+            <input type="text" id="f-evidence" placeholder="np. https://youtu.be/... lub link do klipu w chmurze">
+          </div>
+        </div>
+
+        <div class="field-row single">
+          <div class="field">
+            <label>Świadkowie incydentu (opcjonalnie)</label>
+            <input type="text" id="f-witnesses" placeholder="Imiona i nazwiska, lub nazwy zespołów które były świadkami">
+          </div>
+        </div>
+
+        <div class="form-nav">
+          <button class="btn-prev" onclick="goToPanel(2)">← Wróć</button>
+          <button class="btn-next" onclick="goToPanel(4)">Dalej — Podsumowanie →</button>
+        </div>
+      </div>
+
+      <!-- PANEL 4 — Podsumowanie -->
+      <div class="form-panel" id="panel4">
+        <div class="form-panel-title">Podsumowanie i złożenie</div>
+        <div class="form-panel-sub">Sprawdź wszystkie dane przed złożeniem protestu. Po wysłaniu formularz trafia do sędziów i nie możesz go edytować.</div>
+
+        <!-- Summary card -->
+        <div class="summary-card">
+          <div class="summary-header">
+            <span class="summary-header-title">Podgląd zgłoszenia</span>
+            <span class="summary-header-id" id="previewId">PROT-—</span>
+          </div>
+          <div class="summary-body">
+            <div class="summary-row">
+              <div class="summary-label">Zgłaszający</div>
+              <div class="summary-value" id="sv-name">—</div>
+            </div>
+            <div class="summary-row">
+              <div class="summary-label">Zespół zgłaszający</div>
+              <div class="summary-value" id="sv-team">—</div>
+            </div>
+            <div class="summary-row">
+              <div class="summary-label">Zgłaszany kierowca</div>
+              <div class="summary-value red" id="sv-acc-name">—</div>
+            </div>
+            <div class="summary-row">
+              <div class="summary-label">Zgłaszany zespół</div>
+              <div class="summary-value red" id="sv-acc-team">—</div>
+            </div>
+            <div class="summary-row">
+              <div class="summary-label">Sesja</div>
+              <div class="summary-value" id="sv-session">—</div>
+            </div>
+            <div class="summary-row">
+              <div class="summary-label">Rodzaj incydentu</div>
+              <div class="summary-value" id="sv-incident">—</div>
+            </div>
+            <div class="summary-row full">
+              <div class="summary-label">Waga zdarzenia</div>
+              <div class="summary-value" id="sv-severity">—</div>
+            </div>
+            <div class="summary-row full">
+              <div class="summary-label">Opis zdarzenia</div>
+              <div class="summary-value" id="sv-desc" style="font-weight:300;font-size:13px;color:var(--grey-text);">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="terms-box">
+          <input type="checkbox" id="f-terms">
+          <label for="f-terms">
+            <strong>Potwierdzam zgodność z prawdą.</strong> Oświadczam, że opisany incydent jest zgodny z moją najlepszą wiedzą. Rozumiem, że złożenie fałszywego protestu stanowi naruszenie Art. 11 Regulaminu GPLS 2026 i może skutkować nałożeniem kary na mój zespół.
+          </label>
+        </div>
+
+        <div class="form-nav">
+          <button class="btn-prev" onclick="goToPanel(3)">← Wróć i edytuj</button>
+          <button class="btn-next" id="submitBtn" disabled onclick="submitProtest()">
+            ⚑ &nbsp; Złóż formalny protest
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /protestFormWrap -->
+  </div><!-- /protest-form-area -->
+</div><!-- /protest-main -->
+
+<script>
+
+// ====== STATE ======
+let currentPanel = 1;
+const protestId = 'PROT-' + String(Math.floor(1000 + Math.random() * 9000));
+document.getElementById('previewId').textContent = protestId;
+
+// ====== PANEL NAVIGATION ======
+function goToPanel(n) {
+  if (n > currentPanel && !validatePanel(currentPanel)) return;
+
+  // Update old panel
+  document.getElementById('panel' + currentPanel).classList.remove('active');
+  document.getElementById('fpd' + currentPanel).classList.remove('active');
+  document.getElementById('fpd' + currentPanel).classList.add('done');
+  document.getElementById('fpd' + currentPanel).textContent = '✓';
+  if (currentPanel < 4) document.getElementById('fpl' + currentPanel).classList.add('done');
+
+  currentPanel = n;
+
+  // Activate new panel
+  document.getElementById('panel' + n).classList.add('active');
+  document.getElementById('fpd' + n).classList.remove('done');
+  document.getElementById('fpd' + n).classList.add('active');
+  document.getElementById('fpd' + n).textContent = n;
+  document.getElementById('fp' + n).classList.add('active');
+
+  // If going back, un-done the step
+  for (let i = n; i <= 4; i++) {
+    const dot = document.getElementById('fpd' + i);
+    dot.classList.remove('done');
+    dot.classList.remove('active');
+    dot.textContent = i;
+    if (i < 4 && document.getElementById('fpl' + i)) {
+      document.getElementById('fpl' + i).classList.remove('done');
+    }
+  }
+  document.getElementById('fpd' + n).classList.add('active');
+
+  // If going to summary, fill preview
+  if (n === 4) fillSummary();
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ====== VALIDATION ======
+function validatePanel(p) {
+  let valid = true;
+
+  if (p === 1) {
+    valid = checkField('f-name', 'f-name-wrap') && valid;
+    valid = checkField('f-team', 'f-team-wrap') && valid;
+    valid = checkSelect('f-role', 'f-role-wrap') && valid;
+    valid = checkField('f-acc-name', 'f-acc-name-wrap') && valid;
+    valid = checkField('f-acc-team', 'f-acc-team-wrap') && valid;
+  }
+
+  if (p === 2) {
+    valid = checkSelect('f-session', 'f-session-wrap') && valid;
+
+    const incident = document.querySelector('input[name="incident_type"]:checked');
+    const incidentErr = document.getElementById('incident-error');
+    if (!incident) {
+      incidentErr.style.display = 'block';
+      valid = false;
+    } else {
+      incidentErr.style.display = 'none';
+    }
+
+    const severity = document.querySelector('input[name="severity"]:checked');
+    const severityErr = document.getElementById('severity-error');
+    if (!severity) {
+      severityErr.style.display = 'block';
+      valid = false;
+    } else {
+      severityErr.style.display = 'none';
+    }
+  }
+
+  if (p === 3) {
+    valid = checkTextarea('f-desc', 'f-desc-wrap') && valid;
+  }
+
+  return valid;
+}
+
+function checkField(id, wrapId) {
+  const el = document.getElementById(id);
+  const wrap = document.getElementById(wrapId);
+  if (!wrap) return true;
+  if (!el.value.trim()) {
+    wrap.classList.add('has-error');
+    return false;
+  }
+  wrap.classList.remove('has-error');
+  return true;
+}
+
+function checkSelect(id, wrapId) {
+  const el = document.getElementById(id);
+  const wrap = document.getElementById(wrapId);
+  if (!wrap) return true;
+  if (!el.value) {
+    wrap.classList.add('has-error');
+    return false;
+  }
+  wrap.classList.remove('has-error');
+  return true;
+}
+
+function checkTextarea(id, wrapId) {
+  const el = document.getElementById(id);
+  const wrap = document.getElementById(wrapId);
+  if (!wrap) return true;
+  if (!el.value.trim() || el.value.trim().length < 20) {
+    wrap.classList.add('has-error');
+    return false;
+  }
+  wrap.classList.remove('has-error');
+  return true;
+}
+
+// Remove error on input
+['f-name','f-team','f-acc-name','f-acc-team','f-desc'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', () => {
+    el.closest('.field').classList.remove('has-error');
+  });
+});
+['f-role','f-session'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('change', () => {
+    el.closest('.field').classList.remove('has-error');
+  });
+});
+
+// ====== INCIDENT TILES ======
+document.querySelectorAll('.incident-tile').forEach(tile => {
+  tile.addEventListener('click', () => {
+    document.querySelectorAll('.incident-tile').forEach(t => t.classList.remove('selected'));
+    tile.classList.add('selected');
+    document.getElementById('incident-error').style.display = 'none';
+  });
+});
+
+// ====== SEVERITY TILES ======
+document.querySelectorAll('.sev-tile').forEach(tile => {
+  tile.addEventListener('click', () => {
+    document.querySelectorAll('.sev-tile').forEach(t => t.classList.remove('selected'));
+    tile.classList.add('selected');
+    document.getElementById('severity-error').style.display = 'none';
+  });
+});
+
+// ====== TERMS CHECKBOX ======
+document.getElementById('f-terms').addEventListener('change', function() {
+  document.getElementById('submitBtn').disabled = !this.checked;
+});
+
+// ====== FILL SUMMARY ======
+function fillSummary() {
+  const incident = document.querySelector('input[name="incident_type"]:checked');
+  const severity = document.querySelector('input[name="severity"]:checked');
+  document.getElementById('sv-name').textContent     = document.getElementById('f-name').value || '—';
+  document.getElementById('sv-team').textContent     = document.getElementById('f-team').value || '—';
+  document.getElementById('sv-acc-name').textContent = document.getElementById('f-acc-name').value || '—';
+  document.getElementById('sv-acc-team').textContent = document.getElementById('f-acc-team').value || '—';
+  document.getElementById('sv-session').textContent  = document.getElementById('f-session').value || '—';
+  document.getElementById('sv-incident').textContent = incident ? incident.value : '—';
+  document.getElementById('sv-severity').textContent = severity ? severity.value : '—';
+  document.getElementById('sv-desc').textContent     = document.getElementById('f-desc').value || '—';
+}
+
+// ====== SUBMIT ======
+function submitProtest() {
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = '⏳  Wysyłanie...';
+  btn.disabled = true;
+
+  const incident = document.querySelector('input[name="incident_type"]:checked');
+  const severity = document.querySelector('input[name="severity"]:checked');
+
+  const formData = new FormData();
+  formData.append('_subject', '⚑ ' + protestId + ': ' + document.getElementById('f-acc-name').value + ' — ' + (incident ? incident.value : ''));
+  formData.append('ID protestu',          protestId);
+  formData.append('Zgłaszający',          document.getElementById('f-name').value);
+  formData.append('Rola',                 document.getElementById('f-role').value);
+  formData.append('Zespół zgłaszający',   document.getElementById('f-team').value);
+  formData.append('Zgłaszany kierowca',   document.getElementById('f-acc-name').value);
+  formData.append('Zgłaszany zespół',     document.getElementById('f-acc-team').value);
+  formData.append('Sesja',               document.getElementById('f-session').value);
+  formData.append('Okrążenie',           document.getElementById('f-lap').value || 'nie podano');
+  formData.append('Rodzaj incydentu',    incident ? incident.value : '—');
+  formData.append('Waga zdarzenia',      severity ? severity.value : '—');
+  formData.append('Opis zdarzenia',      document.getElementById('f-desc').value);
+  formData.append('Dowód / nagranie',    document.getElementById('f-evidence').value || 'brak');
+  formData.append('Świadkowie',          document.getElementById('f-witnesses').value || 'nie podano');
+
+  const showSuccess = () => {
+    document.getElementById('protestFormWrap').style.display = 'none';
+    document.getElementById('successIdValue').textContent = protestId;
+    document.getElementById('protestSuccess').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  fetch('https://formspree.io/f/mjgarpgj', {
+    method: 'POST',
+    headers: { 'Accept': 'application/json' },
+    body: formData
+  }).then(showSuccess).catch(showSuccess);
+}
+
+</script>
+</body>
+</html>
