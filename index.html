@@ -2255,7 +2255,7 @@ footer {
   <div class="drivers-grid" id="teamsGrid"></div>
 
   <div style="margin-top:32px;text-align:center;" class="reveal">
-    <button onclick="openTeamsPanel()" style="background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.2);font-family:var(--font-display);font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:10px 24px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(225,6,0,0.4)';this.style.color='var(--red)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='rgba(255,255,255,0.2)'">
+    <button onclick="window.openTeamsPanel()" style="background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.2);font-family:var(--font-display);font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:10px 24px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(225,6,0,0.4)';this.style.color='var(--red)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='rgba(255,255,255,0.2)'">
       🔒 Zarządzaj zespołami
     </button>
   </div>
@@ -2350,7 +2350,7 @@ footer {
 
   <!-- DB OPEN BUTTON (tylko dla organizatorów) -->
   <div style="margin-top:40px;text-align:center;" class="reveal">
-    <button onclick="openDB()" style="
+    <button onclick="window.openDB()" style="
       background:transparent;
       border:1px solid rgba(255,255,255,0.1);
       color:rgba(255,255,255,0.2);
@@ -2375,16 +2375,16 @@ footer {
   <div class="db-header">
     <div class="db-title">Baza danych <em>Protestów</em></div>
     <div class="db-actions">
-      <button class="db-btn db-btn-export" onclick="exportCSV()">⬇ Eksport CSV</button>
-      <button class="db-btn db-btn-clear" onclick="clearDB()">🗑 Wyczyść</button>
-      <button class="db-btn db-btn-close" onclick="closeDB()">✕ Zamknij</button>
+      <button class="db-btn db-btn-export" onclick="window.exportCSV()">⬇ Eksport CSV</button>
+      <button class="db-btn db-btn-clear" onclick="window.clearDB()">🗑 Wyczyść</button>
+      <button class="db-btn db-btn-close" onclick="window.closeDB()">✕ Zamknij</button>
     </div>
   </div>
 
   <div class="db-tabs">
-    <button class="db-tab active" onclick="showTab('all', this)">Wszystkie <span class="db-counter" id="cnt-all">0</span></button>
-    <button class="db-tab" onclick="showTab('open', this)">Otwarte <span class="db-counter" id="cnt-open">0</span></button>
-    <button class="db-tab" onclick="showTab('done', this)">Rozpatrzone <span class="db-counter" id="cnt-done">0</span></button>
+    <button class="db-tab active" onclick="window.showTab('all', this)">Wszystkie <span class="db-counter" id="cnt-all">0</span></button>
+    <button class="db-tab" onclick="window.showTab('open', this)">Otwarte <span class="db-counter" id="cnt-open">0</span></button>
+    <button class="db-tab" onclick="window.showTab('done', this)">Rozpatrzone <span class="db-counter" id="cnt-done">0</span></button>
   </div>
 
   <div class="db-table-wrap">
@@ -2613,73 +2613,7 @@ window.clearDB = async function() {
   for (const d of snap.docs) await deleteDoc(doc(db, 'protests', d.id));
 };
 
-</script>
 
-
-<!-- ========== TEAMS PANEL ========== -->
-<div id="teams-panel" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(10,10,15,0.97);backdrop-filter:blur(16px);overflow-y:auto;padding:30px;">
-
-  <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--red);padding-bottom:20px;margin-bottom:30px;position:sticky;top:0;background:rgba(10,10,15,0.98);z-index:10;padding-top:10px;">
-    <div style="font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:-1px;">Zarządzaj <em style="color:var(--red);font-style:normal;">Zespołami</em></div>
-    <button onclick="closeTeamsPanel()" class="db-btn db-btn-close">✕ Zamknij</button>
-  </div>
-
-  <div style="background:var(--grey-mid);border:1px solid rgba(255,255,255,0.06);border-top:2px solid var(--red);padding:32px;margin-bottom:32px;">
-    <div style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:24px;">➕ Dodaj nowy zespół</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
-      <div>
-        <label style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey-text);display:block;margin-bottom:8px;">Nazwa zespołu <span style="color:var(--red);">*</span></label>
-        <input id="tp_team" type="text" placeholder="np. Ekipa Kowalskiego" style="background:var(--grey-light);border:1px solid rgba(255,255,255,0.08);border-bottom:2px solid rgba(255,255,255,0.2);color:var(--white);font-family:var(--font-display);font-size:14px;font-weight:600;padding:12px 16px;width:100%;outline:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);">
-      </div>
-      <div>
-        <label style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey-text);display:block;margin-bottom:8px;">Frakcja <span style="color:var(--red);">*</span></label>
-        <select id="tp_fraction" style="background:var(--grey-light);border:1px solid rgba(255,255,255,0.08);border-bottom:2px solid rgba(255,255,255,0.2);color:var(--white);font-family:var(--font-display);font-size:14px;font-weight:600;padding:12px 16px;width:100%;outline:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);-webkit-appearance:none;">
-          <option value="A">Frakcja A</option>
-          <option value="B">Frakcja B</option>
-          <option value="C">Frakcja C</option>
-          <option value="D">Frakcja D</option>
-        </select>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:16px;">
-      <div>
-        <label style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey-text);display:block;margin-bottom:8px;">URL Logo zespołu <span style="color:rgba(255,255,255,0.2);font-size:10px;">(opcjonalne — link do zdjęcia)</span></label>
-        <div style="display:flex;gap:12px;align-items:center;">
-          <input id="tp_logo" type="url" placeholder="https://i.imgur.com/logo.png" style="background:var(--grey-light);border:1px solid rgba(255,255,255,0.08);border-bottom:2px solid rgba(255,255,255,0.2);color:var(--white);font-family:var(--font-display);font-size:14px;font-weight:600;padding:12px 16px;flex:1;outline:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);" oninput="previewLogo(this.value)">
-          <div id="tp_logo_preview" style="width:60px;height:60px;background:var(--grey-light);border:1px dashed rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:22px;color:rgba(255,255,255,0.15);flex-shrink:0;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);overflow:hidden;">🏎</div>
-        </div>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
-      <div>
-        <label style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey-text);display:block;margin-bottom:8px;">Kierowca 1 <span style="color:var(--red);">*</span></label>
-        <input id="tp_d1" type="text" placeholder="Imię i nazwisko" style="background:var(--grey-light);border:1px solid rgba(255,255,255,0.08);border-bottom:2px solid rgba(255,255,255,0.2);color:var(--white);font-family:var(--font-display);font-size:14px;font-weight:600;padding:12px 16px;width:100%;outline:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);">
-      </div>
-      <div>
-        <label style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey-text);display:block;margin-bottom:8px;">Kierowca 2 <span style="color:var(--red);">*</span></label>
-        <input id="tp_d2" type="text" placeholder="Imię i nazwisko" style="background:var(--grey-light);border:1px solid rgba(255,255,255,0.08);border-bottom:2px solid rgba(255,255,255,0.2);color:var(--white);font-family:var(--font-display);font-size:14px;font-weight:600;padding:12px 16px;width:100%;outline:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);">
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
-      <div>
-        <label style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey-text);display:block;margin-bottom:8px;">Rezerwowy 1</label>
-        <input id="tp_r1" type="text" placeholder="Opcjonalnie" style="background:var(--grey-light);border:1px solid rgba(255,255,255,0.08);border-bottom:2px solid rgba(255,255,255,0.2);color:var(--white);font-family:var(--font-display);font-size:14px;font-weight:600;padding:12px 16px;width:100%;outline:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);">
-      </div>
-      <div>
-        <label style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey-text);display:block;margin-bottom:8px;">Rezerwowy 2</label>
-        <input id="tp_r2" type="text" placeholder="Opcjonalnie" style="background:var(--grey-light);border:1px solid rgba(255,255,255,0.08);border-bottom:2px solid rgba(255,255,255,0.2);color:var(--white);font-family:var(--font-display);font-size:14px;font-weight:600;padding:12px 16px;width:100%;outline:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);">
-      </div>
-    </div>
-    <button onclick="addTeam()" style="background:var(--red);color:var(--white);border:none;font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:16px 40px;cursor:pointer;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:background 0.2s;" onmouseover="this.style.background='var(--red-light)'" onmouseout="this.style.background='var(--red)'">
-      ➕ Dodaj zespół
-    </button>
-  </div>
-
-  <div style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:16px;">📋 Dodane zespoły</div>
-  <div id="teams-list"></div>
-</div>
-
-<script>
 
 // ===== TEAMS DATABASE (FIREBASE) =====
 let _allTeams = [];
@@ -2745,12 +2679,12 @@ function renderTeamsList() {
     </div>`).join('');
 }
 
-function previewLogo(url) {
+window.previewLogo = function previewLogo(url) {
   const box = document.getElementById('tp_logo_preview');
   if (!box) return;
   if (!url) { box.innerHTML = '🏎'; box.style.background = 'var(--grey-light)'; return; }
   box.innerHTML = `<img src="${url}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='❌';this.parentElement.style.fontSize='20px';">`;
-}
+};
 
 window.addTeam = async function() {
   const name = document.getElementById('tp_team').value.trim();
@@ -2789,6 +2723,73 @@ window.closeTeamsPanel = function() {
 };
 
 
+
 </script>
+
+
+<!-- ========== TEAMS PANEL ========== -->
+<div id="teams-panel" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(10,10,15,0.97);backdrop-filter:blur(16px);overflow-y:auto;padding:30px;">
+
+  <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--red);padding-bottom:20px;margin-bottom:30px;position:sticky;top:0;background:rgba(10,10,15,0.98);z-index:10;padding-top:10px;">
+    <div style="font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:-1px;">Zarządzaj <em style="color:var(--red);font-style:normal;">Zespołami</em></div>
+    <button onclick="window.closeTeamsPanel()" class="db-btn db-btn-close">✕ Zamknij</button>
+  </div>
+
+  <div style="background:var(--grey-mid);border:1px solid rgba(255,255,255,0.06);border-top:2px solid var(--red);padding:32px;margin-bottom:32px;">
+    <div style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:24px;">➕ Dodaj nowy zespół</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+      <div>
+        <label style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey-text);display:block;margin-bottom:8px;">Nazwa zespołu <span style="color:var(--red);">*</span></label>
+        <input id="tp_team" type="text" placeholder="np. Ekipa Kowalskiego" style="background:var(--grey-light);border:1px solid rgba(255,255,255,0.08);border-bottom:2px solid rgba(255,255,255,0.2);color:var(--white);font-family:var(--font-display);font-size:14px;font-weight:600;padding:12px 16px;width:100%;outline:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);">
+      </div>
+      <div>
+        <label style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey-text);display:block;margin-bottom:8px;">Frakcja <span style="color:var(--red);">*</span></label>
+        <select id="tp_fraction" style="background:var(--grey-light);border:1px solid rgba(255,255,255,0.08);border-bottom:2px solid rgba(255,255,255,0.2);color:var(--white);font-family:var(--font-display);font-size:14px;font-weight:600;padding:12px 16px;width:100%;outline:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);-webkit-appearance:none;">
+          <option value="A">Frakcja A</option>
+          <option value="B">Frakcja B</option>
+          <option value="C">Frakcja C</option>
+          <option value="D">Frakcja D</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:16px;">
+      <div>
+        <label style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey-text);display:block;margin-bottom:8px;">URL Logo zespołu <span style="color:rgba(255,255,255,0.2);font-size:10px;">(opcjonalne — link do zdjęcia)</span></label>
+        <div style="display:flex;gap:12px;align-items:center;">
+          <input id="tp_logo" type="url" placeholder="https://i.imgur.com/logo.png" style="background:var(--grey-light);border:1px solid rgba(255,255,255,0.08);border-bottom:2px solid rgba(255,255,255,0.2);color:var(--white);font-family:var(--font-display);font-size:14px;font-weight:600;padding:12px 16px;flex:1;outline:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);" oninput="previewLogo(this.value)">
+          <div id="tp_logo_preview" style="width:60px;height:60px;background:var(--grey-light);border:1px dashed rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:22px;color:rgba(255,255,255,0.15);flex-shrink:0;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);overflow:hidden;">🏎</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+      <div>
+        <label style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey-text);display:block;margin-bottom:8px;">Kierowca 1 <span style="color:var(--red);">*</span></label>
+        <input id="tp_d1" type="text" placeholder="Imię i nazwisko" style="background:var(--grey-light);border:1px solid rgba(255,255,255,0.08);border-bottom:2px solid rgba(255,255,255,0.2);color:var(--white);font-family:var(--font-display);font-size:14px;font-weight:600;padding:12px 16px;width:100%;outline:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);">
+      </div>
+      <div>
+        <label style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey-text);display:block;margin-bottom:8px;">Kierowca 2 <span style="color:var(--red);">*</span></label>
+        <input id="tp_d2" type="text" placeholder="Imię i nazwisko" style="background:var(--grey-light);border:1px solid rgba(255,255,255,0.08);border-bottom:2px solid rgba(255,255,255,0.2);color:var(--white);font-family:var(--font-display);font-size:14px;font-weight:600;padding:12px 16px;width:100%;outline:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);">
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+      <div>
+        <label style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey-text);display:block;margin-bottom:8px;">Rezerwowy 1</label>
+        <input id="tp_r1" type="text" placeholder="Opcjonalnie" style="background:var(--grey-light);border:1px solid rgba(255,255,255,0.08);border-bottom:2px solid rgba(255,255,255,0.2);color:var(--white);font-family:var(--font-display);font-size:14px;font-weight:600;padding:12px 16px;width:100%;outline:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);">
+      </div>
+      <div>
+        <label style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey-text);display:block;margin-bottom:8px;">Rezerwowy 2</label>
+        <input id="tp_r2" type="text" placeholder="Opcjonalnie" style="background:var(--grey-light);border:1px solid rgba(255,255,255,0.08);border-bottom:2px solid rgba(255,255,255,0.2);color:var(--white);font-family:var(--font-display);font-size:14px;font-weight:600;padding:12px 16px;width:100%;outline:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);">
+      </div>
+    </div>
+    <button onclick="window.addTeam()" style="background:var(--red);color:var(--white);border:none;font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:16px 40px;cursor:pointer;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:background 0.2s;" onmouseover="this.style.background='var(--red-light)'" onmouseout="this.style.background='var(--red)'">
+      ➕ Dodaj zespół
+    </button>
+  </div>
+
+  <div style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:16px;">📋 Dodane zespoły</div>
+  <div id="teams-list"></div>
+</div>
+
 </body>
+</html>
 </html>
