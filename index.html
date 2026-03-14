@@ -2430,7 +2430,23 @@ footer {
   </div>
 </footer>
 
-<script>
+<script type="module">
+// ===== FIREBASE SETUP =====
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCzqn5gzmYcyPqoh2xXjJqNwjgIW_7u88k",
+  authDomain: "gplossantos.firebaseapp.com",
+  projectId: "gplossantos",
+  storageBucket: "gplossantos.firebasestorage.app",
+  messagingSenderId: "644720761333",
+  appId: "1:644720761333:web:ccee4327426a23ea1ee8bc"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 // ===== SPEED LINES IN HERO =====
 const linesContainer = document.getElementById('speedLines');
 for (let i = 0; i < 18; i++) {
@@ -2482,35 +2498,46 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// ===== PROTEST DATABASE =====
+// ===== PROTEST DATABASE (FIREBASE) =====
 
-const DB_KEY = 'gpls_protests';
+const violationMap = {
+  kontakt: 'Kontakt / zderzenie',
+  blokowanie: 'Niebezp. blokowanie',
+  wyjazd: 'Wyjazd poza tor',
+  start: 'Falstart',
+  regulamin: 'Naruszenie tech.',
+  zachowanie: 'Niebezp. zachowanie',
+  inne: 'Inne'
+};
 
-function getProtests() {
-  try { return JSON.parse(localStorage.getItem(DB_KEY) || '[]'); } catch { return []; }
-}
+let _allProtests = [];
+let _dbCurrentTab = 'all';
 
-function saveProtests(data) {
-  localStorage.setItem(DB_KEY, JSON.stringify(data));
-}
+// Nasłuchuj protestów w czasie rzeczywistym
+const protestsRef = collection(db, 'protests');
+onSnapshot(query(protestsRef, orderBy('date', 'desc')), (snapshot) => {
+  _allProtests = snapshot.docs.map(d => ({ _docId: d.id, ...d.data() }));
+  updateStats();
+  if (document.getElementById('db-panel').style.display === 'block') {
+    renderTable(_dbCurrentTab);
+  }
+});
 
 function updateStats() {
-  const protests = getProtests();
-  const open = protests.filter(p => p.status === 'open').length;
-  const closed = protests.filter(p => p.status !== 'open').length;
-  document.getElementById('stat-protests').textContent = protests.length;
+  const open = _allProtests.filter(p => p.status === 'open').length;
+  const closed = _allProtests.filter(p => p.status !== 'open').length;
+  document.getElementById('stat-protests').textContent = _allProtests.length;
   document.getElementById('stat-open').textContent = open;
   document.getElementById('stat-closed').textContent = closed;
-  document.getElementById('cnt-all').textContent = protests.length;
+  document.getElementById('cnt-all').textContent = _allProtests.length;
   document.getElementById('cnt-open').textContent = open;
   document.getElementById('cnt-done').textContent = closed;
 }
 
 function renderTable(filter = 'all') {
-  const protests = getProtests();
-  const filtered = filter === 'all' ? protests
-    : filter === 'open' ? protests.filter(p => p.status === 'open')
-    : protests.filter(p => p.status !== 'open');
+  const filtered = filter === 'all' ? _allProtests
+    : filter === 'open' ? _allProtests.filter(p => p.status === 'open')
+    : _allProtests.filter(p => p.status !== 'open');
 
   const tbody = document.getElementById('db-body');
   if (filtered.length === 0) {
@@ -2518,49 +2545,36 @@ function renderTable(filter = 'all') {
     return;
   }
 
-  const violationMap = {
-    kontakt: 'Kontakt / zderzenie',
-    blokowanie: 'Niebezp. blokowanie',
-    wyjazd: 'Wyjazd poza tor',
-    start: 'Falstart',
-    regulamin: 'Naruszenie tech.',
-    zachowanie: 'Niebezp. zachowanie',
-    inne: 'Inne'
-  };
-
-  tbody.innerHTML = filtered.map((p, i) => {
+  tbody.innerHTML = filtered.map((p) => {
     const badgeClass = p.status === 'open' ? 'db-badge-open' : p.status === 'done' ? 'db-badge-done' : 'db-badge-rejected';
     const badgeLabel = p.status === 'open' ? 'Otwarte' : p.status === 'done' ? 'Rozpatrzone' : 'Odrzucone';
     const dowod = p.evidence_link ? `<a href="${p.evidence_link}" target="_blank" style="color:var(--red);font-size:11px;">🔗 Link</a>` : '<span style="opacity:.3">—</span>';
     return `<tr>
-      <td><strong>${p.id}</strong></td>
-      <td style="white-space:nowrap;font-size:11px;">${p.date}</td>
-      <td><strong>${p.reporter_name}</strong></td>
-      <td>${p.reporter_team}</td>
-      <td><strong>${p.driver_name}</strong>${p.driver_number ? ' <span style="color:var(--red);font-size:11px;">' + p.driver_number + '</span>' : ''}</td>
-      <td>${p.driver_team}</td>
-      <td style="font-size:11px;">${p.race_session}</td>
-      <td style="font-size:11px;">${violationMap[p.violation_type] || p.violation_type}</td>
-      <td style="font-size:12px;max-width:200px;">${p.protest_reason}</td>
+      <td><strong>${p.id || '—'}</strong></td>
+      <td style="white-space:nowrap;font-size:11px;">${p.date || '—'}</td>
+      <td><strong>${p.reporter_name || '—'}</strong></td>
+      <td>${p.reporter_team || '—'}</td>
+      <td><strong>${p.driver_name || '—'}</strong>${p.driver_number ? ' <span style="color:var(--red);font-size:11px;">' + p.driver_number + '</span>' : ''}</td>
+      <td>${p.driver_team || '—'}</td>
+      <td style="font-size:11px;">${p.race_session || '—'}</td>
+      <td style="font-size:11px;">${violationMap[p.violation_type] || p.violation_type || '—'}</td>
+      <td style="font-size:12px;max-width:200px;">${p.protest_reason || '—'}</td>
       <td>${dowod}</td>
       <td><span class="db-badge ${badgeClass}">${badgeLabel}</span></td>
       <td style="white-space:nowrap;">
         ${p.status === 'open' ? `
-          <button onclick="changeStatus('${p.id}','done')" style="background:rgba(0,200,83,0.15);color:#00c853;border:none;padding:4px 10px;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:var(--font-display);margin-right:4px;">✓ Rozpatrz</button>
-          <button onclick="changeStatus('${p.id}','rejected')" style="background:rgba(255,255,255,0.06);color:var(--grey-text);border:none;padding:4px 10px;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:var(--font-display);">✕ Odrzuć</button>
+          <button onclick="window._changeStatus('${p._docId}','done')" style="background:rgba(0,200,83,0.15);color:#00c853;border:none;padding:4px 10px;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:var(--font-display);margin-right:4px;">✓ Rozpatrz</button>
+          <button onclick="window._changeStatus('${p._docId}','rejected')" style="background:rgba(255,255,255,0.06);color:var(--grey-text);border:none;padding:4px 10px;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:var(--font-display);">✕ Odrzuć</button>
         ` : `<span style="font-size:11px;color:rgba(255,255,255,0.2);">—</span>`}
       </td>
     </tr>`;
   }).join('');
 }
 
-function changeStatus(id, status) {
-  const protests = getProtests();
-  const p = protests.find(x => x.id === id);
-  if (p) { p.status = status; saveProtests(protests); renderTable(window._dbCurrentTab || 'all'); updateStats(); }
-}
+window._changeStatus = async (docId, status) => {
+  await updateDoc(doc(db, 'protests', docId), { status });
+};
 
-let _dbCurrentTab = 'all';
 function showTab(tab, btn) {
   _dbCurrentTab = tab;
   document.querySelectorAll('.db-tab').forEach(t => t.classList.remove('active'));
@@ -2568,46 +2582,36 @@ function showTab(tab, btn) {
   renderTable(tab);
 }
 
-function openDB() {
+window.openDB = function() {
   const haslo = prompt("🔒 Podaj hasło dostępu:");
   if (haslo !== "andrzejfiut") { if (haslo !== null) alert("❌ Nieprawidłowe hasło."); return; }
   document.getElementById('db-panel').style.display = 'block';
   renderTable('all');
-  updateStats();
-}
+};
 
-function closeDB() {
+window.closeDB = function() {
   document.getElementById('db-panel').style.display = 'none';
-}
+};
 
-function exportCSV() {
-  const protests = getProtests();
-  if (!protests.length) return alert('Brak danych do eksportu.');
+window.showTab = showTab;
+
+window.exportCSV = function() {
+  if (!_allProtests.length) return alert('Brak danych do eksportu.');
   const headers = ['ID','Data','Zgłaszający','Drużyna zgłasz.','Kierowca','Drużyna kierowcy','Nr startowy','Sesja','Naruszenie','Powód','Link dowód','Świadkowie','Status'];
-  const rows = protests.map(p => [p.id, p.date, p.reporter_name, p.reporter_team, p.driver_name, p.driver_team, p.driver_number, p.race_session, p.violation_type, `"${p.protest_reason?.replace(/"/g,'""')}"`, p.evidence_link, p.witnesses, p.status]);
+  const rows = _allProtests.map(p => [p.id, p.date, p.reporter_name, p.reporter_team, p.driver_name, p.driver_team, p.driver_number, p.race_session, p.violation_type, '"'+(p.protest_reason||'').replace(/"/g,'""')+'"', p.evidence_link, p.witnesses, p.status]);
   const csv = [headers, ...rows].map(r => r.join(';')).join('\n');
   const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = `protesty_gpls_2026_${new Date().toISOString().slice(0,10)}.csv`;
   a.click();
-}
+};
 
-function clearDB() {
-  if (confirm('Czy na pewno chcesz usunąć WSZYSTKIE protesty z bazy? Tej operacji nie można cofnąć.')) {
-    saveProtests([]);
-    renderTable();
-    updateStats();
-  }
-}
-
-// odśwież statystyki przy załadowaniu
-updateStats();
-
-// Nasłuchuj zmian ze strony protest.html (cross-tab via storage event)
-window.addEventListener('storage', (e) => {
-  if (e.key === DB_KEY) { updateStats(); if (document.getElementById('db-panel').style.display === 'block') renderTable(_dbCurrentTab || 'all'); }
-});
+window.clearDB = async function() {
+  if (!confirm('Czy na pewno chcesz usunąć WSZYSTKIE protesty? Tej operacji nie można cofnąć.')) return;
+  const snap = await getDocs(collection(db, 'protests'));
+  for (const d of snap.docs) await deleteDoc(doc(db, 'protests', d.id));
+};
 
 </script>
 
@@ -2677,21 +2681,20 @@ window.addEventListener('storage', (e) => {
 
 <script>
 
-// ===== TEAMS DATABASE =====
-const TEAMS_KEY = 'gpls_teams';
+// ===== TEAMS DATABASE (FIREBASE) =====
+let _allTeams = [];
 
-function getTeams() {
-  try { return JSON.parse(localStorage.getItem(TEAMS_KEY) || '[]'); } catch { return []; }
-}
-
-function saveTeams(data) {
-  localStorage.setItem(TEAMS_KEY, JSON.stringify(data));
-}
+const teamsRef = collection(db, 'teams');
+onSnapshot(teamsRef, (snapshot) => {
+  _allTeams = snapshot.docs.map(d => ({ _docId: d.id, ...d.data() }));
+  renderTeamsGrid();
+  if (document.getElementById('teams-panel').style.display === 'block') renderTeamsList();
+});
 
 function renderTeamsGrid() {
   const grid = document.getElementById('teamsGrid');
   if (!grid) return;
-  const teams = getTeams();
+  const teams = _allTeams;
   if (teams.length === 0) {
     grid.innerHTML = `
       <div class="driver-team-card" style="grid-column:1/-1;aspect-ratio:unset;padding:60px;">
@@ -2701,7 +2704,7 @@ function renderTeamsGrid() {
       </div>`;
     return;
   }
-  grid.innerHTML = teams.map(t => `
+  grid.innerHTML = _allTeams.map(t => `
     <div class="driver-team-card">
       <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red-dark),var(--red),var(--red-light));"></div>
       <div style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(225,6,0,0.6);margin-bottom:4px;">Frakcja ${t.fraction}</div>
@@ -2720,12 +2723,12 @@ function renderTeamsGrid() {
 function renderTeamsList() {
   const list = document.getElementById('teams-list');
   if (!list) return;
-  const teams = getTeams();
+  const teams = _allTeams;
   if (teams.length === 0) {
     list.innerHTML = '<div style="text-align:center;padding:40px;color:rgba(255,255,255,0.15);font-size:13px;letter-spacing:2px;text-transform:uppercase;">Brak zespołów</div>';
     return;
   }
-  list.innerHTML = teams.map((t, i) => `
+  list.innerHTML = _allTeams.map((t, i) => `
     <div style="background:var(--grey-mid);border:1px solid rgba(255,255,255,0.06);border-left:3px solid var(--red);padding:20px 24px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
       <div>
         <div style="display:flex;align-items:center;gap:16px;">
@@ -2738,7 +2741,7 @@ function renderTeamsList() {
           ${t.r2 ? ' &nbsp;·&nbsp; 🔄 ' + t.r2 : ''}
         </div>
       </div>
-      <button onclick="deleteTeam(${i})" style="background:rgba(225,6,0,0.15);color:var(--red);border:1px solid rgba(225,6,0,0.3);font-family:var(--font-display);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;cursor:pointer;clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%);transition:background 0.2s;" onmouseover="this.style.background='rgba(225,6,0,0.3)'" onmouseout="this.style.background='rgba(225,6,0,0.15)'">🗑 Usuń</button>
+      <button onclick="window.deleteTeam('${t._docId}')" style="background:rgba(225,6,0,0.15);color:var(--red);border:1px solid rgba(225,6,0,0.3);font-family:var(--font-display);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;cursor:pointer;clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%);transition:background 0.2s;" onmouseover="this.style.background='rgba(225,6,0,0.3)'" onmouseout="this.style.background='rgba(225,6,0,0.15)'">🗑 Usuń</button>
     </div>`).join('');
 }
 
@@ -2749,7 +2752,7 @@ function previewLogo(url) {
   box.innerHTML = `<img src="${url}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='❌';this.parentElement.style.fontSize='20px';">`;
 }
 
-function addTeam() {
+window.addTeam = async function() {
   const name = document.getElementById('tp_team').value.trim();
   const fraction = document.getElementById('tp_fraction').value;
   const logo = document.getElementById('tp_logo').value.trim();
@@ -2758,9 +2761,7 @@ function addTeam() {
   const r1 = document.getElementById('tp_r1').value.trim();
   const r2 = document.getElementById('tp_r2').value.trim();
   if (!name || !d1 || !d2) { alert('Wypełnij nazwę zespołu oraz obydwu kierowców!'); return; }
-  const teams = getTeams();
-  teams.push({ name, fraction, logo, d1, d2, r1, r2 });
-  saveTeams(teams);
+  await addDoc(collection(db, 'teams'), { name, fraction, logo, d1, d2, r1, r2 });
   document.getElementById('tp_team').value = '';
   document.getElementById('tp_logo').value = '';
   document.getElementById('tp_d1').value = '';
@@ -2769,32 +2770,24 @@ function addTeam() {
   document.getElementById('tp_r2').value = '';
   const prev = document.getElementById('tp_logo_preview');
   if (prev) { prev.innerHTML = '🏎'; prev.style.background = 'var(--grey-light)'; }
-  renderTeamsList();
-  renderTeamsGrid();
-}
+};
 
-function deleteTeam(index) {
+window.deleteTeam = async function(docId) {
   if (!confirm('Usunąć ten zespół?')) return;
-  const teams = getTeams();
-  teams.splice(index, 1);
-  saveTeams(teams);
-  renderTeamsList();
-  renderTeamsGrid();
-}
+  await deleteDoc(doc(db, 'teams', docId));
+};
 
-function openTeamsPanel() {
+window.openTeamsPanel = function() {
   const haslo = prompt('🔒 Podaj hasło dostępu:');
   if (haslo !== 'andrzejfiut') { if (haslo !== null) alert('❌ Nieprawidłowe hasło.'); return; }
   document.getElementById('teams-panel').style.display = 'block';
   renderTeamsList();
-}
+};
 
-function closeTeamsPanel() {
+window.closeTeamsPanel = function() {
   document.getElementById('teams-panel').style.display = 'none';
-}
+};
 
-// renderuj siatkę przy załadowaniu strony
-renderTeamsGrid();
 
 </script>
 </body>
