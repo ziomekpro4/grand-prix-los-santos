@@ -2026,6 +2026,67 @@ footer {
 }
 .viewers-banner strong { color: var(--white); }
 
+/* ========== FUNNY POPUP ========== */
+#funny-popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+#funny-popup.show { display: flex; }
+.fp-box {
+  background: var(--grey-mid);
+  border: 2px solid var(--red);
+  padding: 40px 48px;
+  text-align: center;
+  max-width: 480px;
+  width: 90%;
+  position: relative;
+  animation: fpPop 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes fpPop {
+  from { transform: scale(0.5) rotate(-6deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.fp-close {
+  position: absolute;
+  top: 12px; right: 16px;
+  background: none; border: none;
+  color: var(--grey-text);
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.fp-close:hover { color: var(--red); }
+.fp-img {
+  width: 100%;
+  max-width: 340px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.fp-title {
+  font-size: 22px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.fp-title em { color: var(--red); font-style: normal; }
+.fp-sub {
+  font-size: 13px;
+  color: var(--grey-text);
+  letter-spacing: 1px;
+  line-height: 1.6;
+}
 </style>
 </head>
 <body>
@@ -2041,17 +2102,21 @@ footer {
     <span class="nav-logo-text">Grand Prix Los Santos</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#schedule">Harmonogram</a></li>
-    <li><a href="#rules">Regulamin</a></li>
-    <li><a href="#drivers">Zawodnicy</a></li>
-    <li><a href="#equipment">Wyposażenie</a></li>
-    <li><a href="#attractions">Atrakcje</a></li>
-    <li><a href="#registration">Rejestracja</a></li>
-    <li><a href="protest.html" style="color:var(--red);">⚑ Protest</a></li>
-    <li><a href="#viewers">Widzowie</a></li>
+    <li><a href="#" onclick="showFunnyPopup(event)" style="color:var(--red);">⚑ Protest</a></li>
+    <li><a href="#" onclick="showFunnyPopup(event)">Rejestracja</a></li>
   </ul>
-  <a href="#registration" class="nav-cta">Zapisz się ▶</a>
+  <a href="#" onclick="showFunnyPopup(event)" class="nav-cta">Zapisz się ▶</a>
 </nav>
+
+<!-- ========== FUNNY POPUP ========== -->
+<div id="funny-popup">
+  <div class="fp-box">
+    <button class="fp-close" onclick="document.getElementById('funny-popup').classList.remove('show')">✕</button>
+    <img class="fp-img" src="https://media.tenor.com/2RJHoYgLTzgAAAAM/john-cena-you-cant-see-me.gif" alt="nie ma tu nic">
+    <div class="fp-title">Jeszcze <em>nie teraz</em> 😂</div>
+    <div class="fp-sub">Rejestracja i zgłoszenia otworzą się wkrótce.<br>Na razie siedź cicho i czekaj jak każdy normalny człowiek.</div>
+  </div>
+</div>
 
 <!-- ========== PASSWORD MODAL ========== -->
 <div id="pw-modal">
@@ -2100,675 +2165,53 @@ footer {
     <div class="speed-lines" id="speedLines"></div>
   </div>
 
-  <div class="hero-content">
+  <div class="hero-content" style="max-width:700px;">
     <div class="hero-eyebrow">
       <div class="hero-eyebrow-line"></div>
-      <span class="hero-eyebrow-text">Edycja 2026 · Los Santos Circuit</span>
+      <span class="hero-eyebrow-text">Grand Prix Los Santos 2026</span>
     </div>
 
-    <h1 class="hero-title">
-      Grand Prix
-      <span>Los Santos</span>
+    <h1 class="hero-title" style="font-size:clamp(48px,7vw,96px);">
+      Strona
+      <span>w budowie</span>
     </h1>
 
-    <p class="hero-subtitle">Karting · Sprint · Grand Prix</p>
+    <p class="hero-subtitle" style="font-size:14px;letter-spacing:4px;margin-top:24px;">Pracujemy nad czymś wyjątkowym — wróć wkrótce</p>
 
-    <div class="hero-date-badge">
+    <div class="hero-date-badge" style="margin-top:36px;">
       <div class="date-day">21–22</div>
       <div class="date-info">
         <div class="date-month">Marca 2026</div>
-        <div class="date-year">Sobota & Niedziela</div>
+        <div class="date-year">Los Santos Circuit</div>
       </div>
-    </div>
-
-    <div class="hero-cta-group">
-      <a href="#schedule" class="btn-primary">▶ &nbsp;Sprawdź harmonogram</a>
-      <a href="#rules" class="btn-secondary">Regulamin</a>
     </div>
   </div>
 
-  <div class="hero-number">25</div>
+  <div class="hero-number" style="-webkit-text-stroke:1px rgba(255,255,255,0.03);">🏁</div>
 
   <div class="hero-scroll">
     <div class="scroll-indicator"></div>
-    <span>Scroll</span>
   </div>
 </section>
-
-<div class="red-divider"></div>
-
-<!-- ========== SCHEDULE ========== -->
-<section id="schedule">
-  <div class="section-counter">01</div>
-  <div class="section-header reveal">
-    <div class="section-eyebrow">
-      <div class="section-eyebrow-dot"></div>
-      <span class="section-eyebrow-text">Harmonogram zawodów</span>
-    </div>
-    <h2 class="section-title">Race <em>Weekend</em></h2>
-  </div>
-
-  <div class="schedule-days">
-    <!-- SOBOTA -->
-    <div class="day-card reveal reveal-delay-1">
-      <div class="day-header">
-        <div class="day-name">🏁 Sobota</div>
-        <div class="day-date">21.03.2026</div>
-      </div>
-      <div class="schedule-items">
-        <div class="schedule-item">
-          <div class="item-icon">🏎</div>
-          <div class="item-info">
-            <div class="item-name">Trening & Odprawa</div>
-            <div class="item-desc">Zapoznanie z torem i przepisami</div>
-          </div>
-          <div class="item-time">20:00–20:30</div>
-        </div>
-        <div class="schedule-item">
-          <div class="item-icon">⏱</div>
-          <div class="item-info">
-            <div class="item-name">Kwalifikacje</div>
-            <div class="item-desc">Ustalenie siatki startowej</div>
-          </div>
-          <div class="item-time">20:40–21:55</div>
-        </div>
-        <div class="schedule-item featured">
-          <div class="item-icon">🏁</div>
-          <div class="item-info">
-            <div class="item-name">Wyścig Sprint</div>
-            <div class="item-desc">Sobotni wyścig krótki</div>
-          </div>
-          <div class="item-time">22:00</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- NIEDZIELA -->
-    <div class="day-card reveal reveal-delay-2">
-      <div class="day-header">
-        <div class="day-name">🏆 Niedziela</div>
-        <div class="day-date">22.03.2026</div>
-      </div>
-      <div class="schedule-items">
-        <div class="schedule-item featured" style="padding: 40px 32px;">
-          <div class="item-icon" style="width:56px;height:56px;font-size:26px;">🏆</div>
-          <div class="item-info">
-            <div class="item-name" style="font-size:18px;">Wyścig Główny</div>
-            <div class="item-desc">Finałowy wyścig Grand Prix Los Santos 2025</div>
-          </div>
-          <div class="item-time" style="font-size:28px;">21:00</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="red-divider"></div>
-
-<!-- ========== INFO CARDS ========== -->
-<section id="info" style="padding-top:80px;padding-bottom:80px;">
-  <div class="info-grid">
-    <div class="info-card reveal">
-      <div class="info-card-icon">🏎️</div>
-      <div class="info-card-number">03</div>
-      <div class="info-card-title">Dni wyścigu</div>
-      <div class="info-card-text">Dwa dni rywalizacji: treningi, kwalifikacje, Sprint i Wyścig Główny. Pełen format Grand Prix.</div>
-    </div>
-    <div class="info-card reveal reveal-delay-1">
-      <div class="info-card-icon">⚑</div>
-      <div class="info-card-number">06</div>
-      <div class="info-card-title">Rodzajów flag</div>
-      <div class="info-card-text">Standardowe sygnały wyścigowe obowiązują na całym torze. Każdy kierowca musi znać ich znaczenie.</div>
-    </div>
-    <div class="info-card reveal reveal-delay-2">
-      <div class="info-card-icon">📋</div>
-      <div class="info-card-number">13</div>
-      <div class="info-card-title">Artykułów regulaminu</div>
-      <div class="info-card-text">Kompletny regulamin zapewniający fair play, bezpieczeństwo i rzetelną rywalizację na torze.</div>
-    </div>
-  </div>
-</section>
-
-<div class="red-divider"></div>
-
-<!-- ========== FLAGS ========== -->
-<section id="flags">
-  <div class="section-counter">02</div>
-  <div class="section-header reveal">
-    <div class="section-eyebrow">
-      <div class="section-eyebrow-dot"></div>
-      <span class="section-eyebrow-text">Sygnalizacja</span>
-    </div>
-    <h2 class="section-title">Flagi <em>wyścigowe</em></h2>
-  </div>
-
-  <div class="flags-grid">
-    <div class="flag-card reveal">
-      <div class="flag-emoji">🟢</div>
-      <div class="flag-info">
-        <div class="flag-name">Zielona flaga</div>
-        <div class="flag-desc">Tor wolny — rozpoczęcie lub wznowienie wyścigu</div>
-      </div>
-    </div>
-    <div class="flag-card reveal reveal-delay-1">
-      <div class="flag-emoji">🟡</div>
-      <div class="flag-info">
-        <div class="flag-name">Żółta flaga</div>
-        <div class="flag-desc">Niebezpieczeństwo na torze — zakaz wyprzedzania</div>
-      </div>
-    </div>
-    <div class="flag-card reveal reveal-delay-2">
-      <div class="flag-emoji">🔵</div>
-      <div class="flag-info">
-        <div class="flag-name">Niebieska flaga</div>
-        <div class="flag-desc">Szybszy zawodnik zbliża się do dublowania</div>
-      </div>
-    </div>
-    <div class="flag-card reveal">
-      <div class="flag-emoji">⚫</div>
-      <div class="flag-info">
-        <div class="flag-name">Czarna flaga</div>
-        <div class="flag-desc">Dyskwalifikacja zawodnika</div>
-      </div>
-    </div>
-    <div class="flag-card reveal reveal-delay-1">
-      <div class="flag-emoji">🏴</div>
-      <div class="flag-info">
-        <div class="flag-name">Czarna z pomarańczowym kołem</div>
-        <div class="flag-desc">Problem techniczny — zjazd do pit lane</div>
-      </div>
-    </div>
-    <div class="flag-card reveal reveal-delay-2">
-      <div class="flag-emoji">🏁</div>
-      <div class="flag-info">
-        <div class="flag-name">Flaga w szachownicę</div>
-        <div class="flag-desc">Zakończenie wyścigu</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="red-divider"></div>
-
-<!-- ========== RULES ========== -->
-<section id="rules">
-  <div class="section-counter">03</div>
-  <div class="section-header reveal">
-    <div class="section-eyebrow">
-      <div class="section-eyebrow-dot"></div>
-      <span class="section-eyebrow-text">Zasady rywalizacji</span>
-    </div>
-    <button class="collapsible-toggle" id="rules-toggle" onclick="toggleSection('rules-body','rules-toggle')">
-      <h2 class="section-title">Regu<em>lamin</em></h2>
-      <span class="toggle-arrow">▼</span>
-    </button>
-  </div>
-
-  <div class="collapsible-body" id="rules-body">
-
-  <div class="rules-container">
-    <div class="rules-column">
-
-      <div class="rule-group reveal">
-        <div class="rule-group-title">Zasady jazdy</div>
-        <div class="rule-item">
-          <div class="rule-number">5.1</div>
-          <div class="rule-text"><strong>Fair Play:</strong> Kierowcy muszą prowadzić pojazd bezpiecznie i przewidywalnie. Celowe uderzanie innych zawodników jest zabronione.</div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-number">5.2</div>
-          <div class="rule-text"><strong>Wyprzedzanie:</strong> Dozwolone jest wszędzie na torze, o ile odbywa się bezpiecznie. Kierowca broniący pozycji musi zostawić miejsce.</div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-number">5.3</div>
-          <div class="rule-text"><strong>Kontakty:</strong> Niewielkie kontakty mogą się zdarzyć, jednak agresywna jazda i powodowanie kolizji skutkuje karą.</div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-number">5.4</div>
-          <div class="rule-text"><strong>Blokowanie:</strong> Wielokrotna zmiana toru jazdy w celu blokowania przeciwnika jest zabroniona.</div>
-        </div>
-      </div>
-
-      <div class="rule-group reveal">
-        <div class="rule-group-title">Pit Lane</div>
-        <div class="rule-item">
-          <div class="rule-number">8.1</div>
-          <div class="rule-text">W pit lane obowiązuje <strong>ograniczenie prędkości</strong>. Należy zachować szczególną ostrożność.</div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-number">8.3</div>
-          <div class="rule-text"><strong>Zakaz wyprzedzania</strong> w pit lane. Wjazd i wyjazd musi odbywać się ostrożnie.</div>
-        </div>
-      </div>
-
-      <div class="rule-group reveal">
-        <div class="rule-group-title">Limity toru</div>
-        <div class="rule-item">
-          <div class="rule-number">9.1</div>
-          <div class="rule-text">Kierowcy muszą utrzymywać kart <strong>w obrębie toru</strong>.</div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-number">9.2</div>
-          <div class="rule-text"><strong>Skracanie toru</strong> lub uzyskiwanie przewagi przez opuszczanie toru jest zabronione.</div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="rules-column">
-
-      <div class="rule-group reveal">
-        <div class="rule-group-title">Procedura startu</div>
-        <div class="rule-item">
-          <div class="rule-number">▶</div>
-          <div class="rule-text"><strong>Start lotny:</strong> Kierowcy ustawiają się w dwóch rzędach, tempo dyktuje prowadzący stawki. Po sygnale — start.</div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-number">▶</div>
-          <div class="rule-text"><strong>Start zatrzymany:</strong> Kierowcy ustawiają się na polach startowych. Start po zgaśnięciu świateł lub sygnale sędziego.</div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-number">!</div>
-          <div class="rule-text">Falstart może skutkować <strong>karą czasową</strong> lub przejazdem przez pit lane.</div>
-        </div>
-      </div>
-
-      <div class="rule-group reveal">
-        <div class="rule-group-title">Protesty</div>
-        <div class="rule-item">
-          <div class="rule-number">11.1</div>
-          <div class="rule-text">Każdy zawodnik ma prawo zgłosić protest.</div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-number">11.2</div>
-          <div class="rule-text">Protest musi zostać złożony do <strong>30 minut</strong> po zakończeniu wyścigu.</div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-number">11.3</div>
-          <div class="rule-text">Decyzja sędziów po analizie protestu jest <strong>ostateczna</strong>.</div>
-        </div>
-      </div>
-
-      <div class="rule-group reveal">
-        <div class="rule-group-title">Informacje ogólne</div>
-        <div class="rule-item">
-          <div class="rule-number">1.3</div>
-          <div class="rule-text">Udział w zawodach oznacza <strong>pełną akceptację regulaminu</strong>.</div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-number">1.5</div>
-          <div class="rule-text">Decyzje sędziowskie są <strong>ostateczne</strong>.</div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-number">3.3</div>
-          <div class="rule-text">Kierowca pod wpływem alkoholu lub środków odurzających zostaje <strong>natychmiast zdyskwalifikowany</strong>.</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- TEAM RULES SUBSECTION -->
-  <div class="section-header reveal" style="margin-top:60px;margin-bottom:32px;">
-    <div class="section-eyebrow">
-      <div class="section-eyebrow-dot"></div>
-      <span class="section-eyebrow-text">Regulamin zespołów</span>
-    </div>
-    <h3 class="section-title" style="font-size:36px;">Zespo<em>ły</em></h3>
-  </div>
-
-  <div class="team-rules-grid">
-    <div class="team-rule-card reveal">
-      <div class="team-rule-icon">🏎🏎</div>
-      <div class="team-rule-number">2</div>
-      <div class="team-rule-label">Karty na zespół</div>
-      <div class="team-rule-desc">Każdy zespół składa się z dokładnie dwóch kartów startujących pod wspólną nazwą.</div>
-    </div>
-    <div class="team-rule-card reveal reveal-delay-1">
-      <div class="team-rule-icon">👤👤</div>
-      <div class="team-rule-number">2+2</div>
-      <div class="team-rule-label">Kierowcy</div>
-      <div class="team-rule-desc">Każdy zespół wystawia 2 kierowców głównych. Dopuszcza się maksymalnie 2 kierowców rezerwowych.</div>
-    </div>
-    <div class="team-rule-card reveal reveal-delay-2">
-      <div class="team-rule-icon">🏁</div>
-      <div class="team-rule-number">3</div>
-      <div class="team-rule-label">Zespoły na frakcję</div>
-      <div class="team-rule-desc">Każda frakcja może zgłosić do wyścigu maksymalnie 3 zespoły.</div>
-    </div>
-  </div>
-    <div class="section-eyebrow">
-      <div class="section-eyebrow-dot"></div>
-      <span class="section-eyebrow-text">System kar</span>
-    </div>
-    <h3 class="section-title" style="font-size:28px;">Kary <em>&amp; sankcje</em></h3>
-  </div>
-
-  <div class="penalties-grid">
-    <div class="penalty-card reveal">
-      <div class="penalty-icon">⚠️</div>
-      <div class="penalty-name">Ostrzeżenie</div>
-    </div>
-    <div class="penalty-card reveal reveal-delay-1">
-      <div class="penalty-icon">⏱</div>
-      <div class="penalty-name">Kara czasowa</div>
-    </div>
-    <div class="penalty-card reveal reveal-delay-2">
-      <div class="penalty-icon">⬇️</div>
-      <div class="penalty-name">Oddanie pozycji</div>
-    </div>
-    <div class="penalty-card reveal">
-      <div class="penalty-icon">🚧</div>
-      <div class="penalty-name">Drive Through</div>
-    </div>
-    <div class="penalty-card reveal reveal-delay-1">
-      <div class="penalty-icon">⛔</div>
-      <div class="penalty-name">Stop &amp; Go</div>
-    </div>
-    <div class="penalty-card reveal reveal-delay-2">
-      <div class="penalty-icon">❌</div>
-      <div class="penalty-name">Dyskwalifikacja</div>
-    </div>
-  </div>
-  </div><!-- /collapsible-body rules -->
-</section>
-
-<div class="red-divider"></div>
-
-<!-- ========== EQUIPMENT ========== -->
-<section id="equipment">
-  <div class="section-counter">04</div>
-  <div class="section-header reveal">
-    <div class="section-eyebrow">
-      <div class="section-eyebrow-dot"></div>
-      <span class="section-eyebrow-text">Wymogi sprzętowe</span>
-    </div>
-    <button class="collapsible-toggle" id="equip-toggle" onclick="toggleSection('equip-body','equip-toggle')">
-      <h2 class="section-title">Wypo<em>sażenie</em></h2>
-      <span class="toggle-arrow">▼</span>
-    </button>
-  </div>
-
-  <div class="collapsible-body" id="equip-body">
-    <div class="equipment-block reveal">
-      <div class="equipment-block-title">🔴 Wymagane — obowiązkowe</div>
-      <ul class="equipment-list">
-        <li class="equipment-required">Kask kartingowy lub motocyklowy</li>
-        <li class="equipment-required">Rękawice ochronne</li>
-        <li class="equipment-required">Zamknięte obuwie</li>
-      </ul>
-    </div>
-    <div class="equipment-block reveal reveal-delay-1">
-      <div class="equipment-block-title">⚪ Zalecane — opcjonalne</div>
-      <ul class="equipment-list">
-        <li>Kombinezon kartingowy</li>
-        <li>Ochraniacz żeber</li>
-        <li>Ochraniacz szyi</li>
-      </ul>
-    </div>
-  </div>
-  </div><!-- /collapsible-body equip -->
-</section>
-
-<div class="red-divider"></div>
-
-<!-- ========== VIEWERS ========== -->
-<section id="viewers">
-  <div class="section-counter">04b</div>
-  <div class="section-header reveal">
-    <div class="section-eyebrow">
-      <div class="section-eyebrow-dot"></div>
-      <span class="section-eyebrow-text">Dla kibiców</span>
-    </div>
-    <h2 class="section-title">Dla <em>Widzów</em></h2>
-  </div>
-
-  <div class="viewers-grid">
-    <div class="viewer-card reveal">
-      <span class="viewer-card-icon">🏟️</span>
-      <div class="viewer-card-title">Trybuny</div>
-      <div class="viewer-card-desc">Specjalnie przygotowane trybuny zapewniają doskonały widok na tor. Zasiądź wygodnie i śledź każdy zakręt wyścigu z bliska.</div>
-    </div>
-    <div class="viewer-card reveal reveal-delay-1">
-      <span class="viewer-card-icon">🎉</span>
-      <div class="viewer-card-title">Wstęp wolny</div>
-      <div class="viewer-card-desc">Wejście dla widzów jest całkowicie bezpłatne. Zaproś rodzinę i znajomych — im więcej, tym głośniej!</div>
-    </div>
-    <div class="viewer-card reveal reveal-delay-2">
-      <span class="viewer-card-icon">🏁</span>
-      <div class="viewer-card-title">Atmosfera GP</div>
-      <div class="viewer-card-desc">Poczuj klimat prawdziwego Grand Prix — emocje, rywalizacja i prędkość prosto z trybun Los Santos Circuit.</div>
-    </div>
-  </div>
-
-  <div class="viewers-banner reveal">
-    Serdecznie zapraszamy wszystkich kibiców i sympatyków motorsportu! 🏁<br>
-    <strong>Grand Prix Los Santos 2026</strong> to wyjątkowe wydarzenie otwarte dla publiczności.<br>
-    Na terenie toru czekają na Was <strong>wygodne trybuny</strong> z widokiem na całą trasę, <strong>strefa gastronomiczna</strong> oraz <strong>scena DJ</strong>.
-    Przyjdź, dopinguj swoją ulubioną drużynę i poczuj adrenalinie wyścigów kartingowych na żywo!
-  </div>
-</section>
-
-<div class="red-divider"></div>
-
-<!-- ========== ATTRACTIONS ========== -->
-<section id="attractions">
-  <div class="section-counter">05</div>
-  <div class="section-header reveal">
-    <div class="section-eyebrow">
-      <div class="section-eyebrow-dot"></div>
-      <span class="section-eyebrow-text">Poza torem</span>
-    </div>
-    <h2 class="section-title">Atrak<em>cje</em></h2>
-  </div>
-
-  <div class="attractions-grid">
-    <div class="attraction-card reveal">
-      <span class="attraction-big-icon">🔧</span>
-      <div class="attraction-title">Mechanicy</div>
-      <div class="attraction-desc">Na wydarzeniu pojawią się profesjonalni mechanicy, którzy będą współpracować bezpośrednio z zespołami podczas całego weekendu.</div>
-    </div>
-    <div class="attraction-card reveal reveal-delay-1">
-      <span class="attraction-big-icon">🍔</span>
-      <div class="attraction-title">FoodTruck Hookies</div>
-      <div class="attraction-desc">Wyjątkowy food truck z pysznym jedzeniem. Zadbaj o energię przed swoim wyścigiem!</div>
-    </div>
-    <div class="attraction-card reveal reveal-delay-2">
-      <span class="attraction-big-icon">🎧</span>
-      <div class="attraction-title">DJ Stage</div>
-      <div class="attraction-desc">Specjalnie przygotowana scena z profesjonalnym setem DJ. Muzyka na żywo przez cały weekend wyścigowy.</div>
-    </div>
-  </div>
-</section>
-
-<div class="red-divider"></div>
-
-<!-- ========== DRIVERS / TEAMS ========== -->
-<section id="drivers">
-  <div class="section-counter">06</div>
-  <div class="section-header reveal">
-    <div class="section-eyebrow">
-      <div class="section-eyebrow-dot"></div>
-      <span class="section-eyebrow-text">Zgłoszone zespoły i zawodnicy</span>
-    </div>
-    <h2 class="section-title">Zawod<em>nicy</em></h2>
-  </div>
-  <p class="drivers-intro reveal">Poniżej znajdziesz listę zespołów i kierowców zakwalifikowanych do startu. Informacje będą aktualizowane po zakończeniu rejestracji.</p>
-
-  <div class="drivers-grid">
-    <div class="driver-team-card reveal">
-      <div class="dtc-icon">🏎</div>
-      <div class="dtc-soon">SOON</div>
-      <div class="dtc-slot">Slot 1 — Frakcja A</div>
-    </div>
-    <div class="driver-team-card reveal reveal-delay-1">
-      <div class="dtc-icon">🏎</div>
-      <div class="dtc-soon">SOON</div>
-      <div class="dtc-slot">Slot 2 — Frakcja A</div>
-    </div>
-    <div class="driver-team-card reveal reveal-delay-2">
-      <div class="dtc-icon">🏎</div>
-      <div class="dtc-soon">SOON</div>
-      <div class="dtc-slot">Slot 3 — Frakcja A</div>
-    </div>
-  </div>
-</section>
-
-<div class="red-divider"></div>
-
-<!-- ========== REGISTRATION ========== -->
-<section id="registration">
-  <div class="section-counter">07</div>
-  <div class="registration-inner">
-    <div class="registration-text reveal">
-      <div class="section-eyebrow" style="margin-bottom:16px;">
-        <div class="section-eyebrow-dot"></div>
-        <span class="section-eyebrow-text">Dołącz do wyścigu</span>
-      </div>
-      <h2 class="section-title" style="margin-bottom:24px;">Reje<em>stracja</em></h2>
-      <p>Chcesz wziąć udział w Grand Prix Los Santos 2026? Wypełnij formularz zgłoszeniowy i zapewnij swojemu zespołowi miejsce na starcie.</p>
-      <p>Zgłoszenia są przyjmowane do wyczerpania miejsc. Liczba miejsc dla każdej frakcji jest ograniczona.</p>
-      <div class="reg-highlight">
-        <strong>Pamiętaj:</strong> Każda frakcja może wystawić maksymalnie 3 zespoły.<br>
-        Zespół = 2 karty + 2 kierowców głównych (+ do 2 rezerwowych).<br>
-        <strong>Udział = akceptacja regulaminu.</strong>
-      </div>
-    </div>
-
-    <div class="reg-form-panel reveal reveal-delay-1">
-      <div style="font-size:48px;margin-bottom:16px;">🏁</div>
-      <div class="reg-form-title">Formularz zgłoszeniowy</div>
-      <div class="reg-form-sub">Grand Prix Los Santos 2026</div>
-      <a href="rejestracja.html" class="reg-btn">
-        ▶ &nbsp; Wypełnij zgłoszenie
-      </a>
-      <div class="reg-note">Zostaniesz przeniesiony do formularza rejestracji</div>
-    </div>
-  </div>
-</section>
-
-<div class="red-divider"></div>
-
-<!-- ========== PROTEST ========== -->
-<section id="protest">
-  <div class="section-counter">08</div>
-  <div class="section-header reveal">
-    <div class="section-eyebrow">
-      <div class="section-eyebrow-dot"></div>
-      <span class="section-eyebrow-text">Komisja wyścigowa</span>
-    </div>
-    <h2 class="section-title">Pro<em>test</em></h2>
-  </div>
-
-  <div class="protest-split">
-    <div class="protest-info-panel reveal">
-      <div class="protest-info-title">⚖ Jak złożyć protest?</div>
-      <div class="protest-info-body">
-        <strong>Kto może złożyć protest?</strong><br>
-        Każdy zarejestrowany kierowca lub oficjalny przedstawiciel drużyny biorącej udział w zawodach.<br><br>
-        <strong>Kiedy?</strong><br>
-        W ciągu <strong style="color:var(--red);">30 minut</strong> od zakończenia danej sesji / wyścigu. Po tym czasie zgłoszenia nie będą rozpatrywane.<br><br>
-        <strong>Co jest wymagane?</strong><br>
-        Opis incydentu, dane zgłaszanego kierowcy oraz materiał dowodowy (nagranie, zrzut ekranu).<br><br>
-        <strong>Decyzja komisji</strong><br>
-        Wydawana do 60 minut od przyjęcia zgłoszenia. Decyzja jest ostateczna i nieodwołalna.
-      </div>
-    </div>
-
-    <div class="protest-cta-panel reveal reveal-delay-1">
-      <div class="protest-cta-icon">⚑</div>
-      <div class="protest-cta-title">Złóż <em>Protest</em></div>
-      <div class="protest-cta-sub">Oficjalny formularz komisji wyścigowej</div>
-      <a href="protest.html" class="protest-btn">
-        ⚑ &nbsp; Wypełnij formularz protestu
-      </a>
-      <div style="font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:1px;">Zostaniesz przeniesiony do formularza</div>
-    </div>
-  </div>
-
-  <!-- DB OPEN BUTTON (tylko dla organizatorów) -->
-  <div style="margin-top:40px;text-align:center;" class="reveal">
-    <button onclick="openPWModal()" style="
-      background:transparent;
-      border:1px solid rgba(255,255,255,0.1);
-      color:rgba(255,255,255,0.2);
-      font-family:var(--font-display);
-      font-size:10px;
-      letter-spacing:3px;
-      text-transform:uppercase;
-      padding:10px 24px;
-      cursor:pointer;
-      transition:all 0.2s;
-    " onmouseover="this.style.borderColor='rgba(225,6,0,0.4)';this.style.color='var(--red)'"
-       onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='rgba(255,255,255,0.2)'">
-      🔒 Panel organizatora
-    </button>
-  </div>
-</section>
-
-<div class="red-divider"></div>
-
-<!-- ========== DB PANEL ========== -->
-<div id="db-panel">
-  <div class="db-header">
-    <div class="db-title">Baza danych <em>Protestów</em></div>
-    <div class="db-actions">
-      <button class="db-btn db-btn-export" onclick="exportCSV()">⬇ Eksport CSV</button>
-      <button class="db-btn db-btn-clear" onclick="clearDB()">🗑 Wyczyść</button>
-      <button class="db-btn db-btn-close" onclick="closeDB()">✕ Zamknij</button>
-    </div>
-  </div>
-
-  <div class="db-tabs">
-    <button class="db-tab active" onclick="showTab('all', this)">Wszystkie <span class="db-counter" id="cnt-all">0</span></button>
-    <button class="db-tab" onclick="showTab('open', this)">Otwarte <span class="db-counter" id="cnt-open">0</span></button>
-    <button class="db-tab" onclick="showTab('done', this)">Rozpatrzone <span class="db-counter" id="cnt-done">0</span></button>
-  </div>
-
-  <div class="db-table-wrap">
-    <table class="db-table" id="db-table">
-      <thead>
-        <tr>
-          <th>#ID</th>
-          <th>Data</th>
-          <th>Zgłaszający</th>
-          <th>Drużyna</th>
-          <th>Zgłaszany kierowca</th>
-          <th>Drużyna kierowcy</th>
-          <th>Sesja</th>
-          <th>Naruszenie</th>
-          <th>Powód</th>
-          <th>Dowód (link)</th>
-          <th>Status</th>
-          <th>Akcja</th>
-        </tr>
-      </thead>
-      <tbody id="db-body"></tbody>
-    </table>
-  </div>
-</div>
 
 <!-- ========== FOOTER ========== -->
 <footer>
-  <div class="footer-top">
-    <div class="footer-brand">
-      <div class="footer-brand-name">Grand Prix Los Santos</div>
-      <div class="footer-brand-sub">Oficjalna strona zawodów · 2026</div>
-    </div>
-    <div class="footer-meta">
-      <div>📅 21–22 Marca 2026</div>
-      <div>🏁 Los Santos Circuit</div>
-      <div>🎤 Regulamin obowiązuje wszystkich uczestników</div>
-    </div>
-  </div>
-  <div class="footer-divider"></div>
-  <div class="footer-bottom">
+  <div class="footer-bottom" style="padding:30px 0 0;">
     <div class="footer-copy">© 2026 Grand Prix Los Santos. Wszelkie prawa zastrzeżone.</div>
     <div class="footer-disclaimer">Organizator zastrzega sobie prawo do zmian w regulaminie.</div>
   </div>
 </footer>
 
 <script>
+// ===== FUNNY POPUP =====
+function showFunnyPopup(e) {
+  e.preventDefault();
+  document.getElementById('funny-popup').classList.add('show');
+}
+document.getElementById('funny-popup').addEventListener('click', function(e) {
+  if (e.target === this) this.classList.remove('show');
+});
+
 // ===== SPEED LINES IN HERO =====
 const linesContainer = document.getElementById('speedLines');
 for (let i = 0; i < 18; i++) {
