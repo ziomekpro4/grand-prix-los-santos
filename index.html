@@ -1773,6 +1773,259 @@ footer {
   margin-left: 6px;
 }
 
+/* ========== PASSWORD MODAL ========== */
+#pw-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: rgba(10,10,15,0.96);
+  backdrop-filter: blur(20px);
+  align-items: center;
+  justify-content: center;
+}
+#pw-modal.show { display: flex; }
+.pw-box {
+  background: var(--grey-mid);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-top: 3px solid var(--red);
+  padding: 48px 44px;
+  width: 380px;
+  text-align: center;
+}
+.pw-icon { font-size: 40px; margin-bottom: 16px; }
+.pw-title {
+  font-size: 18px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.pw-sub {
+  font-size: 11px;
+  color: var(--grey-text);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.pw-input {
+  width: 100%;
+  background: var(--grey-dark);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-align: center;
+  padding: 14px 20px;
+  outline: none;
+  margin-bottom: 8px;
+  transition: border-color 0.2s;
+}
+.pw-input:focus { border-color: var(--red); }
+.pw-error {
+  font-size: 11px;
+  color: var(--red);
+  letter-spacing: 1px;
+  height: 16px;
+  margin-bottom: 20px;
+}
+.pw-btn {
+  width: 100%;
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 14px;
+  cursor: pointer;
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  transition: background 0.2s;
+  margin-bottom: 12px;
+}
+.pw-btn:hover { background: var(--red-light); }
+.pw-cancel {
+  font-size: 10px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+  transition: color 0.2s;
+}
+.pw-cancel:hover { color: rgba(255,255,255,0.5); }
+
+/* ========== COLLAPSIBLE SECTIONS ========== */
+.collapsible-toggle {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  user-select: none;
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-family: var(--font-display);
+  text-align: left;
+  padding: 0;
+}
+.collapsible-toggle:hover .toggle-arrow { color: var(--red); }
+.toggle-arrow {
+  margin-left: auto;
+  font-size: 20px;
+  color: var(--grey-text);
+  transition: transform 0.3s, color 0.2s;
+  flex-shrink: 0;
+}
+.collapsible-toggle.open .toggle-arrow { transform: rotate(180deg); color: var(--red); }
+.collapsible-body {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.5s ease, opacity 0.4s ease;
+  opacity: 0;
+}
+.collapsible-body.open {
+  max-height: 4000px;
+  opacity: 1;
+}
+
+/* ========== COUNTDOWN BANNER ========== */
+#countdown-bar {
+  background: var(--grey-mid);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 14px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 60px;
+}
+.cd-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+}
+.cd-units {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.cd-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.cd-num {
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--white);
+  min-width: 52px;
+  text-align: center;
+  background: var(--grey-dark);
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--red);
+}
+.cd-unit-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--grey-text);
+}
+.cd-sep {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--red);
+  margin-bottom: 14px;
+}
+.cd-event-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+  border: 1px solid rgba(225,6,0,0.3);
+  padding: 6px 16px;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+
+/* ========== VIEWERS SECTION ========== */
+#viewers {
+  background: var(--grey-mid);
+  position: relative;
+  overflow: hidden;
+}
+#viewers::before {
+  content: 'WIDZOWIE';
+  position: absolute;
+  bottom: -20px; right: -20px;
+  font-size: 140px; font-weight: 900;
+  color: rgba(255,255,255,0.02);
+  letter-spacing: -8px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.viewers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 20px;
+}
+.viewer-card {
+  background: var(--grey-dark);
+  padding: 50px 36px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+.viewer-card:hover { transform: scale(1.02); }
+.viewer-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, transparent 60%, rgba(225,6,0,0.06));
+}
+.viewer-card-icon {
+  font-size: 52px;
+  margin-bottom: 20px;
+  display: block;
+  filter: drop-shadow(0 0 16px rgba(225,6,0,0.25));
+}
+.viewer-card-title {
+  font-size: 17px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+.viewer-card-desc {
+  font-size: 13px;
+  color: var(--grey-text);
+  line-height: 1.7;
+}
+.viewers-banner {
+  margin-top: 40px;
+  background: rgba(225,6,0,0.06);
+  border: 1px solid rgba(225,6,0,0.15);
+  border-left: 4px solid var(--red);
+  padding: 28px 36px;
+  font-size: 15px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.8;
+}
+.viewers-banner strong { color: var(--white); }
+
 </style>
 </head>
 <body>
@@ -1795,9 +2048,50 @@ footer {
     <li><a href="#attractions">Atrakcje</a></li>
     <li><a href="#registration">Rejestracja</a></li>
     <li><a href="protest.html" style="color:var(--red);">⚑ Protest</a></li>
+    <li><a href="#viewers">Widzowie</a></li>
   </ul>
   <a href="#registration" class="nav-cta">Zapisz się ▶</a>
 </nav>
+
+<!-- ========== PASSWORD MODAL ========== -->
+<div id="pw-modal">
+  <div class="pw-box">
+    <div class="pw-icon">🔒</div>
+    <div class="pw-title">Panel organizatora</div>
+    <div class="pw-sub">Wprowadź hasło dostępu</div>
+    <input type="password" class="pw-input" id="pw-input" placeholder="••••••••••" onkeydown="if(event.key==='Enter')checkPW()">
+    <div class="pw-error" id="pw-error"></div>
+    <button class="pw-btn" onclick="checkPW()">🔓 &nbsp; Zaloguj</button>
+    <button class="pw-cancel" onclick="closePWModal()">Anuluj</button>
+  </div>
+</div>
+
+<!-- ========== COUNTDOWN BAR ========== -->
+<div id="countdown-bar">
+  <div class="cd-label">Start eventu za</div>
+  <div class="cd-units">
+    <div class="cd-unit">
+      <div class="cd-num" id="cd-days">--</div>
+      <div class="cd-unit-label">Dni</div>
+    </div>
+    <div class="cd-sep">:</div>
+    <div class="cd-unit">
+      <div class="cd-num" id="cd-hours">--</div>
+      <div class="cd-unit-label">Godzin</div>
+    </div>
+    <div class="cd-sep">:</div>
+    <div class="cd-unit">
+      <div class="cd-num" id="cd-mins">--</div>
+      <div class="cd-unit-label">Minut</div>
+    </div>
+    <div class="cd-sep">:</div>
+    <div class="cd-unit">
+      <div class="cd-num" id="cd-secs">--</div>
+      <div class="cd-unit-label">Sekund</div>
+    </div>
+  </div>
+  <div class="cd-event-badge">🏁 21.03.2026 · 20:00</div>
+</div>
 
 <!-- ========== HERO ========== -->
 <section id="hero">
@@ -2004,8 +2298,13 @@ footer {
       <div class="section-eyebrow-dot"></div>
       <span class="section-eyebrow-text">Zasady rywalizacji</span>
     </div>
-    <h2 class="section-title">Regu<em>lamin</em></h2>
+    <button class="collapsible-toggle" id="rules-toggle" onclick="toggleSection('rules-body','rules-toggle')">
+      <h2 class="section-title">Regu<em>lamin</em></h2>
+      <span class="toggle-arrow">▼</span>
+    </button>
   </div>
+
+  <div class="collapsible-body" id="rules-body">
 
   <div class="rules-container">
     <div class="rules-column">
@@ -2171,6 +2470,7 @@ footer {
       <div class="penalty-name">Dyskwalifikacja</div>
     </div>
   </div>
+  </div><!-- /collapsible-body rules -->
 </section>
 
 <div class="red-divider"></div>
@@ -2183,10 +2483,13 @@ footer {
       <div class="section-eyebrow-dot"></div>
       <span class="section-eyebrow-text">Wymogi sprzętowe</span>
     </div>
-    <h2 class="section-title">Wypo<em>sażenie</em></h2>
+    <button class="collapsible-toggle" id="equip-toggle" onclick="toggleSection('equip-body','equip-toggle')">
+      <h2 class="section-title">Wypo<em>sażenie</em></h2>
+      <span class="toggle-arrow">▼</span>
+    </button>
   </div>
 
-  <div class="equipment-split">
+  <div class="collapsible-body" id="equip-body">
     <div class="equipment-block reveal">
       <div class="equipment-block-title">🔴 Wymagane — obowiązkowe</div>
       <ul class="equipment-list">
@@ -2203,6 +2506,46 @@ footer {
         <li>Ochraniacz szyi</li>
       </ul>
     </div>
+  </div>
+  </div><!-- /collapsible-body equip -->
+</section>
+
+<div class="red-divider"></div>
+
+<!-- ========== VIEWERS ========== -->
+<section id="viewers">
+  <div class="section-counter">04b</div>
+  <div class="section-header reveal">
+    <div class="section-eyebrow">
+      <div class="section-eyebrow-dot"></div>
+      <span class="section-eyebrow-text">Dla kibiców</span>
+    </div>
+    <h2 class="section-title">Dla <em>Widzów</em></h2>
+  </div>
+
+  <div class="viewers-grid">
+    <div class="viewer-card reveal">
+      <span class="viewer-card-icon">🏟️</span>
+      <div class="viewer-card-title">Trybuny</div>
+      <div class="viewer-card-desc">Specjalnie przygotowane trybuny zapewniają doskonały widok na tor. Zasiądź wygodnie i śledź każdy zakręt wyścigu z bliska.</div>
+    </div>
+    <div class="viewer-card reveal reveal-delay-1">
+      <span class="viewer-card-icon">🎉</span>
+      <div class="viewer-card-title">Wstęp wolny</div>
+      <div class="viewer-card-desc">Wejście dla widzów jest całkowicie bezpłatne. Zaproś rodzinę i znajomych — im więcej, tym głośniej!</div>
+    </div>
+    <div class="viewer-card reveal reveal-delay-2">
+      <span class="viewer-card-icon">🏁</span>
+      <div class="viewer-card-title">Atmosfera GP</div>
+      <div class="viewer-card-desc">Poczuj klimat prawdziwego Grand Prix — emocje, rywalizacja i prędkość prosto z trybun Los Santos Circuit.</div>
+    </div>
+  </div>
+
+  <div class="viewers-banner reveal">
+    Serdecznie zapraszamy wszystkich kibiców i sympatyków motorsportu! 🏁<br>
+    <strong>Grand Prix Los Santos 2026</strong> to wyjątkowe wydarzenie otwarte dla publiczności.<br>
+    Na terenie toru czekają na Was <strong>wygodne trybuny</strong> z widokiem na całą trasę, <strong>strefa gastronomiczna</strong> oraz <strong>scena DJ</strong>.
+    Przyjdź, dopinguj swoją ulubioną drużynę i poczuj adrenalinie wyścigów kartingowych na żywo!
   </div>
 </section>
 
@@ -2268,21 +2611,6 @@ footer {
       <div class="dtc-soon">SOON</div>
       <div class="dtc-slot">Slot 3 — Frakcja A</div>
     </div>
-    <div class="driver-team-card reveal">
-      <div class="dtc-icon">🏎</div>
-      <div class="dtc-soon">SOON</div>
-      <div class="dtc-slot">Slot 1 — Frakcja B</div>
-    </div>
-    <div class="driver-team-card reveal reveal-delay-1">
-      <div class="dtc-icon">🏎</div>
-      <div class="dtc-soon">SOON</div>
-      <div class="dtc-slot">Slot 2 — Frakcja B</div>
-    </div>
-    <div class="driver-team-card reveal reveal-delay-2">
-      <div class="dtc-icon">🏎</div>
-      <div class="dtc-soon">SOON</div>
-      <div class="dtc-slot">Slot 3 — Frakcja B</div>
-    </div>
   </div>
 </section>
 
@@ -2311,7 +2639,7 @@ footer {
       <div style="font-size:48px;margin-bottom:16px;">🏁</div>
       <div class="reg-form-title">Formularz zgłoszeniowy</div>
       <div class="reg-form-sub">Grand Prix Los Santos 2026</div>
-      <a href="rejestracja.html" target="_blank" rel="noopener" class="reg-btn">
+      <a href="rejestracja.html" class="reg-btn">
         ▶ &nbsp; Wypełnij zgłoszenie
       </a>
       <div class="reg-note">Zostaniesz przeniesiony do formularza rejestracji</div>
@@ -2351,31 +2679,16 @@ footer {
       <div class="protest-cta-icon">⚑</div>
       <div class="protest-cta-title">Złóż <em>Protest</em></div>
       <div class="protest-cta-sub">Oficjalny formularz komisji wyścigowej</div>
-      <a href="protest.html" target="_blank" rel="noopener" class="protest-btn">
+      <a href="protest.html" class="protest-btn">
         ⚑ &nbsp; Wypełnij formularz protestu
       </a>
       <div style="font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:1px;">Zostaniesz przeniesiony do formularza</div>
     </div>
   </div>
 
-  <div class="protest-stats reveal">
-    <div class="protest-stat">
-      <div class="protest-stat-num" id="stat-protests">0</div>
-      <div class="protest-stat-label">Złożone protesty</div>
-    </div>
-    <div class="protest-stat">
-      <div class="protest-stat-num" id="stat-open">0</div>
-      <div class="protest-stat-label">W rozpatrzeniu</div>
-    </div>
-    <div class="protest-stat">
-      <div class="protest-stat-num" id="stat-closed">0</div>
-      <div class="protest-stat-label">Rozpatrzone</div>
-    </div>
-  </div>
-
   <!-- DB OPEN BUTTON (tylko dla organizatorów) -->
   <div style="margin-top:40px;text-align:center;" class="reveal">
-    <button onclick="openDB()" style="
+    <button onclick="openPWModal()" style="
       background:transparent;
       border:1px solid rgba(255,255,255,0.1);
       color:rgba(255,255,255,0.2);
@@ -2507,8 +2820,71 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// ===== PROTEST DATABASE =====
+// ===== COUNTDOWN =====
+function updateCountdown() {
+  const target = new Date('2026-03-21T20:00:00');
+  const now = new Date();
+  const diff = target - now;
+  if (diff <= 0) {
+    document.getElementById('cd-days').textContent = '00';
+    document.getElementById('cd-hours').textContent = '00';
+    document.getElementById('cd-mins').textContent = '00';
+    document.getElementById('cd-secs').textContent = '00';
+    return;
+  }
+  const days  = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  const mins  = Math.floor((diff % (1000*60*60)) / (1000*60));
+  const secs  = Math.floor((diff % (1000*60)) / 1000);
+  document.getElementById('cd-days').textContent  = String(days).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+  document.getElementById('cd-mins').textContent  = String(mins).padStart(2,'0');
+  document.getElementById('cd-secs').textContent  = String(secs).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
 
+// ===== COLLAPSIBLE SECTIONS =====
+function toggleSection(bodyId, toggleId) {
+  const body = document.getElementById(bodyId);
+  const toggle = document.getElementById(toggleId);
+  body.classList.toggle('open');
+  toggle.classList.toggle('open');
+}
+
+// ===== PASSWORD MODAL =====
+function openPWModal() {
+  const modal = document.getElementById('pw-modal');
+  modal.classList.add('show');
+  setTimeout(() => document.getElementById('pw-input').focus(), 100);
+}
+
+function closePWModal() {
+  document.getElementById('pw-modal').classList.remove('show');
+  document.getElementById('pw-input').value = '';
+  document.getElementById('pw-error').textContent = '';
+}
+
+function checkPW() {
+  const val = document.getElementById('pw-input').value;
+  if (val === 'fiutandrzej') {
+    closePWModal();
+    openDB();
+  } else {
+    const err = document.getElementById('pw-error');
+    err.textContent = '✕ Nieprawidłowe hasło';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+    setTimeout(() => { err.textContent = ''; }, 2500);
+  }
+}
+
+// Close modal on backdrop click
+document.getElementById('pw-modal').addEventListener('click', function(e) {
+  if (e.target === this) closePWModal();
+});
+
+// ===== PROTEST DATABASE =====
 const DB_KEY = 'gpls_protests';
 
 function getProtests() {
@@ -2517,18 +2893,6 @@ function getProtests() {
 
 function saveProtests(data) {
   localStorage.setItem(DB_KEY, JSON.stringify(data));
-}
-
-function updateStats() {
-  const protests = getProtests();
-  const open = protests.filter(p => p.status === 'open').length;
-  const closed = protests.filter(p => p.status !== 'open').length;
-  document.getElementById('stat-protests').textContent = protests.length;
-  document.getElementById('stat-open').textContent = open;
-  document.getElementById('stat-closed').textContent = closed;
-  document.getElementById('cnt-all').textContent = protests.length;
-  document.getElementById('cnt-open').textContent = open;
-  document.getElementById('cnt-done').textContent = closed;
 }
 
 function renderTable(filter = 'all') {
@@ -2553,7 +2917,7 @@ function renderTable(filter = 'all') {
     inne: 'Inne'
   };
 
-  tbody.innerHTML = filtered.map((p, i) => {
+  tbody.innerHTML = filtered.map((p) => {
     const badgeClass = p.status === 'open' ? 'db-badge-open' : p.status === 'done' ? 'db-badge-done' : 'db-badge-rejected';
     const badgeLabel = p.status === 'open' ? 'Otwarte' : p.status === 'done' ? 'Rozpatrzone' : 'Odrzucone';
     const dowod = p.evidence_link ? `<a href="${p.evidence_link}" target="_blank" style="color:var(--red);font-size:11px;">🔗 Link</a>` : '<span style="opacity:.3">—</span>';
@@ -2582,7 +2946,16 @@ function renderTable(filter = 'all') {
 function changeStatus(id, status) {
   const protests = getProtests();
   const p = protests.find(x => x.id === id);
-  if (p) { p.status = status; saveProtests(protests); renderTable(window._dbCurrentTab || 'all'); updateStats(); }
+  if (p) { p.status = status; saveProtests(protests); renderTable(window._dbCurrentTab || 'all'); updateDBCounters(); }
+}
+
+function updateDBCounters() {
+  const protests = getProtests();
+  const open = protests.filter(p => p.status === 'open').length;
+  const closed = protests.filter(p => p.status !== 'open').length;
+  document.getElementById('cnt-all').textContent = protests.length;
+  document.getElementById('cnt-open').textContent = open;
+  document.getElementById('cnt-done').textContent = closed;
 }
 
 let _dbCurrentTab = 'all';
@@ -2596,7 +2969,7 @@ function showTab(tab, btn) {
 function openDB() {
   document.getElementById('db-panel').style.display = 'block';
   renderTable('all');
-  updateStats();
+  updateDBCounters();
 }
 
 function closeDB() {
@@ -2620,20 +2993,11 @@ function clearDB() {
   if (confirm('Czy na pewno chcesz usunąć WSZYSTKIE protesty z bazy? Tej operacji nie można cofnąć.')) {
     saveProtests([]);
     renderTable();
-    updateStats();
+    updateDBCounters();
   }
 }
-
-// odśwież statystyki przy załadowaniu
-updateStats();
-
-// Nasłuchuj zmian ze strony protest.html (cross-tab via storage event)
-window.addEventListener('storage', (e) => {
-  if (e.key === DB_KEY) { updateStats(); if (document.getElementById('db-panel').style.display === 'block') renderTable(_dbCurrentTab || 'all'); }
-});
 
 </script>
 
 </body>
 </html>
-
