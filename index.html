@@ -2568,7 +2568,7 @@ function renderTable(filter = 'all') {
   }).join('');
 }
 
-async function _changeStatus(docId, status) => {
+async function _changeStatus(docId, status) {
   await db.collection('protests').doc(docId).update({ status });
 };
 
