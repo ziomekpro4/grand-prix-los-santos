@@ -965,11 +965,10 @@ footer {
   <a href="index.html" class="success-back">← Powrót do strony głównej</a>
 </div>
 
-<script type="module">
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script>
 // ===== FIREBASE SETUP =====
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
 const firebaseConfig = {
   apiKey: "AIzaSyCzqn5gzmYcyPqoh2xXjJqNwjgIW_7u88k",
   authDomain: "gplossantos.firebaseapp.com",
@@ -978,9 +977,8 @@ const firebaseConfig = {
   messagingSenderId: "644720761333",
   appId: "1:644720761333:web:ccee4327426a23ea1ee8bc"
 };
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
 // ===== FILE UPLOAD =====
 const fileInput = document.getElementById('evidence_file');
@@ -1013,13 +1011,13 @@ const requiredIds = ["reporter_name", "reporter_team", "driver_name", "driver_te
 const termsCheck = document.getElementById("terms_check");
 const submitBtn = document.getElementById("submitBtn");
 
-window.validateForm = function() {
+function validateForm() {
   const allFilled = requiredIds.every(id => {
     const el = document.getElementById(id);
     return el && el.value.trim().length > 0;
   });
   submitBtn.disabled = !(allFilled && termsCheck.checked);
-};
+}
 
 requiredIds.forEach(id => {
   const el = document.getElementById(id);
@@ -1033,11 +1031,11 @@ validateForm();
 
 // ===== DATABASE (FIREBASE) =====
 async function saveProtest(entry) {
-  await addDoc(collection(db, 'protests'), entry);
+  await db.collection('protests').add(entry);
 }
 
 // ===== SUBMIT =====
-window.submitProtest = async function() {
+async function submitProtest() {
   const id = 'PRO-2026-' + Math.floor(1000 + Math.random() * 9000);
   const now = new Date();
   const date = now.toLocaleDateString('pl-PL') + ' ' + now.toLocaleTimeString('pl-PL', {hour:'2-digit', minute:'2-digit'});

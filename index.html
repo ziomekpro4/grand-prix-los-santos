@@ -2255,7 +2255,7 @@ footer {
   <div class="drivers-grid" id="teamsGrid"></div>
 
   <div style="margin-top:32px;text-align:center;" class="reveal">
-    <button onclick="window.openTeamsPanel()" style="background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.2);font-family:var(--font-display);font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:10px 24px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(225,6,0,0.4)';this.style.color='var(--red)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='rgba(255,255,255,0.2)'">
+    <button onclick="openTeamsPanel()" style="background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.2);font-family:var(--font-display);font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:10px 24px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(225,6,0,0.4)';this.style.color='var(--red)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='rgba(255,255,255,0.2)'">
       🔒 Zarządzaj zespołami
     </button>
   </div>
@@ -2350,7 +2350,7 @@ footer {
 
   <!-- DB OPEN BUTTON (tylko dla organizatorów) -->
   <div style="margin-top:40px;text-align:center;" class="reveal">
-    <button onclick="window.openDB()" style="
+    <button onclick="openDB()" style="
       background:transparent;
       border:1px solid rgba(255,255,255,0.1);
       color:rgba(255,255,255,0.2);
@@ -2375,16 +2375,16 @@ footer {
   <div class="db-header">
     <div class="db-title">Baza danych <em>Protestów</em></div>
     <div class="db-actions">
-      <button class="db-btn db-btn-export" onclick="window.exportCSV()">⬇ Eksport CSV</button>
-      <button class="db-btn db-btn-clear" onclick="window.clearDB()">🗑 Wyczyść</button>
-      <button class="db-btn db-btn-close" onclick="window.closeDB()">✕ Zamknij</button>
+      <button class="db-btn db-btn-export" onclick="exportCSV()">⬇ Eksport CSV</button>
+      <button class="db-btn db-btn-clear" onclick="clearDB()">🗑 Wyczyść</button>
+      <button class="db-btn db-btn-close" onclick="closeDB()">✕ Zamknij</button>
     </div>
   </div>
 
   <div class="db-tabs">
-    <button class="db-tab active" onclick="window.showTab('all', this)">Wszystkie <span class="db-counter" id="cnt-all">0</span></button>
-    <button class="db-tab" onclick="window.showTab('open', this)">Otwarte <span class="db-counter" id="cnt-open">0</span></button>
-    <button class="db-tab" onclick="window.showTab('done', this)">Rozpatrzone <span class="db-counter" id="cnt-done">0</span></button>
+    <button class="db-tab active" onclick="showTab('all', this)">Wszystkie <span class="db-counter" id="cnt-all">0</span></button>
+    <button class="db-tab" onclick="showTab('open', this)">Otwarte <span class="db-counter" id="cnt-open">0</span></button>
+    <button class="db-tab" onclick="showTab('done', this)">Rozpatrzone <span class="db-counter" id="cnt-done">0</span></button>
   </div>
 
   <div class="db-table-wrap">
@@ -2430,11 +2430,10 @@ footer {
   </div>
 </footer>
 
-<script type="module">
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script>
 // ===== FIREBASE SETUP =====
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
 const firebaseConfig = {
   apiKey: "AIzaSyCzqn5gzmYcyPqoh2xXjJqNwjgIW_7u88k",
   authDomain: "gplossantos.firebaseapp.com",
@@ -2443,9 +2442,8 @@ const firebaseConfig = {
   messagingSenderId: "644720761333",
   appId: "1:644720761333:web:ccee4327426a23ea1ee8bc"
 };
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
 // ===== SPEED LINES IN HERO =====
 const linesContainer = document.getElementById('speedLines');
@@ -2514,8 +2512,7 @@ let _allProtests = [];
 let _dbCurrentTab = 'all';
 
 // Nasłuchuj protestów w czasie rzeczywistym
-const protestsRef = collection(db, 'protests');
-onSnapshot(query(protestsRef, orderBy('date', 'desc')), (snapshot) => {
+db.collection('protests').orderBy('date', 'desc').onSnapshot((snapshot) => {
   _allProtests = snapshot.docs.map(d => ({ _docId: d.id, ...d.data() }));
   updateStats();
   if (document.getElementById('db-panel').style.display === 'block') {
@@ -2563,16 +2560,16 @@ function renderTable(filter = 'all') {
       <td><span class="db-badge ${badgeClass}">${badgeLabel}</span></td>
       <td style="white-space:nowrap;">
         ${p.status === 'open' ? `
-          <button onclick="window._changeStatus('${p._docId}','done')" style="background:rgba(0,200,83,0.15);color:#00c853;border:none;padding:4px 10px;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:var(--font-display);margin-right:4px;">✓ Rozpatrz</button>
-          <button onclick="window._changeStatus('${p._docId}','rejected')" style="background:rgba(255,255,255,0.06);color:var(--grey-text);border:none;padding:4px 10px;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:var(--font-display);">✕ Odrzuć</button>
+          <button onclick="_changeStatus('${p._docId}','done')" style="background:rgba(0,200,83,0.15);color:#00c853;border:none;padding:4px 10px;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:var(--font-display);margin-right:4px;">✓ Rozpatrz</button>
+          <button onclick="_changeStatus('${p._docId}','rejected')" style="background:rgba(255,255,255,0.06);color:var(--grey-text);border:none;padding:4px 10px;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:var(--font-display);">✕ Odrzuć</button>
         ` : `<span style="font-size:11px;color:rgba(255,255,255,0.2);">—</span>`}
       </td>
     </tr>`;
   }).join('');
 }
 
-window._changeStatus = async (docId, status) => {
-  await updateDoc(doc(db, 'protests', docId), { status });
+async function _changeStatus(docId, status) => {
+  await db.collection('protests').doc(docId).update({ status });
 };
 
 function showTab(tab, btn) {
@@ -2582,20 +2579,20 @@ function showTab(tab, btn) {
   renderTable(tab);
 }
 
-window.openDB = function() {
+function openDB() {
   const haslo = prompt("🔒 Podaj hasło dostępu:");
   if (haslo !== "andrzejfiut") { if (haslo !== null) alert("❌ Nieprawidłowe hasło."); return; }
   document.getElementById('db-panel').style.display = 'block';
   renderTable('all');
 };
 
-window.closeDB = function() {
+function closeDB() {
   document.getElementById('db-panel').style.display = 'none';
 };
 
 window.showTab = showTab;
 
-window.exportCSV = function() {
+function exportCSV() {
   if (!_allProtests.length) return alert('Brak danych do eksportu.');
   const headers = ['ID','Data','Zgłaszający','Drużyna zgłasz.','Kierowca','Drużyna kierowcy','Nr startowy','Sesja','Naruszenie','Powód','Link dowód','Świadkowie','Status'];
   const rows = _allProtests.map(p => [p.id, p.date, p.reporter_name, p.reporter_team, p.driver_name, p.driver_team, p.driver_number, p.race_session, p.violation_type, '"'+(p.protest_reason||'').replace(/"/g,'""')+'"', p.evidence_link, p.witnesses, p.status]);
@@ -2607,10 +2604,10 @@ window.exportCSV = function() {
   a.click();
 };
 
-window.clearDB = async function() {
+async function clearDB() {
   if (!confirm('Czy na pewno chcesz usunąć WSZYSTKIE protesty? Tej operacji nie można cofnąć.')) return;
-  const snap = await getDocs(collection(db, 'protests'));
-  for (const d of snap.docs) await deleteDoc(doc(db, 'protests', d.id));
+  const snap = await db.collection('protests').get();
+  for (const d of snap.docs) await d.ref.delete();
 };
 
 
@@ -2618,8 +2615,7 @@ window.clearDB = async function() {
 // ===== TEAMS DATABASE (FIREBASE) =====
 let _allTeams = [];
 
-const teamsRef = collection(db, 'teams');
-onSnapshot(teamsRef, (snapshot) => {
+db.collection('teams').onSnapshot((snapshot) => {
   _allTeams = snapshot.docs.map(d => ({ _docId: d.id, ...d.data() }));
   renderTeamsGrid();
   if (document.getElementById('teams-panel').style.display === 'block') renderTeamsList();
@@ -2675,18 +2671,18 @@ function renderTeamsList() {
           ${t.r2 ? ' &nbsp;·&nbsp; 🔄 ' + t.r2 : ''}
         </div>
       </div>
-      <button onclick="window.deleteTeam('${t._docId}')" style="background:rgba(225,6,0,0.15);color:var(--red);border:1px solid rgba(225,6,0,0.3);font-family:var(--font-display);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;cursor:pointer;clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%);transition:background 0.2s;" onmouseover="this.style.background='rgba(225,6,0,0.3)'" onmouseout="this.style.background='rgba(225,6,0,0.15)'">🗑 Usuń</button>
+      <button onclick="deleteTeam('${t._docId}')" style="background:rgba(225,6,0,0.15);color:var(--red);border:1px solid rgba(225,6,0,0.3);font-family:var(--font-display);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;cursor:pointer;clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%);transition:background 0.2s;" onmouseover="this.style.background='rgba(225,6,0,0.3)'" onmouseout="this.style.background='rgba(225,6,0,0.15)'">🗑 Usuń</button>
     </div>`).join('');
 }
 
-window.previewLogo = function previewLogo(url) {
+function previewLogo previewLogo(url) {
   const box = document.getElementById('tp_logo_preview');
   if (!box) return;
   if (!url) { box.innerHTML = '🏎'; box.style.background = 'var(--grey-light)'; return; }
   box.innerHTML = `<img src="${url}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='❌';this.parentElement.style.fontSize='20px';">`;
 };
 
-window.addTeam = async function() {
+async function addTeam() {
   const name = document.getElementById('tp_team').value.trim();
   const fraction = document.getElementById('tp_fraction').value;
   const logo = document.getElementById('tp_logo').value.trim();
@@ -2695,7 +2691,7 @@ window.addTeam = async function() {
   const r1 = document.getElementById('tp_r1').value.trim();
   const r2 = document.getElementById('tp_r2').value.trim();
   if (!name || !d1 || !d2) { alert('Wypełnij nazwę zespołu oraz obydwu kierowców!'); return; }
-  await addDoc(collection(db, 'teams'), { name, fraction, logo, d1, d2, r1, r2 });
+  await db.collection('teams').add({ name, fraction, logo, d1, d2, r1, r2 });
   document.getElementById('tp_team').value = '';
   document.getElementById('tp_logo').value = '';
   document.getElementById('tp_d1').value = '';
@@ -2706,19 +2702,19 @@ window.addTeam = async function() {
   if (prev) { prev.innerHTML = '🏎'; prev.style.background = 'var(--grey-light)'; }
 };
 
-window.deleteTeam = async function(docId) {
+async function deleteTeam(docId) {
   if (!confirm('Usunąć ten zespół?')) return;
-  await deleteDoc(doc(db, 'teams', docId));
+  await db.collection('teams').doc(docId).delete();
 };
 
-window.openTeamsPanel = function() {
+function openTeamsPanel() {
   const haslo = prompt('🔒 Podaj hasło dostępu:');
   if (haslo !== 'andrzejfiut') { if (haslo !== null) alert('❌ Nieprawidłowe hasło.'); return; }
   document.getElementById('teams-panel').style.display = 'block';
   renderTeamsList();
 };
 
-window.closeTeamsPanel = function() {
+function closeTeamsPanel() {
   document.getElementById('teams-panel').style.display = 'none';
 };
 
@@ -2732,7 +2728,7 @@ window.closeTeamsPanel = function() {
 
   <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--red);padding-bottom:20px;margin-bottom:30px;position:sticky;top:0;background:rgba(10,10,15,0.98);z-index:10;padding-top:10px;">
     <div style="font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:-1px;">Zarządzaj <em style="color:var(--red);font-style:normal;">Zespołami</em></div>
-    <button onclick="window.closeTeamsPanel()" class="db-btn db-btn-close">✕ Zamknij</button>
+    <button onclick="closeTeamsPanel()" class="db-btn db-btn-close">✕ Zamknij</button>
   </div>
 
   <div style="background:var(--grey-mid);border:1px solid rgba(255,255,255,0.06);border-top:2px solid var(--red);padding:32px;margin-bottom:32px;">
@@ -2781,7 +2777,7 @@ window.closeTeamsPanel = function() {
         <input id="tp_r2" type="text" placeholder="Opcjonalnie" style="background:var(--grey-light);border:1px solid rgba(255,255,255,0.08);border-bottom:2px solid rgba(255,255,255,0.2);color:var(--white);font-family:var(--font-display);font-size:14px;font-weight:600;padding:12px 16px;width:100%;outline:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);">
       </div>
     </div>
-    <button onclick="window.addTeam()" style="background:var(--red);color:var(--white);border:none;font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:16px 40px;cursor:pointer;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:background 0.2s;" onmouseover="this.style.background='var(--red-light)'" onmouseout="this.style.background='var(--red)'">
+    <button onclick="addTeam()" style="background:var(--red);color:var(--white);border:none;font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:16px 40px;cursor:pointer;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:background 0.2s;" onmouseover="this.style.background='var(--red-light)'" onmouseout="this.style.background='var(--red)'">
       ➕ Dodaj zespół
     </button>
   </div>
