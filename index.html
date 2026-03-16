@@ -2135,62 +2135,62 @@ footer {
 <div id="countdown-bar">
   <div class="cd-label">Start eventu za</div>
   <div class="cd-units">
-    <div class="cd-unit">
-      <div class="cd-num" id="cd-days">--</div>
-      <div class="cd-unit-label">Dni</div>
-    </div>
+    <div class="cd-unit"><div class="cd-num" id="cd-days">--</div><div class="cd-unit-label">Dni</div></div>
     <div class="cd-sep">:</div>
-    <div class="cd-unit">
-      <div class="cd-num" id="cd-hours">--</div>
-      <div class="cd-unit-label">Godzin</div>
-    </div>
+    <div class="cd-unit"><div class="cd-num" id="cd-hours">--</div><div class="cd-unit-label">Godzin</div></div>
     <div class="cd-sep">:</div>
-    <div class="cd-unit">
-      <div class="cd-num" id="cd-mins">--</div>
-      <div class="cd-unit-label">Minut</div>
-    </div>
+    <div class="cd-unit"><div class="cd-num" id="cd-mins">--</div><div class="cd-unit-label">Minut</div></div>
     <div class="cd-sep">:</div>
-    <div class="cd-unit">
-      <div class="cd-num" id="cd-secs">--</div>
-      <div class="cd-unit-label">Sekund</div>
-    </div>
+    <div class="cd-unit"><div class="cd-num" id="cd-secs">--</div><div class="cd-unit-label">Sekund</div></div>
   </div>
   <div class="cd-event-badge">🏁 21.03.2026 · 20:00</div>
 </div>
 
-<!-- ========== HERO ========== -->
-<section id="hero">
+<!-- ========== HERO — REDIRECT ========== -->
+<section id="hero" style="height:100vh;display:flex;align-items:center;justify-content:center;">
   <div class="hero-track-bg">
     <div class="hero-grid"></div>
     <div class="speed-lines" id="speedLines"></div>
   </div>
 
-  <div class="hero-content" style="max-width:700px;">
-    <div class="hero-eyebrow">
+  <div style="position:relative;z-index:2;text-align:center;padding:0 40px;max-width:720px;">
+
+    <div class="hero-eyebrow" style="justify-content:center;margin-bottom:20px;">
       <div class="hero-eyebrow-line"></div>
       <span class="hero-eyebrow-text">Grand Prix Los Santos 2026</span>
+      <div class="hero-eyebrow-line"></div>
     </div>
 
-    <h1 class="hero-title" style="font-size:clamp(48px,7vw,96px);">
-      Strona
-      <span>w budowie</span>
+    <div style="font-size:72px;margin-bottom:8px;">🏁</div>
+
+    <h1 class="hero-title" style="font-size:clamp(36px,6vw,80px);margin-bottom:16px;">
+      Mamy <span>Nową Stronę!</span>
     </h1>
 
-    <p class="hero-subtitle" style="font-size:14px;letter-spacing:4px;margin-top:24px;">Pracujemy nad czymś wyjątkowym — wróć wkrótce</p>
+    <p style="font-size:15px;color:var(--grey-text);letter-spacing:2px;text-transform:uppercase;margin-bottom:40px;line-height:1.8;">
+      Oficjalna strona Grand Prix Los Santos została przeniesiona.<br>
+      Za chwilę zostaniesz automatycznie przekierowany.
+    </p>
 
-    <div class="hero-date-badge" style="margin-top:36px;">
-      <div class="date-day">21–22</div>
-      <div class="date-info">
-        <div class="date-month">Marca 2026</div>
-        <div class="date-year">Los Santos Circuit</div>
-      </div>
+    <!-- redirect countdown -->
+    <div style="display:inline-flex;align-items:center;gap:16px;background:rgba(225,6,0,0.08);border:1px solid rgba(225,6,0,0.2);border-left:4px solid var(--red);padding:20px 36px;margin-bottom:36px;">
+      <span style="font-size:13px;color:var(--grey-text);letter-spacing:2px;text-transform:uppercase;">Przekierowanie za</span>
+      <span id="redirect-count" style="font-size:40px;font-weight:900;color:var(--red);line-height:1;min-width:48px;">5</span>
+      <span style="font-size:13px;color:var(--grey-text);letter-spacing:2px;text-transform:uppercase;">sekund</span>
     </div>
-  </div>
 
-  <div class="hero-number" style="-webkit-text-stroke:1px rgba(255,255,255,0.03);">🏁</div>
+    <br>
 
-  <div class="hero-scroll">
-    <div class="scroll-indicator"></div>
+    <a href="https://ziomek.xaa.pl/index.php#rules"
+       style="display:inline-flex;align-items:center;gap:12px;background:var(--red);color:#fff;padding:18px 44px;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;clip-path:polygon(14px 0%,100% 0%,calc(100% - 14px) 100%,0% 100%);transition:background 0.2s;"
+       onmouseover="this.style.background='#ff2a2a'" onmouseout="this.style.background='#e10600'">
+      ▶ &nbsp; Przejdź teraz na nową stronę
+    </a>
+
+    <p style="margin-top:20px;font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:2px;">
+      ziomek.xaa.pl/index.php
+    </p>
+
   </div>
 </section>
 
@@ -2203,6 +2203,18 @@ footer {
 </footer>
 
 <script>
+// ===== REDIRECT COUNTDOWN =====
+let redirectSecs = 5;
+const redirectEl = document.getElementById('redirect-count');
+const redirectTimer = setInterval(() => {
+  redirectSecs--;
+  if (redirectEl) redirectEl.textContent = redirectSecs;
+  if (redirectSecs <= 0) {
+    clearInterval(redirectTimer);
+    window.location.href = 'https://ziomek.xaa.pl/index.php#rules';
+  }
+}, 1000);
+
 // ===== FUNNY POPUP =====
 function showFunnyPopup(e) {
   e.preventDefault();
